@@ -1,0 +1,38 @@
+---
+
+- stat:
+    path: "{{ ansible_env.HOME }}/.fonts/PowerlineSymbols.otf"
+  register: powerline_font
+
+- stat:
+    path: "{{ ansible_env.HOME }}/.config/fontconfig/10-powerline-symbols.conf"
+  register: powerline_config
+
+- name: Create fonts directory
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.fonts"
+
+
+- name: Create font config directory
+  file:
+    state: directory
+    recurse: yes
+    path: "{{ ansible_env.HOME }}/.config/fontconfig/conf.d"
+
+- name: Install font required for nvim
+  get_url:
+    url: https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+    dest: "{{ ansible_env.HOME }}/.fonts/PowerlineSymbols.otf"
+    sha256sum: 4a2496a009b1649878ce067a7ec2aed9f79656c90136971e1dba00766515f7a1
+  when: powerline_font.stat.exists == False
+
+- name: Install fontconfig configuration file
+  get_url:
+    url: https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+    dest: "{{ ansible_env.HOME }}/.config/fontconfig/10-powerline-symbols.conf"
+    sha256sum: 079f6d44d34feebdc2ae7aee791090d6bfb1fec8a0359439368aa2efc5a0c0f7
+  when: powerline_config.stat.exists == False
+
+- name: Refresh font cache
+  command: fc-cache -vf "{{ ansible_env.HOME }}"/.fonts

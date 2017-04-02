@@ -1,0 +1,15 @@
+---
+- name: repos
+  hosts: localhost
+  roles:
+    - repos
+
+- name: packages
+  hosts: localhost
+  roles:
+    - packages
+
+- name: fonts
+  hosts: localhost
+  roles:
+    - fonts

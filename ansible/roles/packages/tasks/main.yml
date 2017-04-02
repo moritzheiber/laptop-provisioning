@@ -1,0 +1,123 @@
+---
+- name: Install i3 keyring
+  apt:
+    name: sur5r-keyring
+    allow_unauthenticated: yes
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+  become: yes
+
+- name: Install Debian packages
+  apt:
+    name: "{{ item.package }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+    install_recommends: no
+  become: yes
+  with_items:
+    - { package: "ruby2.4" }
+    - { package: "ruby2.4-dev" }
+    - { package: "git" }
+    - { package: "i3" }
+    - { package: "redshift-gtk" }
+    - { package: "gnome-encfs-manager" }
+    - { package: "gnome-terminal" }
+    - { package: "autossh" }
+    - { package: "compton" }
+    - { package: "unclutter" }
+    - { package: "urlscan" }
+    - { package: "mutt" }
+    - { package: "docker-engine" }
+    - { package: "riot-web" }
+    - { package: "numix-gtk-theme" }
+    - { package: "numix-icon-theme" }
+    - { package: "owncloud-client" }
+    - { package: "feh" }
+    - { package: "gnupg" }
+    - { package: "transmission-gtk" }
+    - { package: "neovim" }
+    - { package: "unzip" }
+    - { package: "vagrant" }
+    - { package: "dkms" }
+    - { package: "virtualbox-5.1" }
+
+- stat:
+    path: /usr/bin/google-chrome
+  register: google
+
+- name: Install Google Chrome
+  apt: deb=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  become: yes
+  when: google.stat.exists == False
+
+- name: Remove Debian packages
+  apt:
+    name: "{{ item.package }}"
+    purge: yes
+    state: absent
+  become: yes
+  with_items:
+    - { package: "thunderbird" }
+
+- name: Install Python packages
+  pip:
+    name: "{{ item.package }}"
+    extra_args: --user
+    state: latest
+  with_items:
+    - { package: "pip" }
+    - { package: "setuptools" }
+    - { package: "keyring" }
+    - { package: "keyrings.alt" }
+    - { package: "awscli" }
+    - { package: "streamlink" }
+    - { package: "neovim" }
+
+- name: Install pip3
+  apt:
+    name: python3-pip
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+    install_recommends: no
+  become: yes
+
+- name: Install Python3 packages
+  pip:
+    name: "{{ item.package }}"
+    extra_args: --user
+    state: latest
+    executable: /usr/bin/pip3
+  with_items:
+    - { package: "pip" }
+    - { package: "setuptools" }
+    - { package: "neovim" }
+
+- name: Install Rubygems
+  gem:
+    name: "{{ item.package }}"
+  with_items:
+    - { package: "bundler" }
+    - { package: "neovim" }
+
+- name: Ruby alternative
+  become: yes
+  alternatives:
+    name: ruby
+    path: /usr/bin/ruby2.4
+
+- name: Gem alternative
+  become: yes
+  alternatives:
+    name: gem
+    path: /usr/bin/gem2.4
+
+- name: vim alternative
+  become: yes
+  alternatives:
+    name: vim
+    path: /usr/bin/nvim
+
+- include: hashicorp.yml
