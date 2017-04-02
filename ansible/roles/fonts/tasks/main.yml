@@ -5,7 +5,7 @@
   register: powerline_font
 
 - stat:
-    path: "{{ ansible_env.HOME }}/.config/fontconfig/10-powerline-symbols.conf"
+    path: "{{ ansible_env.HOME }}/.config/fontconfig/conf.d/10-powerline-symbols.conf"
   register: powerline_config
 
 - name: Create fonts directory
@@ -30,7 +30,7 @@
 - name: Install fontconfig configuration file
   get_url:
     url: https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-    dest: "{{ ansible_env.HOME }}/.config/fontconfig/10-powerline-symbols.conf"
+    dest: "{{ ansible_env.HOME }}/.config/fontconfig/conf.d/10-powerline-symbols.conf"
     sha256sum: 079f6d44d34feebdc2ae7aee791090d6bfb1fec8a0359439368aa2efc5a0c0f7
   when: powerline_config.stat.exists == False
 
