@@ -42,6 +42,7 @@
     - { package: "vagrant" }
     - { package: "dkms" }
     - { package: "virtualbox-5.1" }
+    - { package: "pass" }
 
 - stat:
     path: /usr/bin/google-chrome
