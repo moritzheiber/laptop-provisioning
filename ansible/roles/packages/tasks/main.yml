@@ -42,6 +42,9 @@
     - { package: "dkms" }
     - { package: "virtualbox-5.1" }
     - { package: "pass" }
+    - { package: "libdbus-glib-1-dev" }
+    - { package: "whois" }
+    - { package: "htop" }
 
 - stat:
     path: /usr/bin/google-chrome
@@ -52,6 +55,10 @@
   become: yes
   when: google.stat.exists == False
 
+- name: Install Microsoft Core Fonts
+  apt: deb=http://httpredir.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+  become: yes
+
 - name: Remove Debian packages
   apt:
     name: "{{ item.package }}"
@@ -60,6 +67,7 @@
   become: yes
   with_items:
     - { package: "thunderbird" }
+    - { package: "pidgin" }
 
 - name: Install Python packages
   pip:
@@ -70,10 +78,11 @@
     - { package: "pip" }
     - { package: "setuptools" }
     - { package: "keyring" }
-    - { package: "keyrings.alt" }
     - { package: "awscli" }
     - { package: "streamlink" }
     - { package: "neovim" }
+    - { package: "secretstorage" }
+    - { package: "dbus-python" }
 
 - name: Install pip3
   apt:
@@ -91,8 +100,6 @@
     state: latest
     executable: /usr/bin/pip3
   with_items:
-    - { package: "pip" }
-    - { package: "setuptools" }
     - { package: "neovim" }
 
 - name: Install Rubygems
