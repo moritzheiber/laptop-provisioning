@@ -33,4 +33,5 @@
 
 - name: Install Vagrant
   apt: deb=https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb
+  become: yes
   when: vagrant.stat.exists == False

@@ -39,7 +39,6 @@
     - { package: "transmission-gtk" }
     - { package: "neovim" }
     - { package: "unzip" }
-    - { package: "vagrant" }
     - { package: "dkms" }
     - { package: "virtualbox-5.1" }
     - { package: "pass" }
