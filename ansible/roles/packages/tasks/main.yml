@@ -120,4 +120,10 @@
     name: vim
     path: /usr/bin/nvim
 
+- name: pinentry alternative
+  become: yes
+  alternatives:
+    name: pinentry
+    path: /usr/bin/pinentry-curses
+
 - include: hashicorp.yml
