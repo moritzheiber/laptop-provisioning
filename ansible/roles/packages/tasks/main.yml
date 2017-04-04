@@ -120,6 +120,13 @@
     executable: /bin/bash
     creates: "{{ ansible_env.GOPATH }}/bin/hclfmt"
 
+- name: Install awstools
+  get_url:
+    url: https://github.com/sam701/awstools/releases/download/0.12.0/awstools_linux_amd64
+    dest: "{{ ansible_env.HOME }}/.local/bin/awstools"
+    sha256sum: bdfe603526b15de20356b03dee97159246bffda97d31512d61345ecd8d0222c8
+    mode: 0755
+
 - name: Ruby alternative
   become: yes
   alternatives:
