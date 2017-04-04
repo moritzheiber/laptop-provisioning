@@ -32,12 +32,8 @@ ansible_deps() {
   fi
 }
 
-ansible_run_playbook() {
-  echo "Running Ansible"
-  ansible-playbook ansible/playbook.yml -i ansible/hosts --ask-become-pass -vv
-}
-
 sudo apt-get update
 
 ansible_deps
-ansible_run_playbook
+
+./run.sh
