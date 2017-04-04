@@ -1,0 +1,17 @@
+- name: Install hclfmt
+  shell: go get github.com/fatih/hclfmt
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/hclfmt"
+
+- name: Install wego
+  shell: go get github.com/schachmat/wego
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/wego"
+
+- name: Install geodig
+  shell: go get github.com/dutchcoders/geodig
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/geodig"

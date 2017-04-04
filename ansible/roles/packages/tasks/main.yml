@@ -49,6 +49,7 @@
     - { package: "i965-va-driver" }
     - { package: "vdpau-va-driver" }
     - { package: "golang-1.8" }
+    - { package: "curl" }
 
 - stat:
     path: /usr/bin/google-chrome
@@ -109,16 +110,18 @@
 - name: Install Rubygems
   gem:
     name: "{{ item.package }}"
+    user_install: no
+  become: yes
   with_items:
     - { package: "bundler" }
     - { package: "neovim" }
 
-
-- name: Install hclfmt
-  shell: go get github.com/fatih/hclfmt
-  args:
-    executable: /bin/bash
-    creates: "{{ ansible_env.GOPATH }}/bin/hclfmt"
+- name: Install local Rubygems
+  gem:
+    name: "{{ item.package }}"
+    user_install: yes
+  with_items:
+    - { package: "rubocop" }
 
 - name: Install awstools
   get_url:
@@ -153,3 +156,4 @@
 
 - include: hashicorp.yml
 - include: docker.yml
+- include: golang.yml
