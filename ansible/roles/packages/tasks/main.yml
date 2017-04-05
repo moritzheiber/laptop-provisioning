@@ -50,6 +50,8 @@
     - { package: "vdpau-va-driver" }
     - { package: "golang-1.8" }
     - { package: "curl" }
+    - { package: "jq" }
+    - { package: "network-manager-openvpn-gnome" }
 
 - stat:
     path: /usr/bin/google-chrome
