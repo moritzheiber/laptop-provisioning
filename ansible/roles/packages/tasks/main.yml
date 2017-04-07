@@ -52,6 +52,7 @@
     - { package: "curl" }
     - { package: "jq" }
     - { package: "network-manager-openvpn-gnome" }
+    - { package: "unrar" }
 
 - stat:
     path: /usr/bin/google-chrome

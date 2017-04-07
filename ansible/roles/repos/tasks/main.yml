@@ -35,7 +35,7 @@
   apt_repository: repo={{ item.repo }} state=present
   become: yes
   with_items:
-    - { repo: "deb [arch=amd64] https://apt.dockerproject.org/repo ubuntu-xenial main" }
+    - { repo: "deb [arch=amd64] https://apt.dockerproject.org/repo ubuntu-yakkety main" }
     - { repo: "deb http://debian.sur5r.net/i3/ yakkety universe" }
     - { repo: "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_16.10/ /" }
     - { repo: "deb https://riot.im/packages/debian/ yakkety main" }
