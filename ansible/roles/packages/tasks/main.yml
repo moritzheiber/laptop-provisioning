@@ -53,6 +53,8 @@
     - { package: "jq" }
     - { package: "network-manager-openvpn-gnome" }
     - { package: "unrar" }
+    - { package: "w3m" }
+    - { package: "yarn" }
 
 - stat:
     path: /usr/bin/google-chrome
@@ -156,6 +158,13 @@
   alternatives:
     name: pinentry
     path: /usr/bin/pinentry-curses
+
+- name: nodejs alternative
+  become: yes
+  alternatives:
+    name: node
+    link: /usr/bin/node
+    path: /usr/bin/nodejs
 
 - include: hashicorp.yml
 - include: docker.yml
