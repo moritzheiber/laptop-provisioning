@@ -1,37 +1,29 @@
 ---
 - set_fact:
-    terraform_version: 0.9.2
+    terraform_version: 0.9.3
     vault_version: 0.7.0
     vagrant_version: 1.9.3
+    packer_version: 1.0.0
     bin_path: "{{ ansible_env.HOME }}/.local/bin"
-
-- stat:
-    path: "{{ bin_path }}/terraform"
-  register: terraform
-
-- stat:
-    path: "{{ bin_path }}/vault"
-  register: vault
-
-- stat:
-    path: /usr/bin/vagrant
-  register: vagrant
 
 - name: Install Terraform
   unarchive:
     src: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
     dest: "{{ bin_path }}"
     remote_src: True
-  when: terraform.stat.exists == False
 
 - name: Install Vault
   unarchive:
     src: https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip
     dest: "{{ bin_path }}"
     remote_src: True
-  when: vault.stat.exists == False
+
+- name: Install Packer
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip
+    dest: "{{ bin_path }}"
+    remote_src: True
 
 - name: Install Vagrant
   apt: deb=https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb
   become: yes
-  when: vagrant.stat.exists == False

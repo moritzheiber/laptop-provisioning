@@ -15,3 +15,9 @@
   args:
     executable: /bin/bash
     creates: "{{ ansible_env.GOPATH }}/bin/geodig"
+
+- name: Install embedmd
+  shell: go get github.com/campoy/embedmd
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/embedmd"

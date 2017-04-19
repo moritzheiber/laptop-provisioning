@@ -1,4 +1,5 @@
 ---
+- hosts: all
 - name: repos
   hosts: localhost
   roles:

@@ -4,7 +4,7 @@ set -e
 
 ansible_run_playbook() {
   echo "Running Ansible"
-  ansible-playbook ansible/playbook.yml -i ansible/hosts --ask-become-pass -v
+  ansible-playbook ansible/playbook.yml --ask-become-pass -v
 }
 
 ansible_run_playbook
