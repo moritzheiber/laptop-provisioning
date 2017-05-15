@@ -57,6 +57,7 @@
     - { package: "w3m" }
     - { package: "yarn" }
     - { package: "gimp" }
+    - { package: "slack-desktop" }
 
 - stat:
     path: /usr/bin/google-chrome
