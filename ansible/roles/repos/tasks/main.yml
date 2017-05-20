@@ -19,6 +19,7 @@
     - { repo: "ppa:neovim-ppa/unstable" }
     - { repo: "ppa:numix/ppa" }
     - { repo: "ppa:gophers/archive" }
+    - { repo: "ppa:git-core/ppa" }
 
 - name: Install APT repository keys
   apt_key: id={{ item.id }} url={{ item.url }} state=present
