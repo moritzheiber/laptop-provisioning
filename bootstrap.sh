@@ -28,7 +28,7 @@ ansible_deps() {
   done
 
   if [ ! -x "${HOME}/.local/bin/ansible-playbook" ] ; then
-    pip install --user --upgrade ansible==2.2.2.0
+    pip install --user --upgrade ansible==2.3.0.0
   fi
 }
 
