@@ -2,15 +2,21 @@
 - hosts: all
 - name: repos
   hosts: localhost
+  vars_files:
+    - "vars/common.yml"
   roles:
     - repos
 
 - name: packages
   hosts: localhost
+  vars_files:
+    - "vars/common.yml"
   roles:
     - packages
 
 - name: fonts
   hosts: localhost
+  vars_files:
+    - "vars/common.yml"
   roles:
     - fonts

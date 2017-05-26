@@ -26,7 +26,7 @@
   become: yes
   with_items:
     - { id: "58118E89F3A912897C070ADBF76221572C52609D", url: "https://apt.dockerproject.org/gpg" }
-    - { id: "1B07204CD71B690D409F57D24ABE1AC7557BEFF9", url: "http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_16.10/Release.key" }
+    - { id: "1B07204CD71B690D409F57D24ABE1AC7557BEFF9", url: "http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_{{ ubuntu_release_number }}/Release.key" }
     - { id: "6FEB6F83D48B93547E7DFEDEE019645248E8F4A1", url: "https://riot.im/packages/debian/repo-key.asc" }
     - { id: "B9F8D658297AF3EFC18D5CDFA2F683C52980AECF", url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc" }
     - { id: "7B0FAB3A13B907435925D9C954422A4B98AB5139", url: "https://www.virtualbox.org/download/oracle_vbox.asc" }
@@ -38,10 +38,10 @@
   apt_repository: repo={{ item.repo }} state=present
   become: yes
   with_items:
-    - { repo: "deb [arch=amd64] https://apt.dockerproject.org/repo ubuntu-yakkety main" }
-    - { repo: "deb http://debian.sur5r.net/i3/ yakkety universe" }
-    - { repo: "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_16.10/ /" }
-    - { repo: "deb https://riot.im/packages/debian/ yakkety main" }
-    - { repo: "deb http://download.virtualbox.org/virtualbox/debian yakkety contrib" }
+    - { repo: "deb [arch=amd64] https://apt.dockerproject.org/repo ubuntu-{{ ubuntu_release }} main" }
+    - { repo: "deb http://debian.sur5r.net/i3/ {{ ubuntu_release }} universe" }
+    - { repo: "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_{{ ubuntu_release_number }}/ /" }
+    - { repo: "deb https://riot.im/packages/debian/ {{ ubuntu_release }} main" }
+    - { repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
     - { repo: "deb https://dl.yarnpkg.com/debian/ stable main" }
     - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
