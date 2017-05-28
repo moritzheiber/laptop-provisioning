@@ -58,6 +58,7 @@
     - { package: "yarn" }
     - { package: "gimp" }
     - { package: "slack-desktop" }
+    - { package: "pinentry-curses" }
 
 - stat:
     path: /usr/bin/google-chrome
@@ -134,21 +135,21 @@
 
 - name: Install awstools
   get_url:
-    url: https://github.com/sam701/awstools/releases/download/0.12.0/awstools_linux_amd64
+    url: "https://github.com/sam701/awstools/releases/download/0.12.0/awstools_linux_amd64"
     dest: "{{ ansible_env.HOME }}/.local/bin/awstools"
     sha256sum: bdfe603526b15de20356b03dee97159246bffda97d31512d61345ecd8d0222c8
     mode: 0755
 
 - name: Install minishift
   unarchive:
-    src: https://github.com/minishift/minishift/releases/download/v1.0.1/minishift-1.0.1-linux-amd64.tgz
+    src: "https://github.com/minishift/minishift/releases/download/v1.0.1/minishift-1.0.1-linux-amd64.tgz"
     dest: "{{ ansible_env.HOME }}/.local/bin/"
     remote_src: True
     creates: "{{ ansible_env.HOME }}/.local/bin/minishift"
 
 - name: Install OpenShift client
   unarchive:
-    src: https://github.com/openshift/origin/releases/download/v1.5.1/openshift-origin-client-tools-v1.5.1-7b451fc-linux-64bit.tar.gz
+    src: "https://github.com/openshift/origin/releases/download/v1.5.1/openshift-origin-client-tools-v1.5.1-7b451fc-linux-64bit.tar.gz"
     dest: "{{ ansible_env.HOME }}/.local/bin/"
     exclude:
       - "*/LICENSE"
