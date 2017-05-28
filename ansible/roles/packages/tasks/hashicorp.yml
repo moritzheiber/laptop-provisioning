@@ -1,6 +1,6 @@
 ---
 - set_fact:
-    terraform_version: 0.9.3
+    terraform_version: 0.9.6
     vault_version: 0.7.0
     vagrant_version: 1.9.3
     packer_version: 1.0.0

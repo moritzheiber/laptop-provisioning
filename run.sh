@@ -2,7 +2,7 @@
 
 set -xue
 
-EXTRA_VARS="${EXTRA_VARS:-}"
+EXTRA_VARS="${PROVISIONING_EXTRA_VARS:-}"
 
 ansible_run_playbook() {
   echo "Running Ansible"
