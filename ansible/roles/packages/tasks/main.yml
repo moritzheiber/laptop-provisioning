@@ -59,6 +59,14 @@
     - { package: "gimp" }
     - { package: "slack-desktop" }
     - { package: "pinentry-curses" }
+    - { package: "libsecret-1-dev" }
+
+- name: Install libsecret git helper
+  command: make
+  become: True
+  args:
+    chdir: /usr/share/doc/git/contrib/credential/libsecret/
+    creates: /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 
 - stat:
     path: /usr/bin/google-chrome
