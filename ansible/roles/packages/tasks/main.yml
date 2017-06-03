@@ -81,6 +81,10 @@
   apt: deb=http://httpredir.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
   become: yes
 
+- name: Install gopass
+  apt: deb=https://github.com/justwatchcom/gopass/releases/download/v1.1.0/gopass_1.1.0_amd64.deb
+  become: yes
+
 - name: Remove Debian packages
   apt:
     name: "{{ item.package }}"
