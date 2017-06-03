@@ -53,6 +53,7 @@
     - { package: "curl" }
     - { package: "jq" }
     - { package: "network-manager-openvpn-gnome" }
+    - { package: "network-manager-openconnect-gnome" }
     - { package: "unrar" }
     - { package: "w3m" }
     - { package: "yarn" }
