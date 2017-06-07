@@ -61,6 +61,8 @@
     - { package: "slack-desktop" }
     - { package: "pinentry-curses" }
     - { package: "libsecret-1-dev" }
+    - { package: "clang-tidy-4.0" }
+    - { package: "clang-format-4.0" }
 
 - name: Install libsecret git helper
   command: make
@@ -85,6 +87,13 @@
 - name: Install gopass
   apt: deb=https://github.com/justwatchcom/gopass/releases/download/v1.1.0/gopass_1.1.0_amd64.deb
   become: yes
+
+- name: Install ctop
+  get_url:
+    url: https://github.com/bcicen/ctop/releases/download/v0.5/ctop-0.5-linux-amd64
+    dest: "{{ ansible_env.HOME }}/.local/bin/ctop"
+    checksum: "sha256:5313c4e2f98639cce53545762f0b65f3db977ae764a9acb2fb15928713b8cde0"
+    mode: 0755
 
 - name: Remove Debian packages
   apt:
@@ -201,6 +210,20 @@
     name: node
     link: /usr/bin/node
     path: /usr/bin/nodejs
+
+- name: clang-format alternative
+  become: yes
+  alternatives:
+    name: clang-format
+    link: /usr/bin/clang-format
+    path: /usr/bin/clang-format-4.0
+
+- name: clang-tidy alternative
+  become: yes
+  alternatives:
+    name: clang-tidy
+    link: /usr/bin/clang-tidy
+    path: /usr/bin/clang-tidy-4.0
 
 - include: hashicorp.yml
 - include: docker.yml

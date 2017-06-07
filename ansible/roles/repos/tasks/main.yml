@@ -32,7 +32,7 @@
     - { id: "7B0FAB3A13B907435925D9C954422A4B98AB5139", url: "https://www.virtualbox.org/download/oracle_vbox.asc" }
     - { id: "72ECF46A56B4AD39C907BBB71646B01B86E50310", url: "https://dl.yarnpkg.com/debian/pubkey.gpg" }
     - { id: "DB085A08CA13B8ACB917E0F6D938EC0D038651BD", url: "https://packagecloud.io/slacktechnologies/slack/gpgkey" }
-
+    - { id: "6084F3CF814B57C1CF12EFD515CF4D18AF4F7421", url: "http://apt.llvm.org/llvm-snapshot.gpg.key" }
 
 - name: Install other repositories
   apt_repository: repo={{ item.repo }} state=present
@@ -45,3 +45,4 @@
     - { repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
     - { repo: "deb https://dl.yarnpkg.com/debian/ stable main" }
     - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
+    - { repo: "deb http://apt.llvm.org/{{ ubuntu_release }}/ llvm-toolchain-{{ ubuntu_release }}-4.0 main" }
