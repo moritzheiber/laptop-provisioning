@@ -1,6 +1,6 @@
 ---
 - set_fact:
-    gopass_version: 1.1.2
+    gopass_version: 1.2.0
     ctop_version: "0.5"
     awstools_version: 1.1.3
     openshift_cli_version: 1.5.1
@@ -70,6 +70,7 @@
     - { package: "libsecret-1-dev" }
     - { package: "clang-tidy-4.0" }
     - { package: "clang-format-4.0" }
+    - { package: "libclang-common-4.0-dev" }
 
 - name: Install libsecret git helper
   command: make
@@ -92,7 +93,7 @@
   become: yes
 
 - name: Install gopass
-  apt: deb=https://github.com/justwatchcom/gopass/releases/download/v{{ gopass_version }}/gopass_{{ gopass_version }}_amd64.deb
+  apt: deb=https://github.com/justwatchcom/gopass/releases/download/v{{ gopass_version }}/gopass-{{ gopass_version }}-linux-amd64.deb
   become: yes
 
 - name: Install ctop

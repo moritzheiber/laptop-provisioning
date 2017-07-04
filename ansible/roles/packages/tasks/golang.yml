@@ -21,3 +21,9 @@
   args:
     executable: /bin/bash
     creates: "{{ ansible_env.GOPATH }}/bin/embedmd"
+
+- name: Install alfred
+  shell: go get -u github.com/kcmerrill/alfred
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/alfred"
