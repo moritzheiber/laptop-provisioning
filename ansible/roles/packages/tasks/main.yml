@@ -1,8 +1,8 @@
 ---
 - set_fact:
-    gopass_version: 1.2.0
+    gopass_version: 1.4.0-rc1
     ctop_version: "0.5"
-    awstools_version: 1.1.3
+    awstools_version: 0.13.1
     openshift_cli_version: 1.5.1
     minishift_version: 1.0.1
 
@@ -68,9 +68,9 @@
     - { package: "slack-desktop" }
     - { package: "pinentry-curses" }
     - { package: "libsecret-1-dev" }
-    - { package: "clang-tidy-4.0" }
-    - { package: "clang-format-4.0" }
-    - { package: "libclang-common-4.0-dev" }
+    - { package: "clang-tidy-5.0" }
+    - { package: "clang-format-5.0" }
+    - { package: "libclang-common-5.0-dev" }
 
 - name: Install libsecret git helper
   command: make
@@ -167,7 +167,7 @@
   get_url:
     url: "https://github.com/sam701/awstools/releases/download/{{ awstools_version }}/awstools_linux_amd64"
     dest: "{{ ansible_env.HOME }}/.local/bin/awstools"
-    sha256sum: bdfe603526b15de20356b03dee97159246bffda97d31512d61345ecd8d0222c8
+    sha256sum: c336f25889a55791f62fdef7ca034caad48be5d49745075138c7969fc38d1793
     mode: 0755
 
 - name: Install minishift
@@ -228,14 +228,14 @@
   alternatives:
     name: clang-format
     link: /usr/bin/clang-format
-    path: /usr/bin/clang-format-4.0
+    path: /usr/bin/clang-format-5.0
 
 - name: clang-tidy alternative
   become: yes
   alternatives:
     name: clang-tidy
     link: /usr/bin/clang-tidy
-    path: /usr/bin/clang-tidy-4.0
+    path: /usr/bin/clang-tidy-5.0
 
 - include: hashicorp.yml
 - include: docker.yml
