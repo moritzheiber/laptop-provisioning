@@ -20,3 +20,8 @@
     - "vars/common.yml"
   roles:
     - fonts
+
+- name: certificates
+  hosts: localhost
+  roles:
+    - certificates

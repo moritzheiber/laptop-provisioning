@@ -1,10 +1,4 @@
 ---
-- set_fact:
-    terraform_version: 0.10.2
-    vault_version: 0.8.1
-    vagrant_version: 2.0.0
-    packer_version: 1.0.4
-    bin_path: "{{ ansible_env.HOME }}/.local/bin"
 
 - name: Install Terraform
   unarchive:

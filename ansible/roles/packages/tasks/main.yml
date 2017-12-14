@@ -1,10 +1,4 @@
 ---
-- set_fact:
-    gopass_version: 1.4.0-rc1
-    ctop_version: "0.5"
-    awstools_version: 0.13.1
-    openshift_cli_version: 1.5.1
-    minishift_version: 1.0.1
 
 - name: Install i3 keyring
   apt:
@@ -37,7 +31,7 @@
     - { package: "unclutter" }
     - { package: "urlscan" }
     - { package: "mutt" }
-    - { package: "docker-engine" }
+    - { package: "docker-ce" }
     - { package: "riot-web" }
     - { package: "numix-gtk-theme" }
     - { package: "numix-icon-theme" }
@@ -71,6 +65,7 @@
     - { package: "clang-tidy-5.0" }
     - { package: "clang-format-5.0" }
     - { package: "libclang-common-5.0-dev" }
+    - { package: "azure-cli" }
 
 - name: Install libsecret git helper
   command: make
@@ -86,10 +81,9 @@
 - name: Install Google Chrome
   apt: deb=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   become: yes
-  when: google.stat.exists == False
 
 - name: Install Microsoft Core Fonts
-  apt: deb=http://httpredir.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+  apt: deb=http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
   become: yes
 
 - name: Install gopass

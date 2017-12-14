@@ -27,3 +27,9 @@
   args:
     executable: /bin/bash
     creates: "{{ ansible_env.GOPATH }}/bin/alfred"
+
+- name: Install lego
+  shell: go get -u github.com/xenolf/lego
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.GOPATH }}/bin/lego"

@@ -21,11 +21,17 @@
     - { repo: "ppa:gophers/archive" }
     - { repo: "ppa:git-core/ppa" }
 
-- name: Install APT repository keys
+- name: Install APT repository keys from keyserver
+  apt_key: id={{ item.id }} keyserver={{ item.keyserver }} state=present
+  become: yes
+  with_items:
+    - { id: "52E16F86FEE04B979B07E28DB02C46DF417A0893", keyserver: "packages.microsoft.com" }
+
+- name: Install APT repository keys from URL
   apt_key: id={{ item.id }} url={{ item.url }} state=present
   become: yes
   with_items:
-    - { id: "58118E89F3A912897C070ADBF76221572C52609D", url: "https://apt.dockerproject.org/gpg" }
+    - { id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88", url: "https://download.docker.com/linux/ubuntu/gpg" }
     - { id: "1B07204CD71B690D409F57D24ABE1AC7557BEFF9", url: "http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_{{ ubuntu_release_number }}/Release.key" }
     - { id: "6FEB6F83D48B93547E7DFEDEE019645248E8F4A1", url: "https://riot.im/packages/debian/repo-key.asc" }
     - { id: "B9F8D658297AF3EFC18D5CDFA2F683C52980AECF", url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc" }
@@ -40,7 +46,7 @@
   apt_repository: repo={{ item.repo }} state=present
   become: yes
   with_items:
-    - { repo: "deb [arch=amd64] https://apt.dockerproject.org/repo ubuntu-{{ ubuntu_release }} main" }
+    - { repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable" }
     - { repo: "deb http://debian.sur5r.net/i3/ {{ ubuntu_release }} universe" }
     - { repo: "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_{{ ubuntu_release_number }}/ /" }
     - { repo: "deb https://riot.im/packages/debian/ {{ ubuntu_release }} main" }
@@ -49,3 +55,4 @@
     - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
     - { repo: "deb http://apt.llvm.org/{{ ubuntu_release }}/ llvm-toolchain-{{ ubuntu_release }}-5.0 main" }
     - { repo: "deb https://deb.nodesource.com/node_8.x {{ ubuntu_release }} main" }
+    - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" }
