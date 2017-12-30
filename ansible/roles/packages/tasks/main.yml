@@ -66,6 +66,7 @@
     - { package: "clang-format-5.0" }
     - { package: "libclang-common-5.0-dev" }
     - { package: "azure-cli" }
+    - { package: "exuberant-ctags" }
 
 - name: Install libsecret git helper
   command: make
