@@ -26,6 +26,7 @@
     - { package: "i3status" }
     - { package: "suckless-tools" }
     - { package: "redshift-gtk" }
+    - { package: "geoclue-2.0" }
     - { package: "gnome-encfs-manager" }
     - { package: "gnome-terminal" }
     - { package: "autossh" }
@@ -68,6 +69,7 @@
     - { package: "nodejs" }
     - { package: "keepassx" }
     - { package: "mosh" }
+    - { package: "signal-desktop" }
 
 - name: Install libsecret git helper
   command: make
