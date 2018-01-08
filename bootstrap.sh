@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exo
+set -eo
 
 declare -a DEPS=(
 python-pip
@@ -10,6 +10,7 @@ libssl-dev
 build-essential
 python-virtualenv
 python-setuptools
+python3-setuptools
 )
 
 installed() {

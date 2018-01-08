@@ -23,6 +23,8 @@
     - { package: "build-essential" }
     - { package: "git" }
     - { package: "i3" }
+    - { package: "i3status" }
+    - { package: "suckless-tools" }
     - { package: "redshift-gtk" }
     - { package: "gnome-encfs-manager" }
     - { package: "gnome-terminal" }
@@ -35,14 +37,13 @@
     - { package: "riot-web" }
     - { package: "numix-gtk-theme" }
     - { package: "numix-icon-theme" }
-    - { package: "owncloud-client" }
     - { package: "feh" }
     - { package: "gnupg" }
     - { package: "transmission-gtk" }
     - { package: "neovim" }
     - { package: "unzip" }
     - { package: "dkms" }
-    - { package: "virtualbox-5.1" }
+    - { package: "virtualbox-5.2" }
     - { package: "pass" }
     - { package: "libdbus-glib-1-dev" }
     - { package: "whois" }
@@ -62,11 +63,11 @@
     - { package: "slack-desktop" }
     - { package: "pinentry-curses" }
     - { package: "libsecret-1-dev" }
-    - { package: "clang-tidy-5.0" }
-    - { package: "clang-format-5.0" }
-    - { package: "libclang-common-5.0-dev" }
     - { package: "azure-cli" }
     - { package: "exuberant-ctags" }
+    - { package: "nodejs" }
+    - { package: "keepassx" }
+    - { package: "mosh" }
 
 - name: Install libsecret git helper
   command: make
@@ -123,6 +124,7 @@
     - { package: "secretstorage" }
     - { package: "dbus-python" }
     - { package: "flake8" }
+    - { package: "msgpack-python" }
 
 - name: Install pip3
   apt:
@@ -184,31 +186,35 @@
     creates: "{{ ansible_env.HOME }}/.local/bin/oc"
 
 - name: Install Hugo
-  apt: deb=https://github.com/gohugoio/hugo/releases/download/v0.24.1/hugo_0.24.1_Linux-64bit.deb
+  apt: "deb=https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_{{ hugo_version }}_Linux-64bit.deb"
   become: yes
 
 - name: Ruby alternative
   become: yes
   alternatives:
     name: ruby
+    link: /usr/bin/ruby
     path: /usr/bin/ruby2.4
 
 - name: Gem alternative
   become: yes
   alternatives:
     name: gem
+    link: /usr/bin/gem
     path: /usr/bin/gem2.4
 
 - name: vim alternative
   become: yes
   alternatives:
     name: vim
+    link: /usr/bin/vim
     path: /usr/bin/nvim
 
 - name: pinentry alternative
   become: yes
   alternatives:
     name: pinentry
+    link: /usr/bin/pinentry
     path: /usr/bin/pinentry-curses
 
 - name: nodejs alternative
@@ -218,19 +224,25 @@
     link: /usr/bin/node
     path: /usr/bin/nodejs
 
-- name: clang-format alternative
-  become: yes
-  alternatives:
-    name: clang-format
-    link: /usr/bin/clang-format
-    path: /usr/bin/clang-format-5.0
+- name: Install rustup-init
+  get_url:
+    url: "https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init"
+    dest: "/tmp/rustup-init"
+    mode: 0755
+  register: download_rustup_init
 
-- name: clang-tidy alternative
-  become: yes
-  alternatives:
-    name: clang-tidy
-    link: /usr/bin/clang-tidy
-    path: /usr/bin/clang-tidy-5.0
+- name: Install rustup
+  command: /tmp/rustup-init -y --no-modify-path
+  args:
+    creates: "{{ansible_env.HOME}}/.cargo/bin/rustup"
+  when: download_rustup_init|succeeded
+  register: rustup_installed
+
+- name: Remove rustup-init
+  file:
+    path: /tmp/rustup-init
+    state: absent
+  when: rustup_installed|succeeded
 
 - include: hashicorp.yml
 - include: docker.yml

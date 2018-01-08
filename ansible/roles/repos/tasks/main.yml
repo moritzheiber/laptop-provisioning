@@ -37,9 +37,9 @@
     - { id: "7B0FAB3A13B907435925D9C954422A4B98AB5139", url: "https://www.virtualbox.org/download/oracle_vbox.asc" }
     - { id: "72ECF46A56B4AD39C907BBB71646B01B86E50310", url: "https://raw.githubusercontent.com/yarnpkg/releases/gh-pages/debian/pubkey.gpg" }
     - { id: "DB085A08CA13B8ACB917E0F6D938EC0D038651BD", url: "https://packagecloud.io/slacktechnologies/slack/gpgkey" }
-    - { id: "6084F3CF814B57C1CF12EFD515CF4D18AF4F7421", url: "http://apt.llvm.org/llvm-snapshot.gpg.key" }
     - { id: "9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280", url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" }
     - { id: "EB4C1BFD4F042F6DDDCCEC917721F63BD38B4796", url: "https://dl-ssl.google.com/linux/linux_signing_key.pub" }
+    - { id: "DBA36B5181D0C816F630E889D980A17457F6FB06", url: "https://updates.signal.org/desktop/apt/keys.asc" }
 
 - name: Install other repositories
   apt_repository: repo={{ item.repo }} state=present
@@ -51,6 +51,6 @@
     - { repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
     - { repo: "deb https://dl.yarnpkg.com/debian/ stable main" }
     - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
-    - { repo: "deb http://apt.llvm.org/{{ ubuntu_release }}/ llvm-toolchain-{{ ubuntu_release }}-5.0 main" }
     - { repo: "deb https://deb.nodesource.com/node_8.x {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" }
+    - { repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" }
