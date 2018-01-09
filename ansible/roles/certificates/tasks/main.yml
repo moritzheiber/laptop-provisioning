@@ -13,4 +13,4 @@
 - name: Update certificate cache
   command: update-ca-certificates
   become: yes
-  only_when: installed_certificates|successful
+  when: installed_certificates|succeeded

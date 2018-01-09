@@ -70,6 +70,8 @@
     - { package: "keepassx" }
     - { package: "mosh" }
     - { package: "signal-desktop" }
+    - { package: "xclip" }
+    - { package: "silversearcher-ag" }
 
 - name: Install libsecret git helper
   command: make
@@ -92,6 +94,10 @@
 
 - name: Install gopass
   apt: deb=https://github.com/justwatchcom/gopass/releases/download/v{{ gopass_version }}/gopass-{{ gopass_version }}-linux-amd64.deb
+  become: yes
+
+- name: Install Mattermost
+  apt: deb=https://releases.mattermost.com/desktop/{{ mattermost_version }}/mattermost-desktop-{{ mattermost_version }}-linux-amd64.deb
   become: yes
 
 - name: Install ctop

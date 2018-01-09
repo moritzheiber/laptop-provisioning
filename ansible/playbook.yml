@@ -1,5 +1,4 @@
 ---
-- hosts: all
 - name: repos
   hosts: localhost
   vars_files:
@@ -25,3 +24,8 @@
   hosts: localhost
   roles:
     - certificates
+
+- name: configuration
+  hosts: localhost
+  roles:
+    - configuration
