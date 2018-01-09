@@ -4,3 +4,9 @@
   systemd: enabled=False name=apport
   become: yes
 
+- name: Use 1080p resolution for LightDM
+  copy:
+    src: display.conf
+    dest: /etc/lightdm/lightdm.conf.d/display.conf
+  become: yes
+

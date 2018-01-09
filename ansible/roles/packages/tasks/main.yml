@@ -116,6 +116,7 @@
   with_items:
     - { package: "thunderbird" }
     - { package: "pidgin" }
+    - { package: "apport-gtk" }
 
 - name: Install Python packages
   pip:
