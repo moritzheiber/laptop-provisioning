@@ -72,6 +72,8 @@
     - { package: "signal-desktop" }
     - { package: "xclip" }
     - { package: "silversearcher-ag" }
+    - { package: "pulseaudio-module-bluetooth" }
+    - { package: "shellcheck" }
 
 - name: Install libsecret git helper
   command: make
@@ -124,7 +126,6 @@
     extra_args: --user
     state: latest
   with_items:
-    - { package: "pip" }
     - { package: "setuptools" }
     - { package: "keyring" }
     - { package: "awscli" }
@@ -134,6 +135,7 @@
     - { package: "dbus-python" }
     - { package: "flake8" }
     - { package: "msgpack-python" }
+    - { package: "python-language-server" }
 
 - name: Install pip3
   apt:
@@ -161,6 +163,7 @@
   with_items:
     - { package: "bundler" }
     - { package: "neovim" }
+    - { package: "ohai" }
 
 - name: Install local Rubygems
   gem:

@@ -8,6 +8,6 @@
 - name: Add user to docker group
   user:
     append: yes
-    name: moe
+    name: "{{ login_user }}"
     groups: docker
   become: yes

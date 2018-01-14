@@ -10,3 +10,13 @@
     dest: /etc/lightdm/lightdm.conf.d/display.conf
   become: yes
 
+- name: Install avatar for desktop manager
+  copy:
+    src: avatar.png
+    dest: /etc/lightdm/avatar.png
+  become: yes
+  register: install_avatar_png
+
+- name: Set login picture for current user
+  command: dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User{{ ohai_etc.passwd.moe.uid }} org.freedesktop.Accounts.User.SetIconFile string:"/etc/lightdm/avatar.png"
+

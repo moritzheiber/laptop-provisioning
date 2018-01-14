@@ -1,3 +1,4 @@
+login_user: "moe"
 ubuntu_release: "artful"
 ubuntu_release_number: "17.10"
 ansible_python_interpreter: "/usr/bin/python2"
