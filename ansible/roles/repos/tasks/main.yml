@@ -7,7 +7,7 @@
     - { package: ca-certificates }
 
 - name: Install i3 repo gpg keyring package
-  apt: deb=http://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2017.01.02_all.deb
+  apt: deb=http://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2018.01.30_all.deb
   become: yes
 
 - name: Install PPA repositories

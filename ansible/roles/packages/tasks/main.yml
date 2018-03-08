@@ -18,8 +18,8 @@
     install_recommends: no
   become: yes
   with_items:
-    - { package: "ruby2.4" }
-    - { package: "ruby2.4-dev" }
+    - { package: "ruby2.5" }
+    - { package: "ruby2.5-dev" }
     - { package: "build-essential" }
     - { package: "git" }
     - { package: "i3" }
@@ -52,7 +52,7 @@
     - { package: "mpv" }
     - { package: "i965-va-driver" }
     - { package: "vdpau-va-driver" }
-    - { package: "golang-1.8" }
+    - { package: "golang-1.9" }
     - { package: "curl" }
     - { package: "jq" }
     - { package: "network-manager-openvpn-gnome" }
@@ -91,7 +91,7 @@
   become: yes
 
 - name: Install Microsoft Core Fonts
-  apt: deb=http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+  apt: deb=http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb
   become: yes
 
 - name: Install gopass
@@ -120,22 +120,22 @@
     - { package: "pidgin" }
     - { package: "apport-gtk" }
 
-- name: Install Python packages
-  pip:
-    name: "{{ item.package }}"
-    extra_args: --user
-    state: latest
-  with_items:
-    - { package: "setuptools" }
-    - { package: "keyring" }
-    - { package: "awscli" }
-    - { package: "streamlink" }
-    - { package: "neovim" }
-    - { package: "secretstorage" }
-    - { package: "dbus-python" }
-    - { package: "flake8" }
-    - { package: "msgpack-python" }
-    - { package: "python-language-server" }
+      # - name: Install Python packages
+      #   pip:
+      #     name: "{{ item.package }}"
+      #     extra_args: --user
+      #     state: latest
+      #   with_items:
+      #     - { package: "setuptools" }
+      #     - { package: "keyring" }
+      #     - { package: "awscli" }
+      #     - { package: "streamlink" }
+      #     - { package: "neovim" }
+      #     - { package: "secretstorage" }
+      #     - { package: "dbus-python" }
+      #     - { package: "flake8" }
+      #     - { package: "msgpack-python" }
+      #     - { package: "python-language-server" }
 
 - name: Install pip3
   apt:
@@ -155,23 +155,6 @@
   with_items:
     - { package: "neovim" }
 
-- name: Install Rubygems
-  gem:
-    name: "{{ item.package }}"
-    user_install: no
-  become: yes
-  with_items:
-    - { package: "bundler" }
-    - { package: "neovim" }
-    - { package: "ohai" }
-
-- name: Install local Rubygems
-  gem:
-    name: "{{ item.package }}"
-    user_install: yes
-  with_items:
-    - { package: "rubocop" }
-
 - name: Install awstools
   get_url:
     url: "https://github.com/sam701/awstools/releases/download/{{ awstools_version }}/awstools_linux_amd64"
@@ -185,6 +168,13 @@
     dest: "{{ ansible_env.HOME }}/.local/bin/"
     remote_src: True
     creates: "{{ ansible_env.HOME }}/.local/bin/minishift"
+
+- name: Install minikube
+  get_url:
+    url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/minikube"
+    sha256sum: 1261de09386fd1f4ee7a4645958757c2c9e69f419a2a4ca8aff475017a7e036e
+    mode: 0755
 
 - name: Install OpenShift client
   unarchive:
@@ -206,14 +196,14 @@
   alternatives:
     name: ruby
     link: /usr/bin/ruby
-    path: /usr/bin/ruby2.4
+    path: /usr/bin/ruby2.5
 
 - name: Gem alternative
   become: yes
   alternatives:
     name: gem
     link: /usr/bin/gem
-    path: /usr/bin/gem2.4
+    path: /usr/bin/gem2.5
 
 - name: vim alternative
   become: yes
@@ -235,6 +225,23 @@
     name: node
     link: /usr/bin/node
     path: /usr/bin/nodejs
+
+- name: Install Rubygems
+  gem:
+    name: "{{ item.package }}"
+    user_install: no
+  become: yes
+  with_items:
+    - { package: "bundler" }
+    - { package: "neovim" }
+    - { package: "ohai" }
+
+- name: Install local Rubygems
+  gem:
+    name: "{{ item.package }}"
+    user_install: yes
+  with_items:
+    - { package: "rubocop" }
 
 - name: Install rustup-init
   get_url:
