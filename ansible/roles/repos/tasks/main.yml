@@ -48,7 +48,7 @@
     - { repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable" }
     - { repo: "deb http://debian.sur5r.net/i3/ {{ ubuntu_release }} universe" }
     - { repo: "deb https://riot.im/packages/debian/ {{ ubuntu_release }} main" }
-    - { repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
+    - { repo: "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
     - { repo: "deb https://dl.yarnpkg.com/debian/ stable main" }
 #   - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
     - { repo: "deb https://deb.nodesource.com/node_8.x {{ ubuntu_release }} main" }

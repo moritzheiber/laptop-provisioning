@@ -52,7 +52,7 @@
     - { package: "mpv" }
     - { package: "i965-va-driver" }
     - { package: "vdpau-va-driver" }
-    - { package: "golang-1.9" }
+    - { package: "golang-1.10" }
     - { package: "curl" }
     - { package: "jq" }
     - { package: "network-manager-openvpn-gnome" }
@@ -61,7 +61,6 @@
     - { package: "w3m" }
     - { package: "yarn" }
     - { package: "gimp" }
-    - { package: "slack-desktop" }
     - { package: "pinentry-curses" }
     - { package: "libsecret-1-dev" }
     - { package: "azure-cli" }
@@ -74,6 +73,7 @@
     - { package: "silversearcher-ag" }
     - { package: "pulseaudio-module-bluetooth" }
     - { package: "shellcheck" }
+    - { package: "hugo" }
 
 - name: Install libsecret git helper
   command: make
@@ -186,10 +186,6 @@
     extra_opts: "--strip-components=1"
     remote_src: True
     creates: "{{ ansible_env.HOME }}/.local/bin/oc"
-
-- name: Install Hugo
-  apt: "deb=https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_{{ hugo_version }}_Linux-64bit.deb"
-  become: yes
 
 - name: Ruby alternative
   become: yes
