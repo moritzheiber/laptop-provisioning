@@ -21,12 +21,6 @@
     - { repo: "ppa:gophers/archive" }
     - { repo: "ppa:git-core/ppa" }
 
-- name: Install APT repository keys from keyserver
-  apt_key: id={{ item.id }} keyserver={{ item.keyserver }} state=present
-  become: yes
-  with_items:
-    - { id: "52E16F86FEE04B979B07E28DB02C46DF417A0893", keyserver: "packages.microsoft.com" }
-
 - name: Install APT repository keys from URL
   apt_key: id={{ item.id }} url={{ item.url }} state=present
   become: yes
@@ -40,6 +34,7 @@
     - { id: "9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280", url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" }
     - { id: "EB4C1BFD4F042F6DDDCCEC917721F63BD38B4796", url: "https://dl-ssl.google.com/linux/linux_signing_key.pub" }
     - { id: "DBA36B5181D0C816F630E889D980A17457F6FB06", url: "https://updates.signal.org/desktop/apt/keys.asc" }
+    - { id: "BC528686B50D79E339D3721CEB3E94ADBE1229CF", url: "https://packages.microsoft.com/keys/microsoft.asc" }
 
 - name: Install other repositories
   apt_repository: repo={{ item.repo }} state=present
@@ -52,5 +47,5 @@
     - { repo: "deb https://dl.yarnpkg.com/debian/ stable main" }
 #   - { repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" }
     - { repo: "deb https://deb.nodesource.com/node_8.x {{ ubuntu_release }} main" }
-    - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" }
+    - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" }
