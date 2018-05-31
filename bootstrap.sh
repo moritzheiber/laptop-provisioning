@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -eo
+set -eu -o pipefail
+
+ANSIBLE_VERSION="2.4.4.0"
 
 declare -a DEPS=(
 python-pip
@@ -14,27 +16,27 @@ python3-setuptools
 )
 
 installed() {
-  local dep="$1"
-
+  local dep="${1}"
   dpkg --get-selections | grep -q "${dep}"
+  return $?
 }
 
 ansible_deps() {
   echo "Installing Python dependencies"
 
-  for dep in ${DEPS[@]} ; do
-    if ! installed "${dep}" ; then
-      sudo apt-get install -y "${dep}"
+  for dep in "${DEPS[@]}" ; do
+    if ! dpkg -s "${dep}" &> /dev/null ; then
+      sudo apt install -y "${dep}"
     fi
   done
 
-  if [ ! -x "${HOME}/.local/bin/ansible-playbook" ] ; then
-    pip install --user --upgrade ansible==2.3.2.0
+  if ! ansible-playbook --version | grep -q "${ANSIBLE_VERSION}" ; then
+    pip install --user --upgrade ansible=="${ANSIBLE_VERSION}"
   fi
 }
 
-sudo apt-get update
-
+echo "Updating index"
+sudo apt update -qq
 ansible_deps
 
 ./run.sh
