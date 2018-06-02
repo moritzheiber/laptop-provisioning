@@ -1,8 +1,8 @@
 # Laptop Provisioning
 
-This is a set of Ansible roles/tasks to configure my Ubuntu-based laptop (currently Ubuntu Artful Aardvark).
+This is a set of Ansible roles/tasks to configure my Ubuntu-based laptop (currently Ubuntu Bionic Beaver).
 
-It's fairly simple, nothing really fancy going on. I didn't want to invest much time in it, most of this has been created in roughly 2 hours. Should you have questions/concerns/ideas for improvements just send me a message, hit me up on [Mastodon](https://mastodon.social/@moritzheiber) or submit a PR. Thanks!
+Should you have questions/concerns/ideas for improvements just send me a message, hit me up on [Mastodon](https://mastodon.social/@moritzheiber) or submit a PR. Thanks!
 
 ## Prerequisites
 
