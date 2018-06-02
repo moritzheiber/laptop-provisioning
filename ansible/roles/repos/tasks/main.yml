@@ -35,6 +35,7 @@
     - { id: "EB4C1BFD4F042F6DDDCCEC917721F63BD38B4796", url: "https://dl-ssl.google.com/linux/linux_signing_key.pub" }
     - { id: "DBA36B5181D0C816F630E889D980A17457F6FB06", url: "https://updates.signal.org/desktop/apt/keys.asc" }
     - { id: "BC528686B50D79E339D3721CEB3E94ADBE1229CF", url: "https://packages.microsoft.com/keys/microsoft.asc" }
+    - { id: "150C6249147592DE6D91981CC927EBE00F1B0520", url: "https://cli-assets.heroku.com/apt/release.key" }
 
 - name: Install other repositories
   apt_repository: repo={{ item.repo }} state=present
@@ -49,3 +50,4 @@
     - { repo: "deb https://deb.nodesource.com/node_8.x {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" }
+    - { repo: "deb [arch=amd64] https://cli-assets.heroku.com/apt ./" }

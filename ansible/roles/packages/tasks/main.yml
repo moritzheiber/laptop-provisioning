@@ -109,6 +109,13 @@
     checksum: "sha256:5313c4e2f98639cce53545762f0b65f3db977ae764a9acb2fb15928713b8cde0"
     mode: 0755
 
+- name: Install powerline-go
+  get_url:
+    url: https://github.com/justjanne/powerline-go/releases/download/v{{ powerline_go_version }}/powerline-go-linux-amd64
+    dest: "{{ ansible_env.HOME }}/.local/bin/powerline-go"
+    checksum: "sha256:{{ powerline_go_checksum }}"
+    mode: 0755
+
 - name: Remove Debian packages
   apt:
     name: "{{ item.package }}"
@@ -120,22 +127,22 @@
     - { package: "pidgin" }
     - { package: "apport-gtk" }
 
-      # - name: Install Python packages
-      #   pip:
-      #     name: "{{ item.package }}"
-      #     extra_args: --user
-      #     state: latest
-      #   with_items:
-      #     - { package: "setuptools" }
-      #     - { package: "keyring" }
-      #     - { package: "awscli" }
-      #     - { package: "streamlink" }
-      #     - { package: "neovim" }
-      #     - { package: "secretstorage" }
-      #     - { package: "dbus-python" }
-      #     - { package: "flake8" }
-      #     - { package: "msgpack-python" }
-      #     - { package: "python-language-server" }
+- name: Install Python2 packages
+  pip:
+    name: "{{ item.package }}"
+    extra_args: --user
+    state: latest
+    executable: /usr/bin/pip2
+  with_items:
+    - { package: "keyring" }
+    - { package: "awscli" }
+    - { package: "streamlink" }
+    - { package: "neovim" }
+    - { package: "secretstorage" }
+    - { package: "dbus-python" }
+    - { package: "flake8" }
+    - { package: "msgpack-python" }
+    - { package: "python-language-server" }
 
 - name: Install pip3
   apt:
