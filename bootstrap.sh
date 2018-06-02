@@ -15,12 +15,6 @@ python-setuptools
 python3-setuptools
 )
 
-installed() {
-  local dep="${1}"
-  dpkg --get-selections | grep -q "${dep}"
-  return $?
-}
-
 ansible_deps() {
   echo "Installing Python dependencies"
 
