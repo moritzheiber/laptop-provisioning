@@ -74,6 +74,7 @@
     - { package: "pulseaudio-module-bluetooth" }
     - { package: "shellcheck" }
     - { package: "hugo" }
+    - { package: "gopass" }
 
 - name: Install libsecret git helper
   command: make
@@ -92,10 +93,6 @@
 
 - name: Install Microsoft Core Fonts
   apt: deb=http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb
-  become: yes
-
-- name: Install gopass
-  apt: deb=https://github.com/justwatchcom/gopass/releases/download/v{{ gopass_version }}/gopass-{{ gopass_version }}-linux-amd64.deb
   become: yes
 
 - name: Install Mattermost

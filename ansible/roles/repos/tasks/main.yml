@@ -36,6 +36,7 @@
     - { id: "DBA36B5181D0C816F630E889D980A17457F6FB06", url: "https://updates.signal.org/desktop/apt/keys.asc" }
     - { id: "BC528686B50D79E339D3721CEB3E94ADBE1229CF", url: "https://packages.microsoft.com/keys/microsoft.asc" }
     - { id: "150C6249147592DE6D91981CC927EBE00F1B0520", url: "https://cli-assets.heroku.com/apt/release.key" }
+    - { id: "C396F836273B06BDC4A5733422C4605681C083D4", url: "https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key" }
 
 - name: Install other repositories
   apt_repository: repo={{ item.repo }} state=present
@@ -51,3 +52,4 @@
     - { repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" }
     - { repo: "deb [arch=amd64] https://cli-assets.heroku.com/apt ./" }
+    - { repo: "deb [arch=amd64] https://dl.bintray.com/gopasspw/gopass bionic main" }
