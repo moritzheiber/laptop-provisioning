@@ -42,7 +42,7 @@
   apt_repository: repo={{ item.repo }} state=present
   become: yes
   with_items:
-    - { repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable" }
+    - { repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} {{ docker_release_channel }}" }
     - { repo: "deb http://debian.sur5r.net/i3/ {{ ubuntu_release }} universe" }
     - { repo: "deb https://riot.im/packages/debian/ {{ ubuntu_release }} main" }
     - { repo: "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian {{ ubuntu_release }} contrib" }
