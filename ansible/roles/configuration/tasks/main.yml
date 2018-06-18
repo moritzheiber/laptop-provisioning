@@ -20,3 +20,9 @@
 - name: Set login picture for current user
   command: dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User{{ ohai_etc.passwd.moe.uid }} org.freedesktop.Accounts.User.SetIconFile string:"/etc/lightdm/avatar.png"
 
+- name: Don't start ssh-agent
+  replace:
+    path: /etc/X11/Xsession.options
+    regexp: '^use-ssh-agent'
+    replace: 'no-use-ssh-agent'
+  become: yes
