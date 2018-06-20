@@ -1,31 +1,31 @@
 ---
 - name: repos
-  hosts: localhost
+  hosts: 127.0.0.1
   vars_files:
     - "vars/common.yml"
   roles:
     - repos
 
 - name: packages
-  hosts: localhost
+  hosts: 127.0.0.1
   vars_files:
     - "vars/common.yml"
   roles:
     - packages
 
 - name: fonts
-  hosts: localhost
+  hosts: 127.0.0.1
   vars_files:
     - "vars/common.yml"
   roles:
     - fonts
 
 - name: certificates
-  hosts: localhost
+  hosts: 127.0.0.1
   roles:
     - certificates
 
 - name: configuration
-  hosts: localhost
+  hosts: 127.0.0.1
   roles:
     - configuration

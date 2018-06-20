@@ -2,8 +2,6 @@
 
 set -eu -o pipefail
 
-ANSIBLE_VERSION="2.4.4.0"
-
 declare -a DEPS=(
 python-pip
 python-apt
@@ -24,8 +22,8 @@ ansible_deps() {
     fi
   done
 
-  if ! ansible-playbook --version | grep -q "${ANSIBLE_VERSION}" ; then
-    pip install --user --upgrade ansible=="${ANSIBLE_VERSION}"
+  if ! ansible-playbook --version ; then
+    pip install --user --upgrade ansible
   fi
 }
 

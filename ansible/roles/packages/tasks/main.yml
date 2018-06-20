@@ -124,22 +124,22 @@
     - { package: "pidgin" }
     - { package: "apport-gtk" }
 
-      # - name: Install Python2 packages
-      #   pip:
-      #     name: "{{ item.package }}"
-      #     extra_args: --user
-      #     state: latest
-      #     executable: /usr/bin/pip2
-      #   with_items:
-      #     - { package: "keyring" }
-      #     - { package: "awscli" }
-      #     - { package: "streamlink" }
-      #     - { package: "neovim" }
-      #     - { package: "secretstorage" }
-      #     - { package: "dbus-python" }
-      #     - { package: "flake8" }
-      #     - { package: "msgpack-python" }
-      #     - { package: "python-language-server" }
+- name: Install Python2 packages
+  pip:
+    name: "{{ item.package }}"
+    extra_args: --user
+    state: latest
+    executable: /usr/bin/pip2
+  with_items:
+    - { package: "keyring" }
+    - { package: "awscli" }
+    - { package: "streamlink" }
+    - { package: "neovim" }
+    - { package: "secretstorage" }
+    - { package: "dbus-python" }
+    - { package: "flake8" }
+    - { package: "msgpack-python" }
+    - { package: "python-language-server" }
 
 - name: Install pip3
   apt:
