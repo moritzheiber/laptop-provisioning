@@ -1,0 +1,63 @@
+update_apt_cache ''
+
+%w(
+  ruby2.5
+  ruby2.5-dev
+  build-essential
+  git
+  i3
+  i3status
+  suckless-tools
+  redshift-gtk
+  geoclue-2.0
+  gnome-encfs-manager
+  gnome-terminal
+  autossh
+  compton
+  unclutter
+  urlscan
+  mutt
+  docker-ce
+  riot-web
+  numix-gtk-theme
+  numix-icon-theme
+  feh
+  gnupg
+  transmission-gtk
+  neovim
+  unzip
+  dkms
+  virtualbox-5.2
+  pass
+  libdbus-glib-1-dev
+  whois
+  htop
+  mpv
+  i965-va-driver
+  vdpau-va-driver
+  golang-1.10
+  curl
+  jq
+  network-manager-openvpn-gnome
+  network-manager-openconnect-gnome
+  unrar
+  w3m
+  yarn
+  gimp
+  pinentry-curses
+  libsecret-1-dev
+  azure-cli
+  exuberant-ctags
+  nodejs
+  keepassx
+  mosh
+  signal-desktop
+  xclip
+  silversearcher-ag
+  pulseaudio-module-bluetooth
+  shellcheck
+  hugo
+  gopass
+).each do |p|
+  package p
+end
