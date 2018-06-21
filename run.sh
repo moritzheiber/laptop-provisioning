@@ -22,4 +22,7 @@ install_mitamae() {
 
 install_mitamae
 
-sudo mitamae local mitamae/mitamae.rb
+(
+  cd mitamae/
+  sudo mitamae local mitamae.rb
+)

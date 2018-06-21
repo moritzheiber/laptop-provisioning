@@ -1,3 +1,2 @@
 /.vagrant
-/*.retry
-/**/*.retry
+/mitamae/plugins*

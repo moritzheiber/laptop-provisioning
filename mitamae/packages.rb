@@ -1,5 +1,9 @@
-update_apt_cache ''
+# We need to install this without authentication
+package 'sur5r-keyring' do
+  options '--allow-unauthenticated'
+end
 
+# apt packages
 %w(
   ruby2.5
   ruby2.5-dev
@@ -58,6 +62,60 @@ update_apt_cache ''
   shellcheck
   hugo
   gopass
+  python3-pip
 ).each do |p|
   package p
+end
+
+# Remove a couple of apt packages
+%w(
+  thunderbird
+  pidgin
+  apport-gtk
+).each do |p|
+  package p do
+    action [:remove]
+  end
+end
+
+# Python2 pip packages installed locally
+%w(
+  keyring
+  awscli
+  streamlink
+  neovim
+  secretstorage
+  dbus-python
+  flake8
+  msgpack-python
+  python-language-server
+).each do |python_p|
+  pip python_p do
+    pip_binary "/usr/bin/pip2"
+    action [:upgrade]
+    options '--user'
+    user 'moe'
+  end
+end
+
+# Python3 pip packages installed locally
+%w(
+  neovim
+).each do |python_p|
+  pip python_p do
+    pip_binary "/usr/bin/pip3"
+    action [:upgrade]
+    options '--user'
+    user 'moe'
+  end
+end
+
+# Install the libsecret helper
+execute 'make' do
+  cwd '/usr/share/doc/git/contrib/credential/libsecret'
+  not_if 'test -f /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
+end
+
+apt 'google-chrome-stable' do
+  source_url 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 end
