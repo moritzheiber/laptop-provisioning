@@ -63,6 +63,7 @@ end
   hugo
   gopass
   python3-pip
+  ttf-mscorefonts-installer
 ).each do |p|
   package p
 end
@@ -94,7 +95,7 @@ end
     pip_binary "/usr/bin/pip2"
     action [:upgrade]
     options '--user'
-    user 'moe'
+    user node[:login_user]
   end
 end
 
@@ -106,7 +107,7 @@ end
     pip_binary "/usr/bin/pip3"
     action [:upgrade]
     options '--user'
-    user 'moe'
+    user node[:login_user]
   end
 end
 
@@ -116,6 +117,62 @@ execute 'make' do
   not_if 'test -f /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
 end
 
-apt 'google-chrome-stable' do
-  source_url 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+{
+  'google-chrome-stable' => 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb',
+  'mattermost-desktop' => "https://releases.mattermost.com/desktop/#{node[:mattermost_version]}/mattermost-desktop-#{node[:mattermost_version]}-linux-amd64.deb"
+}.each do |name, url|
+  apt name do
+    source_url url
+  end
+end
+
+# Global rubygems
+%w(
+  bundler
+  neovim
+  ohai
+).each do |g|
+  gem_package g
+end
+
+# Local rubygems
+%w(
+  rubocop
+  rubocop-rspec
+).each do |g|
+  gem_package g do
+    user node[:login_user]
+  end
+end
+
+rustup 'stable' do
+  user node[:login_user]
+end
+
+download 'powerline-go' do
+  url "https://github.com/justjanne/powerline-go/releases/download/v#{node[:powerline_go_version]}/powerline-go-linux-amd64"
+  destination "#{ENV['HOME']}/.local/bin/powerline-go"
+  mode '0755'
+  checksum node[:powerline_go_checksum]
+end
+
+download 'ctop' do
+  url "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64"
+  destination "#{ENV['HOME']}/.local/bin/ctop"
+  mode '0755'
+  checksum node[:ctop_checksum]
+end
+
+download 'awstools' do
+  url "https://github.com/sam701/awstools/releases/download/#{node[:awstools_version]}/awstools_linux_amd64"
+  destination "#{ENV['HOME']}/.local/bin/awstools"
+  mode '0755'
+  checksum node[:awstools_checksum]
+end
+
+download 'minikube' do
+  url "https://github.com/kubernetes/minikube/releases/download/v#{node[:minikube_version]}/minikube-linux-amd64"
+  destination "#{ENV['HOME']}/.local/bin/minikube"
+  mode '0755'
+  checksum node[:minikube_checksum]
 end

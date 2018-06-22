@@ -5,6 +5,7 @@ set -xue
 MITAMAE_PATH="/usr/bin/mitamae"
 MITAMAE_VERSION="1.5.6"
 MITAMAE_CHECKSUM="585a1ff05e1a8a8a39434bd6b576940d2f850dbd9960c1d493698d3f1df95f1f"
+LOG_LEVEL="${LOG_LEVEL:-info}"
 
 _cleanup() {
   rm -f /tmp/mitamae
@@ -24,5 +25,5 @@ install_mitamae
 
 (
   cd mitamae/
-  sudo mitamae local mitamae.rb
+  sudo mitamae local -l "${LOG_LEVEL}" --node-yaml vars.yml mitamae.rb
 )
