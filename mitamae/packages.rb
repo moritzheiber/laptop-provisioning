@@ -176,3 +176,15 @@ download 'minikube' do
   mode '0755'
   checksum node[:minikube_checksum]
 end
+
+{
+  'ruby' => '/usr/bin/ruby2.5',
+  'gem' => '/usr/bin/gem2.5',
+  'vim' => '/usr/bin/nvim',
+  'pinentry' => '/usr/bin/pinentry-curses',
+  'node' => '/usr/bin/nodejs'
+}.each do |n, p|
+  alternatives n do
+    path p
+  end
+end
