@@ -39,7 +39,6 @@ end
   mpv
   i965-va-driver
   vdpau-va-driver
-  golang-1.10
   curl
   jq
   network-manager-openvpn-gnome
@@ -67,6 +66,9 @@ end
 ).each do |p|
   package p
 end
+
+# Install golang separately to we can keep track of the version
+package "golang-#{node[:golang_version]}"
 
 # Remove a couple of apt packages
 %w(

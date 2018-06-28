@@ -3,6 +3,7 @@ define :rustup do
     destination '/tmp/rustup-init'
     user node[:login_user]
     mode "0755"
+    not_if "test -f #{ENV['HOME']}/.cargo/bin/rustup"
   end
 
   execute '/tmp/rustup-init -y --no-modify-path' do
