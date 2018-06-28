@@ -1,8 +1,3 @@
-# We need to install this without authentication
-package 'sur5r-keyring' do
-  options '--allow-unauthenticated'
-end
-
 # apt packages
 %w(
   ruby2.5
