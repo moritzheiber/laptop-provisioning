@@ -1,0 +1,27 @@
+apt 'vagrant' do
+  # We need to specify the epoch here
+  # For a reference look at deb-version(5)
+  version "1:#{node[:vagrant_version]}"
+  source_url "https://releases.hashicorp.com/vagrant/#{node[:vagrant_version]}/vagrant_#{node[:vagrant_version]}_x86_64.deb"
+end
+
+{
+  'packer' => {
+    version: node[:packer_version],
+    checksum: node[:packer_checksum]
+  },
+  'terraform' => {
+    version: node[:terraform_version],
+    checksum: node[:terraform_checksum]
+  },
+  'vault' => {
+    version: node[:vault_version],
+    checksum: node[:vault_checksum]
+  }
+}.each do |pack, info|
+  hashicorp_install pack do
+    version info[:version]
+    checksum info[:checksum]
+    source_url "https://releases.hashicorp.com/#{pack}/#{info[:version]}/#{pack}_#{info[:version]}_linux_amd64.zip"
+  end
+end

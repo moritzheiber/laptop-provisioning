@@ -1,12 +1,9 @@
 login_user: "moe"
 ubuntu_release: "bionic"
 ubuntu_release_number: "18.04"
-terraform_version: "0.11.7"
-vault_version: "0.9.3"
-vagrant_version: "2.0.0"
-packer_version: "1.1.1"
 powerline_go_version: "1.11.0"
 powerline_go_checksum: "f00f2a20d56f79cb5747fb71d298f213f5c059d49a752606c8e464b792b419fa"
+golang_version: "1.10"
 ctop_version: "0.5"
 awstools_version: "0.13.1"
 openshift_cli_version: "1.5.1"
@@ -21,4 +18,13 @@ vim_plug_checksum: "8dd8edcf4a5308d40ddd9647bb513909c428a649be960db92207102dc842
 ctop_checksum: "5313c4e2f98639cce53545762f0b65f3db977ae764a9acb2fb15928713b8cde0"
 awstools_checksum: "c336f25889a55791f62fdef7ca034caad48be5d49745075138c7969fc38d1793"
 minikube_checksum: "1261de09386fd1f4ee7a4645958757c2c9e69f419a2a4ca8aff475017a7e036e"
-golang_version: "1.10"
+
+# Hashicorp
+terraform_version: "0.11.7"
+terraform_checksum: "6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418"
+vault_version: "0.10.3"
+vault_checksum: "ffec1c201f819f47581f54c08653a8d17ec0a6699854ebd7f6625babb9e290ed"
+packer_version: "1.2.4"
+packer_checksum: "258d1baa23498932baede9b40f2eca4ac363b86b32487b36f48f5102630e9fbb"
+# Installed through deb/apt
+vagrant_version: "2.1.2"
