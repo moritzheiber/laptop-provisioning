@@ -13,8 +13,8 @@ file '/etc/lightdm/lightdm.conf.d/display.conf' do
 end
 
 avatar_path = '/etc/lightdm/avatar.png'
-file avatar_path  do
-  content 'files/avatar.png'
+remote_file avatar_path  do
+  source 'files/avatar.png'
   mode '0644'
 end
 
