@@ -1,11 +1,13 @@
 #!/bin/bash
 
-set -eu -o pipefail
+set -eux -o pipefail
 
 MITAMAE_PATH="/usr/bin/mitamae"
 MITAMAE_VERSION="1.5.6"
 MITAMAE_CHECKSUM="585a1ff05e1a8a8a39434bd6b576940d2f850dbd9960c1d493698d3f1df95f1f"
 LOG_LEVEL="${LOG_LEVEL:-info}"
+OVERRIDES="${OVERRIDES:-}"
+NODE_ATTRIBUTES="--node-yaml vars.yml ${OVERRIDES}"
 
 _cleanup() {
   rm -f /tmp/mitamae
@@ -25,5 +27,6 @@ install_mitamae
 
 (
   cd mitamae/
-  sudo mitamae local -l "${LOG_LEVEL}" --node-yaml vars.yml mitamae.rb
+  # shellcheck disable=SC2086
+  sudo mitamae local -l "${LOG_LEVEL}" ${NODE_ATTRIBUTES} mitamae.rb
 )

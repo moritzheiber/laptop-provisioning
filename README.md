@@ -4,6 +4,8 @@ This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to
 
 Should you have questions/concerns/ideas for improvements just send me a message, hit me up on [Mastodon](https://mastodon.social/@moritzheiber) or submit a PR. Thanks!
 
+_Note: Prior to using MItamae recipes this repository contained a set of Ansible playbooks. They are archived in the `ansible` branch._
+
 ## Prerequisites
 
 A Debian/Ubuntu-based laptop. It's not tested on any other operating system.

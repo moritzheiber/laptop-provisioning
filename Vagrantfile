@@ -1,7 +1,12 @@
 Vagrant.configure('2') do |config|
-  config.vm.box = 'boxcutter/ubuntu1804'
-  config.vm.network 'private_network', type: 'dhcp'
+  config.vm.provider 'docker' do |d|
+    d.image = 'ubuntu:bionic'
+  end
+
   config.vm.provision 'shell',
-                      inline: 'cd /vagrant && ./bootstrap.sh',
-                      privileged: false
+    inline: 'echo "login_user: vagrant" > /tmp/overrides.yml'
+  config.vm.provision 'shell',
+    inline: 'cd /vagrant && ./run.sh',
+    privileged: false,
+    env: { 'OVERRIDES' => '--node-yaml /tmp/overrides.yml' }
 end
