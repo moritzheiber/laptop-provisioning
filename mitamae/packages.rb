@@ -82,7 +82,7 @@ end
   awscli
   streamlink
   neovim
-  secretstorage
+  SecretStorage
   dbus-python
   flake8
   msgpack-python
