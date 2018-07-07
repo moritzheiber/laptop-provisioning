@@ -8,12 +8,12 @@ _Note: Prior to using MItamae recipes this repository contained a set of Ansible
 
 ## Prerequisites
 
-A Debian/Ubuntu-based laptop. It's not tested on any other operating system.
+A Debian/Ubuntu-based machine. It's not tested on any other operating system.
 
 ### Testing
 
-- Vagrant >= 1.9.3
-- VirtualBox >= 5.1.x
+- Vagrant >= 2.1.2
+- Docker >= 18.03.0-ce
 
 ## Provisioning
 
@@ -32,7 +32,7 @@ $ LOG_LEVEL=debug ./run.sh
 ## Testing
 
 ```sh
-$ vagrant up
+$ vagrant up --provider docker --provision
 ```
 
-You should have a box provisioned using the playbook afterwards.
+You should have a box provisioned using the MItamae definitions afterwards.

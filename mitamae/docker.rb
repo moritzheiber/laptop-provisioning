@@ -5,6 +5,6 @@ download 'docker-compose' do
   checksum node[:docker_compose_checksum]
 end
 
-add_user_to_group 'moe' do
+add_user_to_group node[:login_user] do
   group 'docker'
 end

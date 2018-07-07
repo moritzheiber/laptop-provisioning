@@ -18,10 +18,10 @@ end
     version: node[:vault_version],
     checksum: node[:vault_checksum]
   }
-}.each do |pack, info|
-  hashicorp_install pack do
+}.each do |tool, info|
+  hashicorp_install tool do
     version info[:version]
     checksum info[:checksum]
-    source_url "https://releases.hashicorp.com/#{pack}/#{info[:version]}/#{pack}_#{info[:version]}_linux_amd64.zip"
+    source_url "https://releases.hashicorp.com/#{tool}/#{info[:version]}/#{tool}_#{info[:version]}_linux_amd64.zip"
   end
 end

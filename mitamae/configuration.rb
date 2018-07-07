@@ -7,6 +7,8 @@ display_conf = <<EOS
 display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
 EOS
 
+directory '/etc/lightdm/lightdm.conf.d'
+
 file '/etc/lightdm/lightdm.conf.d/display.conf' do
   content display_conf
   mode '0644'
@@ -20,6 +22,7 @@ end
 
 execute 'update-avatar' do
   command "dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User#{Etc.getpwnam(node[:login_user]).uid} org.freedesktop.Accounts.User.SetIconFile string:\"#{avatar_path}\""
+  only_if 'ps aux | grep -q "[d]bus-daemon"'
 end
 
 xsession_file = '/etc/X11/Xsession.options'

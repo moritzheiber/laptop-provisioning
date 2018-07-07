@@ -26,7 +26,6 @@
   neovim
   unzip
   dkms
-  virtualbox-5.2
   pass
   libdbus-glib-1-dev
   whois
@@ -57,6 +56,7 @@
   hugo
   gopass
   python3-pip
+  python-pip
   ttf-mscorefonts-installer
 ).each do |p|
   package p
@@ -128,18 +128,10 @@ end
   bundler
   neovim
   ohai
-).each do |g|
-  gem_package g
-end
-
-# Local rubygems
-%w(
   rubocop
   rubocop-rspec
 ).each do |g|
-  gem_package g do
-    user node[:login_user]
-  end
+  gem_package g
 end
 
 rustup 'stable' do
@@ -181,7 +173,12 @@ end
   'pinentry' => '/usr/bin/pinentry-curses',
   'node' => '/usr/bin/nodejs'
 }.each do |n, p|
+  elements = p.split('/')
+  elements.pop
+  l = (elements << n).join('/')
+
   alternatives n do
     path p
+    link l
   end
 end

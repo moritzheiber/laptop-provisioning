@@ -1,6 +1,6 @@
 module HashiHelper
   def self.package_installed?(name, version)
-    !(/#{version}/ =~ %x(#{name} --version).gsub("\n", '')).nil?
+    !(/#{version}/ =~ %x(#{name} --version 2> /dev/null).gsub("\n", '')).nil?
   end
 end
 
