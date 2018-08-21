@@ -21,8 +21,8 @@ minikube_checksum: "1261de09386fd1f4ee7a4645958757c2c9e69f419a2a4ca8aff475017a7e
 i3_keyring_version: "2018.01.30"
 
 # Hashicorp
-terraform_version: "0.11.7"
-terraform_checksum: "6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418"
+terraform_version: "0.11.8"
+terraform_checksum: "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7"
 vault_version: "0.10.3"
 vault_checksum: "ffec1c201f819f47581f54c08653a8d17ec0a6699854ebd7f6625babb9e290ed"
 packer_version: "1.2.4"

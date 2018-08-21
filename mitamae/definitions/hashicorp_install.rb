@@ -1,6 +1,6 @@
 module HashiHelper
   def self.package_installed?(name, version)
-    !(/#{version}/ =~ %x(#{name} --version 2> /dev/null).gsub("\n", '')).nil?
+    !(Regexp.compile(version) =~ `#{name} --version 2> /dev/null`.lines.first.gsub("\n", '')).nil?
   end
 end
 
@@ -19,7 +19,7 @@ define :hashicorp_install, version: nil, checksum: nil, source_url: nil do
   end
 
   execute "Extracting #{dest} for #{name}" do
-    command "unzip -d /usr/bin/ #{dest}"
+    command "unzip -o -d /usr/bin/ #{dest}"
     not_if { installed }
   end
 
