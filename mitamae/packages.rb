@@ -64,6 +64,7 @@ end
 
 # Install golang separately to we can keep track of the version
 package "golang-#{node[:golang_version]}"
+package 'glide'
 
 # Remove a couple of apt packages
 %w(
@@ -89,7 +90,7 @@ end
   python-language-server
 ).each do |python_p|
   pip python_p do
-    pip_binary "/usr/bin/pip2"
+    pip_binary '/usr/bin/pip2'
     action [:upgrade]
     options '--user'
     user node[:login_user]
@@ -101,7 +102,7 @@ end
   neovim
 ).each do |python_p|
   pip python_p do
-    pip_binary "/usr/bin/pip3"
+    pip_binary '/usr/bin/pip3'
     action [:upgrade]
     options '--user'
     user node[:login_user]
