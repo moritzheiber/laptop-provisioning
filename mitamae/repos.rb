@@ -16,7 +16,7 @@ end
 %w(
   brightbox/ruby-ng
   gencfsm/ppa
-  neovim-ppa/unstable
+  neovim-ppa/stable
   numix/ppa
   gophers/archive
   git-core/ppa
