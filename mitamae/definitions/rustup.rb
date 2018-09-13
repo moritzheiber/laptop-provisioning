@@ -2,7 +2,7 @@ define :rustup do
   download 'https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init' do
     destination '/tmp/rustup-init'
     user node[:login_user]
-    mode "0755"
+    mode '0755'
     not_if "test -f #{ENV['HOME']}/.cargo/bin/rustup"
   end
 

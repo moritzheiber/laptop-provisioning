@@ -183,3 +183,7 @@ end
     link l
   end
 end
+
+saml2aws_install node[:saml2aws_version] do
+  checksum node[:saml2aws_checksum]
+end
