@@ -1,6 +1,7 @@
 module Saml2AwsHelper
   def self.package_installed?(version)
-    !(/#{version}/ =~ `saml2aws --version 2> /dev/null`).nil?
+    backend = Specinfra::Backend::Exec.new(shell: '/bin/sh')
+    !(Regexp.compile(version) =~ backend.run_command('saml2aws --version').stderr.strip).nil?
   end
 end
 

@@ -1,6 +1,6 @@
 module HashiHelper
   def self.package_installed?(name, version)
-    !(Regexp.compile(version) =~ `#{name} --version 2> /dev/null`.lines.first.gsub("\n", '')).nil?
+    !(Regexp.compile(version) =~ `#{name} --version 2> /dev/null`.lines.first).nil?
   end
 end
 
