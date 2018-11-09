@@ -58,6 +58,8 @@
   python3-pip
   python-pip
   ttf-mscorefonts-installer
+  fonts-font-awesome
+  fonts-powerline
 ).each do |p|
   package p
 end
@@ -170,7 +172,7 @@ end
 {
   'ruby' => '/usr/bin/ruby2.5',
   'gem' => '/usr/bin/gem2.5',
-  'vim' => '/usr/bin/nvim',
+  'vim' => '/home/moe/AppImages/nvim.appimage',
   'pinentry' => '/usr/bin/pinentry-curses',
   'node' => '/usr/bin/nodejs'
 }.each do |n, p|
