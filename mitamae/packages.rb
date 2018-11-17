@@ -171,19 +171,31 @@ download 'minikube' do
 end
 
 {
-  'ruby' => '/usr/bin/ruby2.5',
-  'gem' => '/usr/bin/gem2.5',
-  'vim' => '/home/moe/AppImages/nvim.appimage',
-  'pinentry' => '/usr/bin/pinentry-curses',
-  'node' => '/usr/bin/nodejs'
-}.each do |n, p|
-  elements = p.split('/')
-  elements.pop
-  l = (elements << n).join('/')
-
+  'ruby' => {
+    link: '/usr/bin/ruby',
+    path: '/usr/bin/ruby2.5'
+  },
+  'gem' => {
+    link: '/usr/bin/gem',
+    path: '/usr/bin/gem2.5'
+  },
+  'vim' => {
+    link: '/usr/bin/vim',
+    path: '/home/moe/AppImages/nvim.appimage'
+  },
+  'pinentry' => {
+    link: '/usr/bin/pinentry',
+    path: '/usr/bin/pinentry-curses'
+  },
+  'node' => {
+    link: '/usr/bin/node',
+    path: '/usr/bin/nodejs'
+  }
+}.each do |n, info|
   alternatives n do
-    path p
-    link l
+    path info[:path]
+    link info[:link]
+    priority 50
   end
 end
 
