@@ -21,6 +21,7 @@ end
   gophers/archive
   git-core/ppa
   masterminds/glide
+  yubico/stable
 ).each do |u|
   apt_repository u do
     ppa true
@@ -41,4 +42,9 @@ end
   apt_repository u do
     gpg_key k unless k.empty?
   end
+end
+
+remote_file '/etc/apt/preferences.d/yubico-stable-400' do
+  source 'files/yubico-stable-400'
+  mode '0644'
 end

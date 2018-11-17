@@ -60,6 +60,7 @@
   ttf-mscorefonts-installer
   fonts-font-awesome
   fonts-powerline
+  libpam-u2f
 ).each do |p|
   package p
 end

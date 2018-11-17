@@ -1,0 +1,8 @@
+Package:  *
+Pin: release o=LP-PPA-yubico-stable
+Pin-Priority: 400
+
+
+Package:  libpam-u2f libu2f-host0 pamu2fcfg
+Pin: release o=LP-PPA-yubico-stable
+Pin-Priority: 500

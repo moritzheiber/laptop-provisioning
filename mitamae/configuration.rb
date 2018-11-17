@@ -2,10 +2,10 @@ service 'apport' do
   action :disable
 end
 
-display_conf = <<EOS
+display_conf = <<DISPLAY
 [SeatDefaults]
 display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
-EOS
+DISPLAY
 
 directory '/etc/lightdm/lightdm.conf.d'
 

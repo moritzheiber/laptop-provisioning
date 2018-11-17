@@ -1,0 +1,8 @@
+Name: U2F authentication with U2F key
+Default: no
+Priority: 384
+Auth-Type: Additional
+Auth:
+        sufficient pam_u2f.so cue nouserok authfile=/boot/u2f_keys
+Auth-Initial:
+        sufficient pam_u2f.so cue nouserok authfile=/boot/u2f_keys
