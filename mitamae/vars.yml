@@ -19,6 +19,10 @@ ctop_checksum: "5313c4e2f98639cce53545762f0b65f3db977ae764a9acb2fb15928713b8cde0
 awstools_checksum: "c336f25889a55791f62fdef7ca034caad48be5d49745075138c7969fc38d1793"
 minikube_checksum: "1261de09386fd1f4ee7a4645958757c2c9e69f419a2a4ca8aff475017a7e036e"
 i3_keyring_version: "2018.01.30"
+fzf_version: "0.17.5"
+fzf_checksum: "3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8"
+docker_credential_helper_version: "0.6.0"
+docker_credential_helper_checksum: "c48739b286656239bc34a70fd2a5aaa2666839408c94dbc7df193586340ab199"
 
 # Hashicorp
 terraform_version: "0.11.8"

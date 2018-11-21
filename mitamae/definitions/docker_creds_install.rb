@@ -1,6 +1,6 @@
 module DockerCredsHelper
   def self.package_installed?(version)
-    !(/#{version}/ =~ %x(docker-credential-secretservice version 2> /dev/null).gsub("\n", '')).nil?
+    !(/#{version}/ =~ `docker-credential-secretservice version 2> /dev/null`.gsub("\n", '')).nil?
   end
 end
 

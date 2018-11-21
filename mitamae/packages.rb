@@ -170,6 +170,12 @@ download 'minikube' do
   checksum node[:minikube_checksum]
 end
 
+fzf_install node[:fzf_version] do
+  source_url "https://github.com/junegunn/fzf-bin/releases/download/#{node[:fzf_version]}/fzf-#{node[:fzf_version]}-linux_amd64.tgz"
+  checksum node[:fzf_checksum]
+  destination "#{ENV['HOME']}/.local/bin/fzf"
+end
+
 {
   'ruby' => {
     link: '/usr/bin/ruby',
