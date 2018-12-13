@@ -23,6 +23,7 @@ fzf_version: "0.17.5"
 fzf_checksum: "3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8"
 docker_credential_helper_version: "0.6.0"
 docker_credential_helper_checksum: "c48739b286656239bc34a70fd2a5aaa2666839408c94dbc7df193586340ab199"
+ripgrep_version: "0.10.0"
 
 # Hashicorp
 terraform_version: "0.11.8"
