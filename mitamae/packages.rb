@@ -80,6 +80,16 @@ package 'glide'
   end
 end
 
+# Global pip2 packages
+%w(
+  tzupdate
+).each do |python_p|
+  pip python_p do
+    pip_binary '/usr/bin/pip2'
+    options ''
+  end
+end
+
 # Python2 pip packages installed locally
 %w(
   keyring
