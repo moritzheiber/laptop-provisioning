@@ -198,7 +198,7 @@ end
   },
   'vim' => {
     link: '/usr/bin/vim',
-    path: '/home/moe/AppImages/nvim.appimage'
+    path: '/usr/bin/nvim'
   },
   'pinentry' => {
     link: '/usr/bin/pinentry',
