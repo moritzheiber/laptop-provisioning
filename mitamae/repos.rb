@@ -32,7 +32,7 @@ end
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
   "deb http://debian.sur5r.net/i3/ #{node[:ubuntu_release]} universe" => '',
   "deb https://riot.im/packages/debian/ #{node[:ubuntu_release]} main" => '6FEB6F83D48B93547E7DFEDEE019645248E8F4A1',
-  'deb https://dl.yarnpkg.com/debian/ stable main' => '72ECF46A56B4AD39C907BBB71646B01B86E50310',
+  'deb https://dl.yarnpkg.com/debian/ stable main' => 'https://dl.yarnpkg.com/debian/pubkey.gpg',
   "deb https://deb.nodesource.com/node_8.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
   "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'BC528686B50D79E339D3721CEB3E94ADBE1229CF',
   'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' => 'DBA36B5181D0C816F630E889D980A17457F6FB06',
