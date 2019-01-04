@@ -18,7 +18,7 @@ You also need to manually clone the following plugin repositories into the `mita
 - [https://github.com/moritzheiber/mitamae-plugin-resource-apt-repository](https://github.com/moritzheiber/mitamae-plugin-resource-apt-repository)
 - [https://github.com/moritzheiber/mitamae-plugin-resource-alternatives](https://github.com/moritzheiber/mitamae-plugin-resource-alternatives)
 
-I may or may add them as git submodules at a later point in time.
+I may or may not add them as git submodules at a later point in time.
 
 ### Testing
 
