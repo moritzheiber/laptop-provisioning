@@ -86,7 +86,7 @@ end
 ).each do |python_p|
   pip python_p do
     pip_binary '/usr/bin/pip2'
-    options ''
+    options '--upgrade'
   end
 end
 
