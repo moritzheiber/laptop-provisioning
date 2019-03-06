@@ -61,6 +61,7 @@
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
+  google-chrome-stable
 ).each do |p|
   package p
 end
@@ -94,7 +95,6 @@ end
 %w(
   keyring
   awscli
-  streamlink
   neovim
   SecretStorage
   dbus-python
@@ -113,6 +113,7 @@ end
 # Python3 pip packages installed locally
 %w(
   neovim
+  streamlink
 ).each do |python_p|
   pip python_p do
     pip_binary '/usr/bin/pip3'
@@ -129,7 +130,6 @@ execute 'make' do
 end
 
 {
-  'google-chrome-stable' => 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb',
   'mattermost-desktop' => "https://releases.mattermost.com/desktop/#{node[:mattermost_version]}/mattermost-desktop-#{node[:mattermost_version]}-linux-amd64.deb",
   'ripgrep' => "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb"
 }.each do |name, url|
