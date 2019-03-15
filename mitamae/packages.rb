@@ -68,7 +68,6 @@ end
 
 # Install golang separately to we can keep track of the version
 package "golang-#{node[:golang_version]}"
-package 'glide'
 
 # Remove a couple of apt packages
 %w(
@@ -105,7 +104,6 @@ end
   pip python_p do
     pip_binary '/usr/bin/pip2'
     action [:upgrade]
-    options '--user'
     user node[:login_user]
   end
 end
