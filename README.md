@@ -1,4 +1,4 @@
-# Laptop Provisioning
+# Laptop Provisioning [![Build Status](https://travis-ci.org/moritzheiber/laptop-provisioning.svg?branch=master)](https://travis-ci.org/moritzheiber/laptop-provisioning)
 
 This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to configure my Ubuntu-based laptop (currently Ubuntu Bionic Beaver).
 
@@ -10,15 +10,17 @@ _Note: Prior to using MItamae recipes this repository contained a set of Ansible
 
 A Debian/Ubuntu-based machine. It's not tested on any other operating system.
 
-You also need to manually clone the following plugin repositories into the `mitamae/plugins` directory:
+You will also want to fetch all the required git submodules:
 
-- [https://github.com/moritzheiber/itamae-plugin-resource-pip](https://github.com/moritzheiber/itamae-plugin-resource-pip)
-- [https://github.com/moritzheiber/mitamae-plugin-resource-download](https://github.com/moritzheiber/mitamae-plugin-resource-download)
-- [https://github.com/moritzheiber/mitamae-plugin-resource-apt](https://github.com/moritzheiber/mitamae-plugin-resource-apt)
-- [https://github.com/moritzheiber/mitamae-plugin-resource-apt-repository](https://github.com/moritzheiber/mitamae-plugin-resource-apt-repository)
-- [https://github.com/moritzheiber/mitamae-plugin-resource-alternatives](https://github.com/moritzheiber/mitamae-plugin-resource-alternatives)
+```
+$ git submodule update --init --recursive
+```
 
-I may or may not add them as git submodules at a later point in time.
+Be sure to update your local submodule definitions from time to time, should you want to stay "current":
+
+```
+$ git submodule update --recursive --remote
+```
 
 ### Testing
 

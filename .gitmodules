@@ -1,0 +1,15 @@
+[submodule "mitamae/plugins/itamae-plugin-resource-pip"]
+	path = mitamae/plugins/itamae-plugin-resource-pip
+	url = https://github.com/moritzheiber/itamae-plugin-resource-pip.git
+[submodule "mitamae/plugins/mitamae-plugin-resource-apt-repository"]
+	path = mitamae/plugins/mitamae-plugin-resource-apt-repository
+	url = https://github.com/moritzheiber/mitamae-plugin-resource-apt-repository.git
+[submodule "mitamae/plugins/mitamae-plugin-resource-alternatives"]
+	path = mitamae/plugins/mitamae-plugin-resource-alternatives
+	url = https://github.com/moritzheiber/mitamae-plugin-resource-alternatives
+[submodule "mitamae/plugins/mitamae-plugin-resource-apt"]
+	path = mitamae/plugins/mitamae-plugin-resource-apt
+	url = https://github.com/moritzheiber/mitamae-plugin-resource-apt.git
+[submodule "mitamae/plugins/mitamae-plugin-resource-download"]
+	path = mitamae/plugins/mitamae-plugin-resource-download
+	url = https://github.com/moritzheiber/mitamae-plugin-resource-download.git
