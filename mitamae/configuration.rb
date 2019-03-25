@@ -40,3 +40,14 @@ download 'vim-plug' do
   checksum node[:vim_plug_checksum]
   user node[:login_user]
 end
+
+directory "/home/#{node[:login_user]}/Code/thoughtworks" do
+  mode '0755'
+  user node[:login_user]
+end
+
+remote_file "/home/#{node[:login_user]}/Code/thoughtworks/gitconfig" do
+  source 'files/tw_gitconfig'
+  mode '0644'
+  user node[:login_user]
+end

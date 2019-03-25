@@ -18,7 +18,7 @@ end
   gencfsm/ppa
   neovim-ppa/stable
   numix/ppa
-  gophers/archive
+  longsleep/golang-backports
   git-core/ppa
   yubico/stable
 ).each do |u|

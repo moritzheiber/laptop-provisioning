@@ -1,0 +1,6 @@
+[user]
+  email = mheiber@thoughtworks.com
+  name = Moritz Heiber
+  signingkey = F75C32B1
+[commit]
+  gpgsign = true

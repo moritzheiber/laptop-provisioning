@@ -67,7 +67,7 @@
 end
 
 # Install golang separately to we can keep track of the version
-package "golang-#{node[:golang_version]}"
+package 'golang-go'
 
 # Remove a couple of apt packages
 %w(
