@@ -11,6 +11,7 @@ env:
   - VERSION=2.2.4
 
 install:
+  - sudo apt update -qq
   - sudo apt install -y curl ca-certificates
   - curl -o /tmp/vagrant.deb -L https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb
   - sudo dpkg -i /tmp/vagrant.deb
