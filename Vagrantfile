@@ -1,3 +1,9 @@
+run_script = <<SCRIPT
+apt update -qq && \
+cd /vagrant && \
+./run.sh
+SCRIPT
+
 Vagrant.configure('2') do |config|
   config.vm.provider 'docker' do |d|
     d.image = 'moritzheiber/vagrant:bionic'
@@ -5,12 +11,12 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provision 'shell',
-    inline: 'echo "login_user: vagrant" > /tmp/overrides.yml'
+                      inline: 'echo "login_user: vagrant" > /tmp/overrides.yml'
   config.vm.provision 'shell',
-    inline: 'cd /vagrant && ./run.sh',
-    privileged: false,
-    env: {
-      'OVERRIDES' => '--node-yaml /tmp/overrides.yml',
-      'LOG_LEVEL' => 'debug'
-    }
+                      inline: run_script,
+                      privileged: false,
+                      env: {
+                        'OVERRIDES' => '--node-yaml /tmp/overrides.yml',
+                        'LOG_LEVEL' => 'debug'
+                      }
 end
