@@ -21,6 +21,7 @@ end
   longsleep/golang-backports
   git-core/ppa
   yubico/stable
+  eh5/pulseaudio-a2dp
 ).each do |u|
   apt_repository u do
     ppa true
