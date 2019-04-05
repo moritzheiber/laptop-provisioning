@@ -15,7 +15,6 @@ end
 
 %w(
   brightbox/ruby-ng
-  gencfsm/ppa
   neovim-ppa/stable
   numix/ppa
   longsleep/golang-backports

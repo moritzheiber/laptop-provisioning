@@ -9,7 +9,6 @@
   suckless-tools
   redshift-gtk
   geoclue-2.0
-  gnome-encfs-manager
   gnome-terminal
   autossh
   compton
