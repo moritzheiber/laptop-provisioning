@@ -62,6 +62,8 @@
   google-chrome-stable
   kubectl
   google-cloud-sdk
+  libpython3-dev
+  libpython2.7-dev
 ).each do |p|
   package p
 end
