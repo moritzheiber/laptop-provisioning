@@ -6,6 +6,7 @@ include_recipe 'definitions/docker_creds_install'
 include_recipe 'definitions/saml2aws_install'
 include_recipe 'definitions/fzf_install'
 include_recipe 'definitions/helm_install'
+include_recipe 'definitions/oya_install'
 
 include_recipe 'repos'
 include_recipe 'packages'

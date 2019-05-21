@@ -187,6 +187,12 @@ fzf_install node[:fzf_version] do
   destination "#{ENV['HOME']}/.local/bin/fzf"
 end
 
+oya_install node[:oya_version] do
+  source_url "https://github.com/tooploox/oya/releases/download/v#{node[:oya_version]}/oya_v#{node[:oya_version]}_linux_amd64.gz"
+  checksum node[:oya_checksum]
+  destination "#{ENV['HOME']}/.local/bin/oya"
+end
+
 helm_install node[:helm_version] do
   source_url "https://storage.googleapis.com/kubernetes-helm/helm-v#{node[:helm_version]}-linux-amd64.tar.gz"
   checksum node[:helm_checksum]
