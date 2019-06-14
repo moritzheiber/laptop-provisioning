@@ -28,8 +28,8 @@ oya_version: "0.0.11"
 oya_checksum: "494eb960e4cda384041e4c63006f40861a52469baebb2c166e147c7c2d47f267"
 
 # Hashicorp
-terraform_version: "0.12.0"
-terraform_checksum: "42ffd2db97853d5249621d071f4babeed8f5fdba40e3685e6c1013b9b7b25830"
+terraform_version: "0.12.2"
+terraform_checksum: "d9a96b646420d7f0a80aa5d51bb7b2a125acead537ab13c635f76668de9b8e32"
 vault_version: "1.1.0"
 vault_checksum: "65d665ee7ba08fb41a7113a2ae3c1d5fd7e0b530b59644ed7dc8a01870b2d73f"
 packer_version: "1.2.4"
