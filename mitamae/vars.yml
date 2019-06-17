@@ -36,5 +36,5 @@ packer_version: "1.2.4"
 packer_checksum: "258d1baa23498932baede9b40f2eca4ac363b86b32487b36f48f5102630e9fbb"
 # Installed through deb/apt
 vagrant_version: "2.2.4"
-saml2aws_version: "2.15.0"
-saml2aws_checksum: "d4c717b49556a67e22f5e9c332a79ec02af86b7ee2f0eb452712b176db3d3647"
+saml2aws_version: "2.14.0"
+saml2aws_checksum: "d96b420ae12b4f8d9506cb1cfb3c53ee55e8a3fea4d5eb65c89adac8a6710cf4"
