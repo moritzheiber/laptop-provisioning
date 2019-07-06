@@ -231,3 +231,9 @@ end
 saml2aws_install node[:saml2aws_version] do
   checksum node[:saml2aws_checksum]
 end
+
+go_chromecast_install node[:go_chromecast_version] do
+  source_url "https://github.com/vishen/go-chromecast/releases/download/v#{node[:go_chromecast_version]}/go-chromecast_#{node[:go_chromecast_version]}_Linux_x86_64.tar.gz"
+  checksum node[:go_chromecast_checksum]
+  destination '/usr/bin'
+end
