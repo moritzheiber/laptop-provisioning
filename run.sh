@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux -o pipefail
+set -Eeu -o pipefail
 
 MITAMAE_PATH="/usr/bin/mitamae"
 MITAMAE_VERSION="1.7.5"

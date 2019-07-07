@@ -1,8 +1,6 @@
 module GoChromecastHelper
-  def self.package_installed?(binary)
-    File::Stat.new(binary).executable?
-  rescue Errno::ENOENT => _
-    false
+  def self.package_installed?(binary, version)
+    !(Regexp.compile("v#{version}") =~ `#{binary} --version 2> /dev/null`.lines.first).nil?
   end
 end
 
@@ -16,7 +14,7 @@ define :go_chromecast_install,
   destination = params[:destination]
 
   tmp_dest = "/tmp/go_chromecast_#{version}.tar.gz"
-  installed = GoChromecastHelper.package_installed?("#{destination}/go-chromecast")
+  installed = GoChromecastHelper.package_installed?("#{destination}/go-chromecast", version)
 
   download source_url do
     destination tmp_dest
