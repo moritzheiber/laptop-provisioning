@@ -2,7 +2,7 @@
   github.com/schachmat/wego
   github.com/dutchcoders/geodig
   github.com/campoy/embedmd
-  golang.org/x/tools/gopls@latest
+  golang.org/x/tools/gopls
   golang.org/x/lint/golint
 ).each do |repo|
   name = repo.split('/').last
