@@ -14,7 +14,7 @@ CONTENT
   # Nitrokey
   # Nitrokey
   # Solokey
-  notifies :run, 'execute[udevadm control --reload-rules]', :immediately
+  notifies :run, 'execute[service udev restart]', :immediately
 end
 
 remote_file '/usr/share/pam-configs/u2f' do
@@ -27,6 +27,6 @@ execute 'pam-auth-update --enable u2f' do
   action :nothing
 end
 
-execute 'udevadm control --reload-rules' do
+execute 'service udev restart' do
   action :nothing
 end
