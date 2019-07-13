@@ -8,6 +8,7 @@ include_recipe 'definitions/fzf_install'
 include_recipe 'definitions/helm_install'
 include_recipe 'definitions/oya_install'
 include_recipe 'definitions/go_chromecast_install'
+include_recipe 'definitions/terraform_lsp_install'
 
 include_recipe 'repos'
 include_recipe 'packages'

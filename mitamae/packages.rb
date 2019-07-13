@@ -238,3 +238,9 @@ go_chromecast_install node[:go_chromecast_version] do
   checksum node[:go_chromecast_checksum]
   destination '/usr/bin'
 end
+
+terraform_lsp_install node[:terraform_lsp_version] do
+  source_url "https://github.com/juliosueiras/terraform-lsp/releases/download/v#{node[:terraform_lsp_version]}/terraform-lsp_#{node[:terraform_lsp_version]}_linux_amd64.tar.gz"
+  checksum node[:terraform_lsp_checksum]
+  destination '/usr/bin'
+end
