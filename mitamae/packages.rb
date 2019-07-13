@@ -1,7 +1,7 @@
 # apt packages
-%w(
-  ruby2.5
-  ruby2.5-dev
+%W(
+  ruby#{node[:ruby_version]}
+  ruby#{node[:ruby_version]}-dev
   build-essential
   git
   i3
@@ -138,6 +138,35 @@ end
   end
 end
 
+{
+  'ruby' => {
+    link: '/usr/bin/ruby',
+    path: "/usr/bin/ruby#{node[:ruby_version]}"
+  },
+  'gem' => {
+    link: '/usr/bin/gem',
+    path: "/usr/bin/gem#{node[:ruby_version]}"
+  },
+  'vim' => {
+    link: '/usr/bin/vim',
+    path: '/usr/bin/nvim'
+  },
+  'pinentry' => {
+    link: '/usr/bin/pinentry',
+    path: '/usr/bin/pinentry-curses'
+  },
+  'node' => {
+    link: '/usr/bin/node',
+    path: '/usr/bin/nodejs'
+  }
+}.each do |n, info|
+  alternatives n do
+    path info[:path]
+    link info[:link]
+    priority 50
+  end
+end
+
 # Global rubygems
 %w(
   bundler
@@ -145,6 +174,7 @@ end
   ohai
   rubocop
   rubocop-rspec
+  solargraph
 ).each do |g|
   gem_package g
 end
@@ -197,35 +227,6 @@ helm_install node[:helm_version] do
   source_url "https://storage.googleapis.com/kubernetes-helm/helm-v#{node[:helm_version]}-linux-amd64.tar.gz"
   checksum node[:helm_checksum]
   destination '/usr/bin'
-end
-
-{
-  'ruby' => {
-    link: '/usr/bin/ruby',
-    path: '/usr/bin/ruby2.5'
-  },
-  'gem' => {
-    link: '/usr/bin/gem',
-    path: '/usr/bin/gem2.5'
-  },
-  'vim' => {
-    link: '/usr/bin/vim',
-    path: '/usr/bin/nvim'
-  },
-  'pinentry' => {
-    link: '/usr/bin/pinentry',
-    path: '/usr/bin/pinentry-curses'
-  },
-  'node' => {
-    link: '/usr/bin/node',
-    path: '/usr/bin/nodejs'
-  }
-}.each do |n, info|
-  alternatives n do
-    path info[:path]
-    link info[:link]
-    priority 50
-  end
 end
 
 saml2aws_install node[:saml2aws_version] do
