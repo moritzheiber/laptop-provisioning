@@ -52,7 +52,6 @@
   silversearcher-ag
   pulseaudio-module-bluetooth
   shellcheck
-  gopass
   python3-pip
   python-pip
   ttf-mscorefonts-installer
@@ -243,4 +242,9 @@ terraform_lsp_install node[:terraform_lsp_version] do
   source_url "https://github.com/juliosueiras/terraform-lsp/releases/download/v#{node[:terraform_lsp_version]}/terraform-lsp_#{node[:terraform_lsp_version]}_linux_amd64.tar.gz"
   checksum node[:terraform_lsp_checksum]
   destination '/usr/bin'
+end
+
+apt 'gopass' do
+  source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
+  version node[:gopass_version]
 end

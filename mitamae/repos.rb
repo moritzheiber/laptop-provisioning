@@ -35,7 +35,6 @@ end
   "deb https://deb.nodesource.com/node_8.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
   'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
   'deb [arch=amd64] https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
-  "deb [arch=amd64] https://dl.bintray.com/gopasspw/gopass #{node[:ubuntu_release]} main" => 'https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key',
   'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
   'deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   "deb [arch=amd64] http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'

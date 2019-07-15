@@ -1,8 +1,8 @@
 login_user: "moe"
 ubuntu_release: "bionic"
 ubuntu_release_number: "18.04"
-powerline_go_version: "1.12.1"
-powerline_go_checksum: "639688213912c89cfa6105a412903b9c70dd26062bfc7dd1620601aa4134bb20"
+powerline_go_version: "1.13.0"
+powerline_go_checksum: "1a6bddf9e8354b6ec2263df8489b349ac11e73b97d095f8a163404f3ff115995"
 ctop_version: "0.5"
 ruby_version: "2.6"
 awstools_version: "0.13.1"
@@ -37,6 +37,9 @@ packer_version: "1.4.1"
 packer_checksum: "b713ea79a6fb131e27d65ec3f2227f36932540e71820288c3c5ad770b565ecd7"
 # Installed through deb/apt
 vagrant_version: "2.2.4"
+gopass_version: "1.8.5"
+
+# Other random tooling
 saml2aws_version: "2.14.0"
 saml2aws_checksum: "d96b420ae12b4f8d9506cb1cfb3c53ee55e8a3fea4d5eb65c89adac8a6710cf4"
 go_chromecast_version: "0.0.11"
