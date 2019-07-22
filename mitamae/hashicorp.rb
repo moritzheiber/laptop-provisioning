@@ -25,3 +25,16 @@ end
     source_url "https://releases.hashicorp.com/#{tool}/#{info[:version]}/#{tool}_#{info[:version]}_linux_amd64.zip"
   end
 end
+
+directory "/home/#{node[:login_user]}/.terraform.d/plugin-cache" do
+  user node[:login_user]
+  mode "755"
+end
+
+template "/home/#{node[:login_user]}/.terraformrc" do
+  content <<RC
+plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"
+RC
+  mode "600"
+  user node[:login_user]
+end
