@@ -182,32 +182,40 @@ rustup 'stable' do
   user node[:login_user]
 end
 
-download 'powerline-go' do
-  url "https://github.com/justjanne/powerline-go/releases/download/v#{node[:powerline_go_version]}/powerline-go-linux-amd64"
-  destination "#{ENV['HOME']}/.local/bin/powerline-go"
-  mode '0755'
-  checksum node[:powerline_go_checksum]
-end
-
-download 'ctop' do
-  url "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64"
-  destination "#{ENV['HOME']}/.local/bin/ctop"
-  mode '0755'
-  checksum node[:ctop_checksum]
-end
-
-download 'awstools' do
-  url "https://github.com/sam701/awstools/releases/download/#{node[:awstools_version]}/awstools_linux_amd64"
-  destination "#{ENV['HOME']}/.local/bin/awstools"
-  mode '0755'
-  checksum node[:awstools_checksum]
-end
-
-download 'minikube' do
-  url "https://github.com/kubernetes/minikube/releases/download/v#{node[:minikube_version]}/minikube-linux-amd64"
-  destination "#{ENV['HOME']}/.local/bin/minikube"
-  mode '0755'
-  checksum node[:minikube_checksum]
+[
+  {
+    name: 'powerline-go',
+    url: "https://github.com/justjanne/powerline-go/releases/download/v#{node[:powerline_go_version]}/powerline-go-linux-amd64",
+    checksum: node[:powerline_go_checksum]
+  },
+  {
+    name: 'ctop',
+    url: "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64",
+    checksum: node[:ctop_checksum]
+  },
+  {
+    name: 'awstools',
+    url: "https://github.com/sam701/awstools/releases/download/#{node[:awstools_version]}/awstools_linux_amd64",
+    checksum: node[:awstools_checksum]
+  },
+  {
+    name: 'minikube',
+    url: "https://github.com/kubernetes/minikube/releases/download/v#{node[:minikube_version]}/minikube-linux-amd64",
+    checksum: node[:minikube_checksum]
+  },
+  {
+    name: 'terraform-docs',
+    url: "https://github.com/segmentio/terraform-docs/releases/download/v#{node[:terraform_docs_version]}/terraform-docs-v#{node[:terraform_docs_version]}-linux-amd64",
+    checksum: node[:terraform_docs_checksum]
+  }
+].each do |cli|
+  download cli[:name] do
+    url cli[:url]
+    destination "#{ENV['HOME']}/.local/bin/#{cli[:name]}"
+    mode '0755'
+    user node[:login_user]
+    checksum cli[:checksum]
+  end
 end
 
 fzf_install node[:fzf_version] do

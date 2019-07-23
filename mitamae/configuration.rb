@@ -35,7 +35,7 @@ file xsession_file do
 end
 
 download 'vim-plug' do
-  url 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  url "https://raw.githubusercontent.com/junegunn/vim-plug/#{node[:vim_plug_commit_hash]}/plug.vim"
   destination "/home/#{node[:login_user]}/.local/share/nvim/site/autoload/plug.vim"
   checksum node[:vim_plug_checksum]
   user node[:login_user]
