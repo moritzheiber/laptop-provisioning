@@ -39,11 +39,11 @@ packer_version: "1.4.1"
 packer_checksum: "b713ea79a6fb131e27d65ec3f2227f36932540e71820288c3c5ad770b565ecd7"
 # Installed through deb/apt
 vagrant_version: "2.2.4"
-gopass_version: "1.8.5"
+gopass_version: "1.8.6"
 
 # Other random tooling
-saml2aws_version: "2.14.0"
-saml2aws_checksum: "d96b420ae12b4f8d9506cb1cfb3c53ee55e8a3fea4d5eb65c89adac8a6710cf4"
+saml2aws_version: "2.16.0"
+saml2aws_checksum: "388f4cc75707a0d2ce973c5aeec5d872508386a60b5690481d3ddcca12ee5a7e"
 go_chromecast_version: "0.0.11"
 go_chromecast_checksum: "fbc97de9bb099eb1ce9ad63cb6da0882f2c8399e08c67e7e8bc99c0ddb0b3108"
 terraform_lsp_version: "0.0.5"
