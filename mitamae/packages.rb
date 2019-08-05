@@ -207,6 +207,11 @@ end
     name: 'terraform-docs',
     url: "https://github.com/segmentio/terraform-docs/releases/download/v#{node[:terraform_docs_version]}/terraform-docs-v#{node[:terraform_docs_version]}-linux-amd64",
     checksum: node[:terraform_docs_checksum]
+  },
+  {
+    name: 'i3status-rs',
+    url: "https://github.com/greshake/i3status-rust/releases/download/v#{node[:i3_status_rs_version]}/i3status-rs",
+    checksum: node[:i3_status_rs_checksum]
   }
 ].each do |cli|
   download cli[:name] do
