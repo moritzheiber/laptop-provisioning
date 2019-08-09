@@ -50,7 +50,9 @@
   signal-desktop
   xclip
   silversearcher-ag
-  pulseaudio-module-bluetooth
+  pulseaudio-modules-bt
+  libldac
+  libavcodec58
   shellcheck
   python3-pip
   python-pip
@@ -63,6 +65,8 @@
   google-cloud-sdk
   libpython3-dev
   libpython2.7-dev
+  xss-lock
+  i3lock-fancy
 ).each do |p|
   package p
 end
@@ -75,6 +79,7 @@ package 'golang-go'
   thunderbird
   pidgin
   apport-gtk
+  light-locker
 ).each do |p|
   package p do
     action [:remove]
