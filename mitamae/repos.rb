@@ -21,6 +21,7 @@ end
   git-core/ppa
   yubico/stable
   eh5/pulseaudio-a2dp
+  ubuntu-mozilla-security/ppa
 ).each do |u|
   apt_repository u do
     ppa true
