@@ -1,6 +1,8 @@
 define :add_user_to_group, group: nil do
-  groups = run_command("groups #{params[:name]}").stdout.split(' ').drop(2)
-  groups = groups.push(params[:group]).flatten.uniq unless params[:group].nil?
+  user = params[:name]
+  group = params[:group]
 
-  execute "usermod -G #{groups.join(',')} #{params[:name]}"
+  execute "usermod -a -G #{group} #{user}" do
+    only_if { run_command("id #{user} | sed 's/ context=.*//g' | cut -f 4 -d '=' | grep -- #{group}").exit_status > 0 }
+  end
 end
