@@ -5,15 +5,13 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provision 'shell',
-                      inline: 'echo "login_user: vagrant" > /tmp/overrides.yml'
+    inline: 'apt update -qq',
+    privileged: true
   config.vm.provision 'shell',
-                      inline: 'apt update -qq',
-                      privileged: true
-  config.vm.provision 'shell',
-                      inline: 'cd /vagrant && ./run.sh',
-                      privileged: false,
-                      env: {
-                        'OVERRIDES' => '--node-yaml /tmp/overrides.yml',
-                        'LOG_LEVEL' => 'debug'
-                      }
+    inline: 'cd /vagrant/mitamae && ./run',
+    privileged: true,
+    env: {
+      'LOG_LEVEL' => 'debug',
+      'DEBIAN_FRONTEND' => 'noninteractive'
+    }
 end
