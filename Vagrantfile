@@ -8,7 +8,7 @@ Vagrant.configure('2') do |config|
     inline: 'apt update -qq',
     privileged: true
   config.vm.provision 'shell',
-    inline: 'cd /vagrant/mitamae && ./run',
+    inline: 'cd /vagrant && ./run',
     privileged: true,
     env: {
       'LOG_LEVEL' => 'debug',
