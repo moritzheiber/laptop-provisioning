@@ -25,14 +25,12 @@
   neovim
   unzip
   dkms
-  pass
   libdbus-glib-1-dev
   whois
   htop
   mpv
   i965-va-driver
   vdpau-va-driver
-  curl
   jq
   network-manager-openvpn-gnome
   network-manager-openconnect-gnome
@@ -45,7 +43,6 @@
   azure-cli
   exuberant-ctags
   nodejs
-  keepassx
   mosh
   signal-desktop
   xclip
@@ -60,7 +57,6 @@
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
-  google-chrome-stable
   kubectl
   google-cloud-sdk
   libpython3-dev
@@ -69,6 +65,15 @@
   i3lock-fancy
 ).each do |p|
   package p
+end
+
+package 'google-chrome-stable' do
+  notifies :delete, 'file[remove_chrome_repository]', :immediately
+end
+
+file 'remove_chrome_repository' do
+  path '/etc/apt/sources.list.d/google-chrome.list'
+  action :nothing
 end
 
 # Install golang separately to we can keep track of the version
@@ -221,7 +226,7 @@ end
 ].each do |cli|
   download cli[:name] do
     url cli[:url]
-    destination "#{ENV['HOME']}/.local/bin/#{cli[:name]}"
+    destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/#{cli[:name]}"
     mode '0755'
     user node[:login_user]
     checksum cli[:checksum]
@@ -231,13 +236,13 @@ end
 fzf_install node[:fzf_version] do
   source_url "https://github.com/junegunn/fzf-bin/releases/download/#{node[:fzf_version]}/fzf-#{node[:fzf_version]}-linux_amd64.tgz"
   checksum node[:fzf_checksum]
-  destination "#{ENV['HOME']}/.local/bin/fzf"
+  destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/fzf"
 end
 
 oya_install node[:oya_version] do
   source_url "https://github.com/tooploox/oya/releases/download/v#{node[:oya_version]}/oya_v#{node[:oya_version]}_linux_amd64.gz"
   checksum node[:oya_checksum]
-  destination "#{ENV['HOME']}/.local/bin/oya"
+  destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/oya"
 end
 
 helm_install node[:helm_version] do

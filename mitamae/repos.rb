@@ -1,5 +1,6 @@
 %w(
   apt-transport-https
+  apt-utils
   ca-certificates
   software-properties-common
   curl

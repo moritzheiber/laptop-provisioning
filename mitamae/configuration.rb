@@ -21,7 +21,7 @@ remote_file avatar_path  do
 end
 
 execute 'update-avatar' do
-  command "dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User#{Etc.getpwnam(node[:login_user]).uid} org.freedesktop.Accounts.User.SetIconFile string:\"#{avatar_path}\""
+  command "dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User#{node[:user][node[:login_user].to_s][:uid]} org.freedesktop.Accounts.User.SetIconFile string:\"#{avatar_path}\""
   only_if 'ps aux | grep -q "[d]bus-daemon"'
 end
 
