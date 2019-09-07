@@ -1,5 +1,8 @@
+# Installing apt-fast first
+package 'apt-fast'
+
 # apt packages
-%W(
+apt_packages = %W(
   ruby#{node[:ruby_version]}
   ruby#{node[:ruby_version]}-dev
   build-essential
@@ -63,7 +66,13 @@
   libpython2.7-dev
   xss-lock
   i3lock-fancy
-).each do |p|
+)
+
+execute "VERBOSE_OUTPUT=y apt-fast install -y #{apt_packages.join(' ')}" do
+  not_if "apt list --installed | grep -q #{apt_packages.first}"
+end
+
+apt_packages.each do |p|
   package p
 end
 

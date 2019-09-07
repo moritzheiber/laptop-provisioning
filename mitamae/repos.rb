@@ -15,6 +15,7 @@ apt 'sur5r-keyring' do
 end
 
 %w(
+  apt-fast/stable
   brightbox/ruby-ng
   neovim-ppa/stable
   numix/ppa

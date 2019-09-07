@@ -1,7 +1,7 @@
 initial_user = 'moe'
 provisioning_script = <<SCRIPT
 apt update -qq &&
-useradd -d /home/#{initial_user} -s /bin/bash -m -U -G sudo,adm,cdrom,dip #{initial_user}
+id #{initial_user} || useradd -d /home/#{initial_user} -s /bin/bash -m -U -G sudo,adm,cdrom,dip #{initial_user}
 SCRIPT
 
 Vagrant.configure('2') do |config|
