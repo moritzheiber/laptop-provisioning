@@ -23,7 +23,7 @@ apt_packages = %W(
   numix-gtk-theme
   numix-icon-theme
   feh
-  gnupg
+  gnupg2
   transmission-gtk
   neovim
   unzip
