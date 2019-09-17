@@ -40,7 +40,8 @@ end
   'deb [arch=amd64] https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
   'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
   'deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
-  "deb [arch=amd64] http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+  "deb [arch=amd64] http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+  'deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey'
 }.each do |u, k|
   apt_repository u do
     gpg_key k unless k.empty?
