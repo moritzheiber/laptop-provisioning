@@ -226,11 +226,6 @@ end
     name: 'terraform-docs',
     url: "https://github.com/segmentio/terraform-docs/releases/download/v#{node[:terraform_docs_version]}/terraform-docs-v#{node[:terraform_docs_version]}-linux-amd64",
     checksum: node[:terraform_docs_checksum]
-  },
-  {
-    name: 'i3status-rs',
-    url: "https://github.com/greshake/i3status-rust/releases/download/v#{node[:i3_status_rs_version]}/i3status-rs",
-    checksum: node[:i3_status_rs_checksum]
   }
 ].each do |cli|
   download cli[:name] do
@@ -279,4 +274,9 @@ end
 apt 'gopass' do
   source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
   version node[:gopass_version]
+end
+
+apt 'i3status-rust' do
+  source_url "https://github.com/greshake/i3status-rust/releases/download/v#{node[:i3_status_rs_version]}/i3status-rust_#{node[:i3_status_rs_version]}_amd64.deb"
+  version node[:i3_status_rs_version]
 end
