@@ -226,6 +226,16 @@ end
     name: 'terraform-docs',
     url: "https://github.com/segmentio/terraform-docs/releases/download/v#{node[:terraform_docs_version]}/terraform-docs-v#{node[:terraform_docs_version]}-linux-amd64",
     checksum: node[:terraform_docs_checksum]
+  },
+  {
+    name: 'aws-iam-authenticator',
+    url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
+    checksum: node[:aws_iam_authenticator_checksum]
+  },
+  {
+    name: 'docker-credential-ecr-login',
+    url: "https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/#{node[:docker_credential_ecr_login_version]}/linux-amd64/docker-credential-ecr-login",
+    checksum: node[:docker_credential_ecr_login_checksum]
   }
 ].each do |cli|
   download cli[:name] do

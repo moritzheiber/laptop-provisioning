@@ -29,6 +29,10 @@ docker_credential_helper_checksum: "c48739b286656239bc34a70fd2a5aaa2666839408c94
 ripgrep_version: "0.10.0"
 oya_version: "0.0.11"
 oya_checksum: "494eb960e4cda384041e4c63006f40861a52469baebb2c166e147c7c2d47f267"
+aws_iam_authenticator_version: "0.4.0"
+aws_iam_authenticator_checksum: "9744923781cca33dba3f48e1b8443af4d7f158748bd105134aaa68252da3b907"
+docker_credential_ecr_login_version: "0.3.1"
+docker_credential_ecr_login_checksum: "b159bf808e97d86bc8969f9866d42bdfe548f908b1a597738ffeb02915163ec8"
 
 # Hashicorp
 terraform_version: "0.12.10"
@@ -44,8 +48,8 @@ gopass_version: "1.8.6"
 # Other random tooling
 saml2aws_version: "2.16.0"
 saml2aws_checksum: "388f4cc75707a0d2ce973c5aeec5d872508386a60b5690481d3ddcca12ee5a7e"
-go_chromecast_version: "0.0.12"
-go_chromecast_checksum: "dc0f8ef0e13365df30208aa9bf6fa30e13389fa854ed2120d222e87324aaa4a1"
+go_chromecast_version: "0.0.13"
+go_chromecast_checksum: "2cbf4ce945fc2223a33c626332c21bc64a3d867082bb474dbbd756d79dd33bbe"
 terraform_lsp_version: "0.0.9"
 terraform_lsp_checksum: "55fec793344f6377f53b6955a394cc87e15c4384d2ac9b4193c792de90c13f7a"
 terraform_docs_version: "0.6.0"
