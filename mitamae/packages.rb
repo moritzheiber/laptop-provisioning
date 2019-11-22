@@ -66,6 +66,7 @@ apt_packages = %W(
   libpython2.7-dev
   xss-lock
   i3lock-fancy
+  enpass
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y #{apt_packages.join(' ')}" do
@@ -260,7 +261,7 @@ oya_install node[:oya_version] do
 end
 
 helm_install node[:helm_version] do
-  source_url "https://storage.googleapis.com/kubernetes-helm/helm-v#{node[:helm_version]}-linux-amd64.tar.gz"
+  source_url "https://get.helm.sh/helm-v#{node[:helm_version]}-linux-amd64.tar.gz"
   checksum node[:helm_checksum]
   destination '/usr/bin'
 end

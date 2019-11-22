@@ -22,7 +22,7 @@ define :helm_install,
     not_if { installed }
   end
   execute "Extracting #{tmp_dest}" do
-    command "tar xf #{tmp_dest} -C #{destination}/ --strip-components=1 linux-amd64/helm linux-amd64/tiller"
+    command "tar xf #{tmp_dest} -C #{destination}/ --strip-components=1 linux-amd64/helm"
     not_if { installed }
   end
 
