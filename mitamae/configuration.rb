@@ -51,3 +51,11 @@ remote_file "/home/#{node[:login_user]}/Code/thoughtworks/gitconfig" do
   mode '0644'
   user node[:login_user]
 end
+
+file "/home/#{node[:login_user]}/.npmrc" do
+  user node[:login_user]
+  mode '0600'
+  content <<-FILE
+prefix=/home/moe/.local/npm
+  FILE
+end
