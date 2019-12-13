@@ -35,7 +35,7 @@ end
   "deb http://debian.sur5r.net/i3/ #{node[:ubuntu_release]} universe" => '',
   "deb https://riot.im/packages/debian/ #{node[:ubuntu_release]} main" => 'https://riot.im/packages/debian/repo-key.asc',
   'deb https://dl.yarnpkg.com/debian/ stable main' => 'https://dl.yarnpkg.com/debian/pubkey.gpg',
-  "deb https://deb.nodesource.com/node_8.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+  "deb https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
   'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
   'deb [arch=amd64] https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
   'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',

@@ -33,6 +33,7 @@ aws_iam_authenticator_version: "0.4.0"
 aws_iam_authenticator_checksum: "9744923781cca33dba3f48e1b8443af4d7f158748bd105134aaa68252da3b907"
 docker_credential_ecr_login_version: "0.3.1"
 docker_credential_ecr_login_checksum: "b159bf808e97d86bc8969f9866d42bdfe548f908b1a597738ffeb02915163ec8"
+nodejs_major_version: "12"
 
 # Hashicorp
 terraform_version: "0.12.16"
