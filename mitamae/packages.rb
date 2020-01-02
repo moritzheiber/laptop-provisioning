@@ -157,35 +157,6 @@ end
   end
 end
 
-{
-  'ruby' => {
-    link: '/usr/bin/ruby',
-    path: "/usr/bin/ruby#{node[:ruby_version]}"
-  },
-  'gem' => {
-    link: '/usr/bin/gem',
-    path: "/usr/bin/gem#{node[:ruby_version]}"
-  },
-  'vim' => {
-    link: '/usr/bin/vim',
-    path: '/usr/bin/nvim'
-  },
-  'pinentry' => {
-    link: '/usr/bin/pinentry',
-    path: '/usr/bin/pinentry-curses'
-  },
-  'node' => {
-    link: '/usr/bin/node',
-    path: '/usr/bin/nodejs'
-  }
-}.each do |n, info|
-  alternatives n do
-    path info[:path]
-    link info[:link]
-    priority 50
-  end
-end
-
 # Global rubygems
 %w(
   bundler
@@ -200,6 +171,30 @@ end
 
 rustup 'stable' do
   user node[:login_user]
+end
+
+# AppImages
+directory "#{node[:user][node[:login_user]][:directory]}/AppImages" do
+  mode '0755'
+  owner node[:login_user]
+  group node[:login_user]
+  user node[:login_user]
+end
+
+[
+  {
+    name: 'nvim.appimage',
+    url: "https://github.com/neovim/neovim/releases/download/v#{node[:neovim_version]}/nvim.appimage",
+    checksum: node[:neovim_checksum]
+  }
+].each do |app_image|
+  download app_image[:name] do
+    url app_image[:url]
+    destination "#{node[:user][node[:login_user]][:directory]}/AppImages/#{app_image[:name]}"
+    mode '0755'
+    user node[:login_user]
+    checksum app_image[:checksum]
+  end
 end
 
 [
@@ -290,4 +285,33 @@ end
 apt 'i3status-rust' do
   source_url "https://github.com/greshake/i3status-rust/releases/download/v#{node[:i3_status_rs_version]}/i3status-rust_#{node[:i3_status_rs_version]}_amd64.deb"
   version node[:i3_status_rs_version]
+end
+
+{
+  'ruby' => {
+    link: '/usr/bin/ruby',
+    path: "/usr/bin/ruby#{node[:ruby_version]}"
+  },
+  'gem' => {
+    link: '/usr/bin/gem',
+    path: "/usr/bin/gem#{node[:ruby_version]}"
+  },
+  'vim' => {
+    link: '/usr/bin/vim',
+    path: "/home/#{node[:login_user]}/AppImages/nvim.appimage"
+  },
+  'pinentry' => {
+    link: '/usr/bin/pinentry',
+    path: '/usr/bin/pinentry-curses'
+  },
+  'node' => {
+    link: '/usr/bin/node',
+    path: '/usr/bin/nodejs'
+  }
+}.each do |n, info|
+  alternatives n do
+    path info[:path]
+    link info[:link]
+    priority 50
+  end
 end

@@ -11,13 +11,13 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provision 'shell',
-    inline: provisioning_script,
-    privileged: true
+                      inline: provisioning_script,
+                      privileged: true
   config.vm.provision 'shell',
-    inline: 'cd /vagrant && ./run',
-    privileged: true,
-    env: {
-      'LOG_LEVEL' => 'debug',
-      'DEBIAN_FRONTEND' => 'noninteractive'
-    }
+                      inline: 'cd /vagrant && ./run',
+                      privileged: true,
+                      env: {
+                        'LOG_LEVEL' => 'debug',
+                        'DEBIAN_FRONTEND' => 'noninteractive'
+                      }
 end
