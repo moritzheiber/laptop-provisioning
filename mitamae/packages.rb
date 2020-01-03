@@ -66,7 +66,6 @@ apt_packages = %W(
   libpython2.7-dev
   xss-lock
   i3lock-fancy
-  enpass
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y #{apt_packages.join(' ')}" do
