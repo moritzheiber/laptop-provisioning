@@ -43,7 +43,6 @@ apt_packages = %W(
   gimp
   pinentry-curses
   libsecret-1-dev
-  azure-cli
   exuberant-ctags
   nodejs
   mosh
@@ -61,7 +60,6 @@ apt_packages = %W(
   fonts-powerline
   libpam-u2f
   kubectl
-  google-cloud-sdk
   libpython3-dev
   libpython2.7-dev
   xss-lock
