@@ -118,6 +118,7 @@ end
   flake8
   msgpack-python
   python-language-server
+  wheel
 ).each do |python_p|
   pip python_p do
     pip_binary '/usr/bin/pip2'
@@ -130,6 +131,8 @@ end
 %w(
   neovim
   streamlink
+  wheel
+  solo-python
 ).each do |python_p|
   pip python_p do
     pip_binary '/usr/bin/pip3'

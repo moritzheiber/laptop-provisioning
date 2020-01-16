@@ -36,8 +36,8 @@ docker_credential_ecr_login_checksum: "b159bf808e97d86bc8969f9866d42bdfe548f908b
 nodejs_major_version: "12"
 
 # Hashicorp
-terraform_version: "0.12.16"
-terraform_checksum: "fcc719314660adc66cbd688918d13baa1095301e2e507f9ac92c9e22acf4cc02"
+terraform_version: "0.12.18"
+terraform_checksum: "e7ebe3ca988768bffe0c239d107645bd53515354cff6cbe5651718195a151700"
 vault_version: "1.1.0"
 vault_checksum: "65d665ee7ba08fb41a7113a2ae3c1d5fd7e0b530b59644ed7dc8a01870b2d73f"
 packer_version: "1.4.1"
@@ -47,8 +47,8 @@ vagrant_version: "2.2.4"
 gopass_version: "1.8.6"
 
 # Other random tooling
-saml2aws_version: "2.20.0"
-saml2aws_checksum: "7ee441a596cdf2c460dd14f4f3e6fc99ac3e6b39409a492376f55421b9b9bc0d"
+saml2aws_version: "2.21.0"
+saml2aws_checksum: "e57bd1f5f4e49447d9d4ad7862d3c43d62b3379605296a6631496a915f2be067"
 go_chromecast_version: "0.0.14"
 go_chromecast_checksum: "994731ba0480e472ed200ce981fd560f53d00903de72860c297ebe8bf98a9c14"
 terraform_lsp_version: "0.0.9"

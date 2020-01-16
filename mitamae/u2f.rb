@@ -1,19 +1,22 @@
 template '/etc/udev/rules.d/99-security-keys.rules' do
   mode '0644'
   content <<CONTENT
+ACTION!="add|change", GOTO="u2f_custom_end"
 <% @devices.each do |device| %>
-KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev", ATTRS{idVendor}=="<%= device[:vendor] %>", ATTRS{idProduct}=="<%= device[:product] %>"<% end %>
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev", TAG+="uaccess", ATTRS{idVendor}=="<%= device[:vendor] %>", ATTRS{idProduct}=="<%= device[:product] %>"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="<%= device[:vendor] %>", ATTRS{idProduct}=="<%= device[:product] %>", TAG+="uaccess"<% end %>
+LABEL="u2f_custom_end"
 CONTENT
   variables(
     devices: [
-      { vendor: '2581', product: 'f1d0' },
-      { vendor: '20a0', product: '4287' },
+      # Yubikeys
+      { vendor: '1050', product: '0113|0114|0115|0116|0120|0121|0200|0402|0403|0406|0407|0410' },
+      # Nitrokeys
+      { vendor: '20a0', product: '4287|42b1|42b3' },
+      # Solokeys
       { vendor: '0483', product: 'a2ca' }
     ]
   )
-  # Nitrokey
-  # Nitrokey
-  # Solokey
   notifies :run, 'execute[service udev restart]', :immediately
 end
 
