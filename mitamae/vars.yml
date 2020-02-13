@@ -47,8 +47,8 @@ vagrant_version: "2.2.4"
 gopass_version: "1.8.6"
 
 # Other random tooling
-saml2aws_version: "2.21.0"
-saml2aws_checksum: "e57bd1f5f4e49447d9d4ad7862d3c43d62b3379605296a6631496a915f2be067"
+saml2aws_version: "2.22.1"
+saml2aws_checksum: "03a70142417a34c9276cdc6f3cbb645c7f151387d32b0c3594bbd238a89190ee"
 go_chromecast_version: "0.0.14"
 go_chromecast_checksum: "994731ba0480e472ed200ce981fd560f53d00903de72860c297ebe8bf98a9c14"
 terraform_lsp_version: "0.0.9"
@@ -58,3 +58,5 @@ terraform_docs_checksum: "d572e23425dd914e43933761f85dbcde2d7d473d6b960e12b191f3
 i3_status_rs_version: "0.11.0"
 neovim_version: "0.4.3"
 neovim_checksum: "a3b7ccbde583acdc7f3385025d3c5e386f92aa97e425b311a49402836998b4e0"
+rust_analyzer_version: "2020-02-10"
+rust_analyzer_checksum: "7a03be74b1a3fda5d64797d198d816465294ed63b8692d7b56470d5114954a33"

@@ -233,6 +233,11 @@ end
     name: 'docker-credential-ecr-login',
     url: "https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/#{node[:docker_credential_ecr_login_version]}/linux-amd64/docker-credential-ecr-login",
     checksum: node[:docker_credential_ecr_login_checksum]
+  },
+  {
+    name: 'ra_lsp_server',
+    url: "https://github.com/rust-analyzer/rust-analyzer/releases/download/#{node[:rust_analyzer_version]}/ra_lsp_server-linux",
+    checksum: node[:rust_analyzer_checksum]
   }
 ].each do |cli|
   download cli[:name] do
