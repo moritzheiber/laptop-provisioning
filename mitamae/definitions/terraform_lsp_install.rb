@@ -1,8 +1,6 @@
 module TerraformLspHelper
-  def self.package_installed?(binary)
-    File::Stat.new(binary).executable?
-  rescue Errno::ENOENT => _
-    false
+  def self.package_installed?(binary, version)
+    !(Regexp.compile("v#{version}") =~ `#{binary} --version 2> /dev/null`.lines.first).nil?
   end
 end
 
@@ -16,7 +14,7 @@ define :terraform_lsp_install,
   destination = params[:destination]
 
   tmp_dest = "/tmp/terraform_lsp_#{version}.tar.gz"
-  installed = TerraformLspHelper.package_installed?("#{destination}/terraform-lsp")
+  installed = TerraformLspHelper.package_installed?("#{destination}/terraform-lsp", version)
 
   download source_url do
     destination tmp_dest
