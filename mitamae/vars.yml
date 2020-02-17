@@ -47,8 +47,8 @@ vagrant_version: "2.2.4"
 gopass_version: "1.8.6"
 
 # Other random tooling
-saml2aws_version: "2.22.1"
-saml2aws_checksum: "03a70142417a34c9276cdc6f3cbb645c7f151387d32b0c3594bbd238a89190ee"
+saml2aws_version: "2.23.0"
+saml2aws_checksum: "6cefaea1430e2ca0a1df4493c9f8ffe86436db826319998ff215c6331f0333dc"
 go_chromecast_version: "0.0.14"
 go_chromecast_checksum: "994731ba0480e472ed200ce981fd560f53d00903de72860c297ebe8bf98a9c14"
 terraform_lsp_version: "0.0.10"
