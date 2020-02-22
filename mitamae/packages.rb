@@ -283,6 +283,12 @@ terraform_lsp_install node[:terraform_lsp_version] do
   destination '/usr/bin'
 end
 
+k9s_install node[:k9s_version] do
+  source_url "https://github.com/derailed/k9s/releases/download/v#{node[:k9s_version]}/k9s_Linux_x86_64.tar.gz"
+  checksum node[:k9s_checksum]
+  destination '/usr/bin'
+end
+
 apt 'gopass' do
   source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
   version node[:gopass_version]
