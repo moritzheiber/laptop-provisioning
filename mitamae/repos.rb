@@ -44,7 +44,7 @@ end
   'deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey',
   "deb [arch=amd64] https://packagecloud.io/segment/aws-okta/ubuntu/ #{node[:ubuntu_release]} main" => 'https://packagecloud.io/segment/aws-okta/gpgkey',
   'deb [arch=amd64] https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
-  "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox.asc'
+  "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
 }.each do |u, k|
   apt_repository u do
     gpg_key k unless k.empty?
