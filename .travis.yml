@@ -8,7 +8,7 @@ addons:
     update: true
 
 env:
-  - VERSION=2.2.5
+  - VERSION=2.2.7
 
 install:
   - sudo apt install -y curl ca-certificates
