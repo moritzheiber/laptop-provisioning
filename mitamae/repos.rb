@@ -44,16 +44,12 @@ end
   'deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey',
   "deb [arch=amd64] https://packagecloud.io/segment/aws-okta/ubuntu/ #{node[:ubuntu_release]} main" => 'https://packagecloud.io/segment/aws-okta/gpgkey',
   'deb [arch=amd64] https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
-  "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
+  "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
+  "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc'
 }.each do |u, k|
   apt_repository u do
     gpg_key k unless k.empty?
   end
-end
-
-apt_repository "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" do
-  keyserver 'packages.microsoft.com'
-  gpg_key 'BC528686B50D79E339D3721CEB3E94ADBE1229CF'
 end
 
 remote_file '/etc/apt/preferences.d/yubico-stable-400' do
