@@ -43,7 +43,7 @@ vault_checksum: "65d665ee7ba08fb41a7113a2ae3c1d5fd7e0b530b59644ed7dc8a01870b2d73
 packer_version: "1.4.1"
 packer_checksum: "b713ea79a6fb131e27d65ec3f2227f36932540e71820288c3c5ad770b565ecd7"
 # Installed through deb/apt
-vagrant_version: "2.2.4"
+vagrant_version: "2.2.7"
 gopass_version: "1.8.6"
 
 # Other random tooling
