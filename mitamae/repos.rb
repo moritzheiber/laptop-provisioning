@@ -42,7 +42,6 @@ end
   'deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   "deb [arch=amd64] http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   'deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey',
-  "deb [arch=amd64] https://packagecloud.io/segment/aws-okta/ubuntu/ #{node[:ubuntu_release]} main" => 'https://packagecloud.io/segment/aws-okta/gpgkey',
   'deb [arch=amd64] https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
   "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc'
