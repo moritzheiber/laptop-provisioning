@@ -151,10 +151,14 @@ end
 
 {
   #  'mattermost-desktop' => "https://releases.mattermost.com/desktop/#{node[:mattermost_version]}/mattermost-desktop-#{node[:mattermost_version]}-linux-amd64.deb",
-  'ripgrep' => "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb"
-}.each do |name, url|
+  'ripgrep' => {
+    url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
+    version: node[:ripgrep_version]
+  }
+}.each do |name, vars|
   apt name do
-    source_url url
+    version vars[:version]
+    source_url vars[:url]
   end
 end
 
