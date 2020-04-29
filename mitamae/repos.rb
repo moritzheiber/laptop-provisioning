@@ -14,41 +14,54 @@ apt 'sur5r-keyring' do
   version node[:i3_keyring_version]
 end
 
+# %w(
+#   brightbox/ruby-ng
+#   neovim-ppa/stable
+#   numix/ppa
+#   longsleep/golang-backports
+#   eh5/pulseaudio-a2dp
+#   ubuntu-mozilla-security/ppa
+#   nextcloud-devs/client
+# ).each do |u|
+#   apt_repository u do
+#     ppa true
+#   end
+# end
+
 %w(
   apt-fast/stable
-  brightbox/ruby-ng
-  neovim-ppa/stable
-  numix/ppa
-  longsleep/golang-backports
   git-core/ppa
   yubico/stable
-  eh5/pulseaudio-a2dp
-  ubuntu-mozilla-security/ppa
-  nextcloud-devs/client
 ).each do |u|
   apt_repository u do
     ppa true
   end
 end
 
+# {
+#   "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
+#   "http://debian.sur5r.net/i3/ #{node[:ubuntu_release]} universe" => '',
+#   "https://riot.im/packages/debian/ #{node[:ubuntu_release]} main" => 'https://riot.im/packages/debian/repo-key.asc',
+#   "http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+#   "https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
+#   "https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc',
+#   "https://tel.red/repos/ubuntu #{node[:ubuntu_release]} non-free" => '9454C19A66B920C83DDF696E07C8CCAFCE49F8C5',
+#   "https://packagecloud.io/slacktechnologies/slack/ubuntu/ #{node[:ubuntu_release]} main" => 'https://packagecloud.io/slacktechnologies/slack/gpgkey'
+# }.each do |url, key|
+#   apt_repository "deb [arch=amd64] #{url}" do
+#     gpg_key key unless key.empty?
+#   end
+# end
+
 {
-  "deb [arch=amd64] https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
-  "deb http://debian.sur5r.net/i3/ #{node[:ubuntu_release]} universe" => '',
-  "deb https://riot.im/packages/debian/ #{node[:ubuntu_release]} main" => 'https://riot.im/packages/debian/repo-key.asc',
-  'deb https://dl.yarnpkg.com/debian/ stable main' => 'https://dl.yarnpkg.com/debian/pubkey.gpg',
-  "deb https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
-  'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
-  'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
-  'deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
-  "deb [arch=amd64] http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
-  'deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey',
-  'deb [arch=amd64] https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
-  "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
-  "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc',
-  "deb [arch=amd64] https://tel.red/repos/ubuntu #{node[:ubuntu_release]} non-free" => '9454C19A66B920C83DDF696E07C8CCAFCE49F8C5'
-}.each do |u, k|
-  apt_repository u do
-    gpg_key k unless k.empty?
+  "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+  'https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
+  'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+  'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
+  'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg'
+}.each do |url, key|
+  apt_repository "deb [arch=amd64] #{url}" do
+    gpg_key key unless key.empty?
   end
 end
 

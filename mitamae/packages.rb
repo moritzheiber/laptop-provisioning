@@ -1,10 +1,16 @@
 # Installing apt-fast first
 package 'apt-fast'
 
+# Can't install these packages:
+# docker-ce
+# riot-web
+# pulseaudio-modules-bt
+# nextcloud-client
+
 # apt packages
-apt_packages = %W(
-  ruby#{node[:ruby_version]}
-  ruby#{node[:ruby_version]}-dev
+apt_packages = %w(
+  ruby
+  ruby-dev
   build-essential
   git
   i3
@@ -18,8 +24,6 @@ apt_packages = %W(
   unclutter
   urlscan
   mutt
-  docker-ce
-  riot-web
   numix-gtk-theme
   numix-icon-theme
   feh
@@ -33,41 +37,34 @@ apt_packages = %W(
   htop
   mpv
   i965-va-driver
-  vdpau-va-driver
+  libvdpau-va-gl1
   jq
   network-manager-openvpn-gnome
   network-manager-openconnect-gnome
+  wireguard
   unrar
   w3m
-  yarn
   gimp
   pinentry-curses
   libsecret-1-dev
-  exuberant-ctags
   nodejs
   mosh
   signal-desktop
   xclip
   silversearcher-ag
-  pulseaudio-modules-bt
-  libldac
-  libavcodec58
   shellcheck
   python3-pip
-  python-pip
   ttf-mscorefonts-installer
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
   kubectl
   libpython3-dev
-  libpython2.7-dev
   xss-lock
   i3lock-fancy
-  nextcloud-client
 )
 
-execute "VERBOSE_OUTPUT=y apt-fast install -y #{apt_packages.join(' ')}" do
+execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
   not_if "apt list --installed | grep -q #{apt_packages.first}"
 end
 
@@ -99,17 +96,7 @@ package 'golang-go'
   end
 end
 
-# Global pip2 packages
-%w(
-  tzupdate
-).each do |python_p|
-  pip python_p do
-    pip_binary '/usr/bin/pip2'
-    options '--upgrade'
-  end
-end
-
-# Python2 pip packages installed locally
+# Python3 pip packages installed locally
 %w(
   keyring
   awscli
@@ -120,19 +107,8 @@ end
   msgpack-python
   python-language-server
   wheel
-).each do |python_p|
-  pip python_p do
-    pip_binary '/usr/bin/pip2'
-    action [:upgrade]
-    user node[:login_user]
-  end
-end
-
-# Python3 pip packages installed locally
-%w(
-  neovim
+  tzupdate
   streamlink
-  wheel
   solo-python
 ).each do |python_p|
   pip python_p do
@@ -212,11 +188,6 @@ end
     name: 'ctop',
     url: "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64",
     checksum: node[:ctop_checksum]
-  },
-  {
-    name: 'awstools',
-    url: "https://github.com/sam701/awstools/releases/download/#{node[:awstools_version]}/awstools_linux_amd64",
-    checksum: node[:awstools_checksum]
   },
   {
     name: 'minikube',
@@ -304,14 +275,6 @@ apt 'i3status-rust' do
 end
 
 {
-  'ruby' => {
-    link: '/usr/bin/ruby',
-    path: "/usr/bin/ruby#{node[:ruby_version]}"
-  },
-  'gem' => {
-    link: '/usr/bin/gem',
-    path: "/usr/bin/gem#{node[:ruby_version]}"
-  },
   'vim' => {
     link: '/usr/bin/vim',
     path: "/home/#{node[:login_user]}/AppImages/nvim.appimage"
@@ -319,10 +282,6 @@ end
   'pinentry' => {
     link: '/usr/bin/pinentry',
     path: '/usr/bin/pinentry-curses'
-  },
-  'node' => {
-    link: '/usr/bin/node',
-    path: '/usr/bin/nodejs'
   }
 }.each do |n, info|
   alternatives n do
