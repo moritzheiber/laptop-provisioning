@@ -49,6 +49,9 @@ apt_packages = %w(
   libpam-u2f
   libpython3-dev
   neovim
+  amazon-ecr-credential-helper
+  ctop
+  docker.io
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -171,11 +174,6 @@ end
     checksum: node[:powerline_go_checksum]
   },
   {
-    name: 'ctop',
-    url: "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64",
-    checksum: node[:ctop_checksum]
-  },
-  {
     name: 'minikube',
     url: "https://github.com/kubernetes/minikube/releases/download/v#{node[:minikube_version]}/minikube-linux-amd64",
     checksum: node[:minikube_checksum]
@@ -189,11 +187,6 @@ end
     name: 'aws-iam-authenticator',
     url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
     checksum: node[:aws_iam_authenticator_checksum]
-  },
-  {
-    name: 'docker-credential-ecr-login',
-    url: "https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/#{node[:docker_credential_ecr_login_version]}/linux-amd64/docker-credential-ecr-login",
-    checksum: node[:docker_credential_ecr_login_checksum]
   },
   {
     name: 'ra_lsp_server',
