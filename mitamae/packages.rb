@@ -48,6 +48,7 @@ apt_packages = %w(
   fonts-powerline
   libpam-u2f
   libpython3-dev
+  neovim
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do

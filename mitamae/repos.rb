@@ -20,7 +20,6 @@ end
 #   numix/ppa
 #   longsleep/golang-backports
 #   eh5/pulseaudio-a2dp
-#   ubuntu-mozilla-security/ppa
 #   nextcloud-devs/client
 # ).each do |u|
 #   apt_repository u do
@@ -32,6 +31,7 @@ end
   apt-fast/stable
   git-core/ppa
   yubico/stable
+  ubuntu-mozilla-security/ppa
 ).each do |u|
   apt_repository u do
     ppa true
@@ -41,7 +41,6 @@ end
 # {
 #   "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
 #   "http://debian.sur5r.net/i3/ #{node[:ubuntu_release]} universe" => '',
-#   "https://riot.im/packages/debian/ #{node[:ubuntu_release]} main" => 'https://riot.im/packages/debian/repo-key.asc',
 #   "http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
 #   "https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
 #   "https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc',
@@ -58,7 +57,8 @@ end
   'https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
   'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
-  'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg'
+  'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
+  'https://riot.im/packages/debian/ default main' => 'https://riot.im/packages/debian/repo-key.asc'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?
