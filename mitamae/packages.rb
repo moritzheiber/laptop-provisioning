@@ -13,23 +13,14 @@ apt_packages = %w(
   ruby-dev
   build-essential
   git
-  i3
-  i3status
-  suckless-tools
   redshift-gtk
   geoclue-2.0
-  gnome-terminal
   autossh
-  compton
   unclutter
   urlscan
   mutt
-  numix-gtk-theme
-  numix-icon-theme
-  feh
   gnupg2
   transmission-gtk
-  neovim
   unzip
   dkms
   libdbus-glib-1-dev
@@ -39,8 +30,6 @@ apt_packages = %w(
   i965-va-driver
   libvdpau-va-gl1
   jq
-  network-manager-openvpn-gnome
-  network-manager-openconnect-gnome
   wireguard
   unrar
   w3m
@@ -58,10 +47,7 @@ apt_packages = %w(
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
-  kubectl
   libpython3-dev
-  xss-lock
-  i3lock-fancy
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -89,7 +75,6 @@ package 'golang-go'
   thunderbird
   pidgin
   apport-gtk
-  light-locker
 ).each do |p|
   package p do
     action [:remove]
@@ -228,12 +213,6 @@ fzf_install node[:fzf_version] do
   source_url "https://github.com/junegunn/fzf-bin/releases/download/#{node[:fzf_version]}/fzf-#{node[:fzf_version]}-linux_amd64.tgz"
   checksum node[:fzf_checksum]
   destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/fzf"
-end
-
-oya_install node[:oya_version] do
-  source_url "https://github.com/tooploox/oya/releases/download/v#{node[:oya_version]}/oya_v#{node[:oya_version]}_linux_amd64.gz"
-  checksum node[:oya_checksum]
-  destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/oya"
 end
 
 helm_install node[:helm_version] do
