@@ -52,6 +52,8 @@ apt_packages = %w(
   amazon-ecr-credential-helper
   ctop
   docker.io
+  libssl-dev
+  codium
 )
 
 execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -143,12 +145,15 @@ rustup 'stable' do
   user node[:login_user]
 end
 
+cargo_prefix = "/home/#{node[:login_user]}/.cargo/bin"
+
 %w(
   kx
   tokei
 ).each do |p|
-  execute "cargo install #{p}" do
-    not_if "test -e /home/#{node[:login_user]}/.cargo/bin/#{p}"
+  execute "#{cargo_prefix}/cargo install #{p}" do
+    user node[:login_user]
+    not_if "test -e #{cargo_prefix}/#{p}"
   end
 end
 
