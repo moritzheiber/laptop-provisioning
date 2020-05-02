@@ -1,31 +1,26 @@
 # Installing apt-fast first
 package 'apt-fast'
 
+# Can't install these packages:
+# docker-ce
+# riot-web
+# pulseaudio-modules-bt
+# nextcloud-client
+
 # apt packages
-apt_packages = %W(
-  ruby#{node[:ruby_version]}
-  ruby#{node[:ruby_version]}-dev
+apt_packages = %w(
+  ruby
+  ruby-dev
   build-essential
   git
-  i3
-  i3status
-  suckless-tools
   redshift-gtk
   geoclue-2.0
-  gnome-terminal
   autossh
-  compton
   unclutter
   urlscan
   mutt
-  docker-ce
-  riot-web
-  numix-gtk-theme
-  numix-icon-theme
-  feh
   gnupg2
   transmission-gtk
-  neovim
   unzip
   dkms
   libdbus-glib-1-dev
@@ -33,41 +28,35 @@ apt_packages = %W(
   htop
   mpv
   i965-va-driver
-  vdpau-va-driver
+  libvdpau-va-gl1
   jq
-  network-manager-openvpn-gnome
-  network-manager-openconnect-gnome
+  wireguard
   unrar
   w3m
-  yarn
   gimp
   pinentry-curses
   libsecret-1-dev
-  exuberant-ctags
   nodejs
   mosh
   signal-desktop
   xclip
   silversearcher-ag
-  pulseaudio-modules-bt
-  libldac
-  libavcodec58
   shellcheck
   python3-pip
-  python-pip
   ttf-mscorefonts-installer
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
-  kubectl
   libpython3-dev
-  libpython2.7-dev
-  xss-lock
-  i3lock-fancy
-  nextcloud-client
+  neovim
+  amazon-ecr-credential-helper
+  ctop
+  docker.io
+  libssl-dev
+  codium
 )
 
-execute "VERBOSE_OUTPUT=y apt-fast install -y #{apt_packages.join(' ')}" do
+execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
   not_if "apt list --installed | grep -q #{apt_packages.first}"
 end
 
@@ -92,24 +81,13 @@ package 'golang-go'
   thunderbird
   pidgin
   apport-gtk
-  light-locker
 ).each do |p|
   package p do
     action [:remove]
   end
 end
 
-# Global pip2 packages
-%w(
-  tzupdate
-).each do |python_p|
-  pip python_p do
-    pip_binary '/usr/bin/pip2'
-    options '--upgrade'
-  end
-end
-
-# Python2 pip packages installed locally
+# Python3 pip packages installed locally
 %w(
   keyring
   awscli
@@ -120,19 +98,8 @@ end
   msgpack-python
   python-language-server
   wheel
-).each do |python_p|
-  pip python_p do
-    pip_binary '/usr/bin/pip2'
-    action [:upgrade]
-    user node[:login_user]
-  end
-end
-
-# Python3 pip packages installed locally
-%w(
-  neovim
+  tzupdate
   streamlink
-  wheel
   solo-python
 ).each do |python_p|
   pip python_p do
@@ -178,12 +145,15 @@ rustup 'stable' do
   user node[:login_user]
 end
 
+cargo_prefix = "/home/#{node[:login_user]}/.cargo/bin"
+
 %w(
   kx
   tokei
 ).each do |p|
-  execute "cargo install #{p}" do
-    not_if "test -e /home/#{node[:login_user]}/.cargo/bin/#{p}"
+  execute "#{cargo_prefix}/cargo install #{p}" do
+    user node[:login_user]
+    not_if "test -e #{cargo_prefix}/#{p}"
   end
 end
 
@@ -218,16 +188,6 @@ end
     checksum: node[:powerline_go_checksum]
   },
   {
-    name: 'ctop',
-    url: "https://github.com/bcicen/ctop/releases/download/v#{node[:ctop_version]}/ctop-#{node[:ctop_version]}-linux-amd64",
-    checksum: node[:ctop_checksum]
-  },
-  {
-    name: 'awstools',
-    url: "https://github.com/sam701/awstools/releases/download/#{node[:awstools_version]}/awstools_linux_amd64",
-    checksum: node[:awstools_checksum]
-  },
-  {
     name: 'minikube',
     url: "https://github.com/kubernetes/minikube/releases/download/v#{node[:minikube_version]}/minikube-linux-amd64",
     checksum: node[:minikube_checksum]
@@ -241,11 +201,6 @@ end
     name: 'aws-iam-authenticator',
     url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
     checksum: node[:aws_iam_authenticator_checksum]
-  },
-  {
-    name: 'docker-credential-ecr-login',
-    url: "https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/#{node[:docker_credential_ecr_login_version]}/linux-amd64/docker-credential-ecr-login",
-    checksum: node[:docker_credential_ecr_login_checksum]
   },
   {
     name: 'ra_lsp_server',
@@ -266,12 +221,6 @@ fzf_install node[:fzf_version] do
   source_url "https://github.com/junegunn/fzf-bin/releases/download/#{node[:fzf_version]}/fzf-#{node[:fzf_version]}-linux_amd64.tgz"
   checksum node[:fzf_checksum]
   destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/fzf"
-end
-
-oya_install node[:oya_version] do
-  source_url "https://github.com/tooploox/oya/releases/download/v#{node[:oya_version]}/oya_v#{node[:oya_version]}_linux_amd64.gz"
-  checksum node[:oya_checksum]
-  destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/oya"
 end
 
 helm_install node[:helm_version] do
@@ -313,14 +262,6 @@ apt 'i3status-rust' do
 end
 
 {
-  'ruby' => {
-    link: '/usr/bin/ruby',
-    path: "/usr/bin/ruby#{node[:ruby_version]}"
-  },
-  'gem' => {
-    link: '/usr/bin/gem',
-    path: "/usr/bin/gem#{node[:ruby_version]}"
-  },
   'vim' => {
     link: '/usr/bin/vim',
     path: "/home/#{node[:login_user]}/AppImages/nvim.appimage"
@@ -328,10 +269,6 @@ end
   'pinentry' => {
     link: '/usr/bin/pinentry',
     path: '/usr/bin/pinentry-curses'
-  },
-  'node' => {
-    link: '/usr/bin/node',
-    path: '/usr/bin/nodejs'
   }
 }.each do |n, info|
   alternatives n do

@@ -1,6 +1,10 @@
 module DockerCredsHelper
   def self.package_installed?(version)
-    !(/#{version}/ =~ `docker-credential-secretservice version 2> /dev/null`.gsub("\n", '')).nil?
+    !(/#{version}/ =~ `#{location} version 2> /dev/null`.gsub("\n", '')).nil?
+  end
+
+  def self.location
+    '/usr/bin/docker-credential-secretservice'
   end
 end
 
@@ -20,6 +24,10 @@ define :docker_creds_install, checksum: nil, source_url: nil do
   execute "Extracting #{dest}" do
     command "tar xf #{dest} -C /usr/bin/"
     not_if { installed }
+  end
+
+  file DockerCredsHelper.location do
+    mode '755'
   end
 
   file dest do

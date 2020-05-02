@@ -1,12 +1,13 @@
 initial_user = 'moe'
 provisioning_script = <<SCRIPT
 apt update -qq &&
+apt install -y wget &&
 id #{initial_user} || useradd -d /home/#{initial_user} -s /bin/bash -m -U -G sudo,adm,cdrom,dip #{initial_user}
 SCRIPT
 
 Vagrant.configure('2') do |config|
   config.vm.provider 'docker' do |d|
-    d.image = 'moritzheiber/vagrant:bionic'
+    d.image = 'moritzheiber/vagrant:focal'
     d.has_ssh = true
   end
 
