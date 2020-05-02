@@ -43,17 +43,20 @@ end
 
 directory "/home/#{node[:login_user]}/Code/thoughtworks" do
   mode '0755'
-  user node[:login_user]
+  owner node[:login_user]
+  group node[:login_user]
 end
 
 remote_file "/home/#{node[:login_user]}/Code/thoughtworks/gitconfig" do
   source 'files/tw_gitconfig'
   mode '0644'
-  user node[:login_user]
+  owner node[:login_user]
+  group node[:login_user]
 end
 
 file "/home/#{node[:login_user]}/.npmrc" do
-  user node[:login_user]
+  owner node[:login_user]
+  group node[:login_user]
   mode '0600'
   content <<-FILE
 prefix=/home/moe/.local/npm
