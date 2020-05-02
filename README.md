@@ -1,10 +1,10 @@
 # Laptop Provisioning [![Build Status](https://travis-ci.org/moritzheiber/laptop-provisioning.svg?branch=master)](https://travis-ci.org/moritzheiber/laptop-provisioning)
 
-This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to configure my Ubuntu-based laptop (currently Ubuntu Bionic Beaver).
+This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to configure my Ubuntu-based laptop (currently Regolith 1.4).
 
 Should you have questions/concerns/ideas for improvements just send me a message, hit me up on [Mastodon](https://mastodon.social/@moritzheiber) or submit a PR. Thanks!
 
-_Note: Prior to using MItamae recipes this repository contained a set of Ansible playbooks. They are archived in the `ansible` branch._
+_Note: Prior to using mitamae recipes this repository contained a set of Ansible playbooks. They are archived in the `ansible` branch._
 
 ## Prerequisites
 
