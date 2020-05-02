@@ -178,6 +178,15 @@ rustup 'stable' do
   user node[:login_user]
 end
 
+%w(
+  kx
+  tokei
+).each do |p|
+  execute "cargo install #{p}" do
+    not_if "test -e /home/#{node[:login_user]}/.cargo/bin/#{p}"
+  end
+end
+
 # AppImages
 directory "#{node[:user][node[:login_user]][:directory]}/AppImages" do
   mode '0755'
