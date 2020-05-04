@@ -13,10 +13,6 @@ apt_packages = %w(
   ruby-dev
   build-essential
   git
-  redshift-gtk
-  geoclue-2.0
-  autossh
-  unclutter
   urlscan
   mutt
   gnupg2
@@ -43,11 +39,11 @@ apt_packages = %w(
   silversearcher-ag
   shellcheck
   python3-pip
+  python3-dev
   ttf-mscorefonts-installer
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
-  python3-dev
   neovim
   amazon-ecr-credential-helper
   ctop
@@ -56,7 +52,7 @@ apt_packages = %w(
   codium
 )
 
-execute "VERBOSE_OUTPUT=y apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
+execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
   not_if "apt list --installed | grep -q #{apt_packages.first}"
 end
 
@@ -113,7 +109,7 @@ end
 # Install the libsecret helper
 execute 'make' do
   cwd '/usr/share/doc/git/contrib/credential/libsecret'
-  not_if 'test -f /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
+  not_if 'test -e /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
 end
 
 {

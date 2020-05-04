@@ -2,18 +2,6 @@ service 'apport' do
   action :disable
 end
 
-display_conf = <<DISPLAY
-[SeatDefaults]
-display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
-DISPLAY
-
-directory '/etc/lightdm/lightdm.conf.d'
-
-file '/etc/lightdm/lightdm.conf.d/display.conf' do
-  content display_conf
-  mode '0644'
-end
-
 avatar_path = '/etc/lightdm/avatar.png'
 remote_file avatar_path  do
   source 'files/avatar.png'
