@@ -47,7 +47,7 @@ apt_packages = %w(
   fonts-font-awesome
   fonts-powerline
   libpam-u2f
-  libpython3-dev
+  python3-dev
   neovim
   amazon-ecr-credential-helper
   ctop
@@ -121,6 +121,10 @@ end
   'ripgrep' => {
     url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
     version: node[:ripgrep_version]
+  },
+  'sharecmd' => {
+    url: "https://github.com/mschneider82/sharecmd/releases/download/v#{node[:sharecmd_version]}/sharecmd_amd64.deb",
+    version: node[:sharecmd_version]
   }
 }.each do |name, vars|
   apt name do
