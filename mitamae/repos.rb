@@ -58,11 +58,17 @@ end
   'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
   'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
-  'https://riot.im/packages/debian/ default main' => 'https://riot.im/packages/debian/repo-key.asc'
+  'https://riot.im/packages/debian/ default main' => 'https://riot.im/packages/debian/repo-key.asc',
+  'https://packages.microsoft.com/repos/ms-teams stable main' => 'https://packages.microsoft.com/keys/microsoft.asc'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?
   end
+end
+
+# Remove the automatically installed teams.list
+file '/etc/apt/sources.list.d/teams.list' do
+  action :delete
 end
 
 remote_file '/etc/apt/preferences.d/yubico-stable-400' do
