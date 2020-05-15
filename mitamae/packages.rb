@@ -5,7 +5,6 @@ package 'apt-fast'
 # docker-ce
 # riot-web
 # pulseaudio-modules-bt
-# nextcloud-client
 
 # apt packages
 apt_packages = %w(
@@ -13,7 +12,6 @@ apt_packages = %w(
   ruby-dev
   build-essential
   git
-  unclutter
   urlscan
   mutt
   gnupg2
@@ -58,7 +56,9 @@ execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --n
 end
 
 apt_packages.each do |p|
-  package p
+  package p do
+    options '--no-install-recommends'
+  end
 end
 
 package 'google-chrome-stable' do
@@ -118,10 +118,6 @@ end
   'ripgrep' => {
     url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
     version: node[:ripgrep_version]
-  },
-  'sharecmd' => {
-    url: "https://github.com/mschneider82/sharecmd/releases/download/v#{node[:sharecmd_version]}/sharecmd_amd64.deb",
-    version: node[:sharecmd_version]
   }
 }.each do |name, vars|
   apt name do
