@@ -46,9 +46,9 @@ apt_packages = %w(
   neovim
   amazon-ecr-credential-helper
   ctop
-  docker.io
   libssl-dev
   codium
+  docker-ce
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
