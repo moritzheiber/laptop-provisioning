@@ -45,10 +45,10 @@ apt_packages = %w(
   libpam-u2f
   neovim
   amazon-ecr-credential-helper
-  ctop
   libssl-dev
   codium
   docker-ce
+  vault
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do

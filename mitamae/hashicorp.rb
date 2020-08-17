@@ -13,10 +13,6 @@ end
   'terraform' => {
     version: node[:terraform_version],
     checksum: node[:terraform_checksum]
-  },
-  'vault' => {
-    version: node[:vault_version],
-    checksum: node[:vault_checksum]
   }
 }.each do |tool, info|
   hashicorp_install tool do
