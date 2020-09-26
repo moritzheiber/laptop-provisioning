@@ -251,6 +251,10 @@ k9s_install node[:k9s_version] do
   destination '/usr/bin'
 end
 
+kx_install node[:kx_version] do
+  checksum node[:kx_checksum]
+end
+
 apt 'gopass' do
   source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
   version node[:gopass_version]
