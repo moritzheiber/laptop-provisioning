@@ -255,6 +255,10 @@ kx_install node[:kx_version] do
   checksum node[:kx_checksum]
 end
 
+gossm_install node[:gossm_version] do
+  checksum node[:gossm_checksum]
+end
+
 apt 'gopass' do
   source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
   version node[:gopass_version]
