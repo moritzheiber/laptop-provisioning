@@ -9,13 +9,12 @@ addons:
   apt:
     update: true
 
-env:
-  - VERSION=2.2.7
-
 install:
   - sudo apt install -y curl ca-certificates
-  - curl -o /tmp/vagrant.deb -L https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb
-  - sudo dpkg -i /tmp/vagrant.deb
+  - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  - sudo apt update -qq
+  - sudo apt install --no-install-recommends vagrant
 
 script:
   - vagrant up
