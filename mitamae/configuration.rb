@@ -1,7 +1,7 @@
 service 'apport' do
   action :disable
 end
-
+lightdm_path = '/usr/share/lightdm'
 display_conf = <<DISPLAY
 [SeatDefaults]
 display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
@@ -10,14 +10,14 @@ display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
 background=/usr/share/backgrounds/warty-final-ubuntu.png
 DISPLAY
 
-directory '/usr/share/lightdm/lightdm-gtk-greeter.conf.d'
+directory "#{lightdm_path}/lightdm-gtk-greeter.conf.d"
 
-file '/usr/share/lightdm/lightdm-gtk-greeter.conf.d/display.conf' do
+file "#{lightdm_path}/lightdm-gtk-greeter.conf.d/display.conf" do
   content display_conf
   mode '0644'
 end
 
-avatar_path = '/etc/lightdm/avatar.png'
+avatar_path = "#{lightdm_path}/avatar.png"
 remote_file avatar_path  do
   source 'files/avatar.png'
   mode '0644'

@@ -1,0 +1,30 @@
+name: test
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    if: ${{ !contains(github.event.commits[0].message, '[ci skip]') }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update and install dependencies
+        shell: bash
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt update
+          sudo -E apt install -y --no-install-recommends curl ca-certificates software-properties-common
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo -E apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt update -qq
+          sudo -E apt install --no-install-recommends vagrant
+      - name: Test
+        shell: bash
+        run: |
+          vagrant up
