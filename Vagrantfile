@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 initial_user = 'moe'
 provisioning_script = <<SCRIPT
 apt update -qq &&

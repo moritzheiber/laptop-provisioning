@@ -13,6 +13,8 @@ jobs:
     if: ${{ !contains(github.event.commits[0].message, '[ci skip]') }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Update and install dependencies
         shell: bash
         env:
