@@ -5,11 +5,14 @@ end
 display_conf = <<DISPLAY
 [SeatDefaults]
 display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
+
+[greeter]
+background=/usr/share/backgrounds/warty-final-ubuntu.png
 DISPLAY
 
-directory '/etc/lightdm/lightdm.conf.d'
+directory '/usr/share/lightdm/lightdm-gtk-greeter.conf.d'
 
-file '/etc/lightdm/lightdm.conf.d/display.conf' do
+file '/usr/share/lightdm/lightdm-gtk-greeter.conf.d/display.conf' do
   content display_conf
   mode '0644'
 end

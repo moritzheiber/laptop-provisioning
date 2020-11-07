@@ -68,7 +68,7 @@ end
   'https://riot.im/packages/debian/ default main' => 'https://riot.im/packages/debian/repo-key.asc',
   'https://packages.microsoft.com/repos/ms-teams stable main' => 'https://packages.microsoft.com/keys/microsoft.asc',
   'https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' => 'https://packagecloud.io/slacktechnologies/slack/gpgkey',
-  'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.gpg',
+  'https://repo.jotta.us/debian unstable main' => 'https://repo.jotta.us/public.gpg',
   "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
