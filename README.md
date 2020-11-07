@@ -1,4 +1,4 @@
-# Laptop Provisioning [![Build Status](https://travis-ci.org/moritzheiber/laptop-provisioning.svg?branch=master)](https://travis-ci.org/moritzheiber/laptop-provisioning)
+# Laptop Provisioning ![test](https://github.com/moritzheiber/laptop-provisioning/workflows/test/badge.svg)
 
 This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to configure my Ubuntu-based laptop (currently Regolith 1.4).
 
