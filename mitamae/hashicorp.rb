@@ -7,6 +7,7 @@ end
 template "/home/#{node[:login_user]}/.terraformrc" do
   content <<RC
 plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"
+disable_checkpoint = true
 RC
   owner node[:login_user]
   group node[:login_user]

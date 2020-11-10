@@ -28,7 +28,6 @@ end
 #   neovim-ppa/stable
 #   numix/ppa
 #   longsleep/golang-backports
-#   eh5/pulseaudio-a2dp
 # ).each do |u|
 #   apt_repository u do
 #     ppa true
@@ -40,6 +39,7 @@ end
   git-core/ppa
   yubico/stable
   ubuntu-mozilla-security/ppa
+  berglh/pulseaudio-a2dp
 ).each do |u|
   apt_repository u do
     ppa true
@@ -47,11 +47,9 @@ end
 end
 
 # {
-#   "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
 #   "http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
 #   "https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
 #   "https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc',
-#   "https://tel.red/repos/ubuntu #{node[:ubuntu_release]} non-free" => '9454C19A66B920C83DDF696E07C8CCAFCE49F8C5',
 # }.each do |url, key|
 #   apt_repository "deb [arch=amd64] #{url}" do
 #     gpg_key key unless key.empty?
