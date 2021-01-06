@@ -1,11 +1,6 @@
 # Installing apt-fast first
 package 'apt-fast'
 
-# Can't install these packages:
-# docker-ce
-# riot-web
-# pulseaudio-modules-bt
-
 # apt packages
 apt_packages = %w(
   ruby
@@ -52,6 +47,8 @@ apt_packages = %w(
   packer
   terraform
   vagrant
+  element-desktop
+  pulseaudio-modules-bt
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
