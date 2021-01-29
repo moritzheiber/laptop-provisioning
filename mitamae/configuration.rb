@@ -28,15 +28,6 @@ execute 'update-avatar' do
   only_if 'ps aux | grep -q "[d]bus-daemon"'
 end
 
-xsession_file = '/etc/X11/Xsession.options'
-file xsession_file do
-  action :edit
-  block do |content|
-    content.gsub!(/^use-ssh-agent/, 'no-use-ssh-agent')
-  end
-  not_if "grep -q 'no-use-ssh-agent' #{xsession_file}"
-end
-
 download 'vim-plug' do
   url "https://raw.githubusercontent.com/junegunn/vim-plug/#{node[:vim_plug_commit_hash]}/plug.vim"
   destination "/home/#{node[:login_user]}/.local/share/nvim/site/autoload/plug.vim"
@@ -64,4 +55,18 @@ file "/home/#{node[:login_user]}/.npmrc" do
   content <<-FILE
 prefix=/home/moe/.local/npm
   FILE
+end
+
+bluetooth_config_file = '/etc/bluetooth/main.conf'
+file bluetooth_config_file do
+  action :edit
+  block do |content|
+    content.gsub!(/^#FastConnectable=true/, 'FastConnectable=true')
+  end
+  only_if "grep -q '#FastConnectable=true' #{bluetooth_config_file}"
+  notifies :restart, 'service[bluetooth]', :immediately
+end
+
+service 'bluetooth' do
+  action :nothing
 end
