@@ -257,7 +257,7 @@ gossm_install node[:gossm_version] do
 end
 
 apt 'gopass' do
-  source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass-#{node[:gopass_version]}-linux-amd64.deb"
+  source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass_#{node[:gopass_version]}_linux_amd64.deb"
   version node[:gopass_version]
 end
 
