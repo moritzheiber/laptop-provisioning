@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -Eeux -o pipefail
+
+_handle_get() {
+  local value
+  value="${*}"
+
+  if [ "${value}" == "org.gnome.nm-applet disable-disconnected-notifications" ] ; then
+    echo "false"
+  elif [ "${value}" == "org.gnome.nm-applet disable-connected-notifications" ] ; then
+    echo "false"
+  fi
+}
+
+CMD=${1:-}
+shift || true
+
+case "${CMD}" in
+  get) _handle_get "$@" ;;
+  *) exit 0;
+esac
