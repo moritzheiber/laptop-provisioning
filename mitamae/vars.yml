@@ -31,7 +31,7 @@ packer_version: "1.4.1"
 packer_checksum: "b713ea79a6fb131e27d65ec3f2227f36932540e71820288c3c5ad770b565ecd7"
 # Installed through deb/apt
 vagrant_version: "2.2.7"
-gopass_version: "1.12.0"
+gopass_version: "1.12.1"
 
 # Other random tooling
 saml2aws_version: "2.24.0"
