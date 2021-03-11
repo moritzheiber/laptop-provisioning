@@ -49,6 +49,7 @@ apt_packages = %w(
   vagrant
   element-desktop
   pulseaudio-modules-bt
+  heroku
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
