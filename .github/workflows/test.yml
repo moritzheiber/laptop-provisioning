@@ -1,9 +1,17 @@
 name: test
 on:
   pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE.md'
+      - '.github/**'
     branches:
       - "*"
   push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE.md'
+      - '.github/**'
     branches:
       - main
 
