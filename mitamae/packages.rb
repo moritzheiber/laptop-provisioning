@@ -1,5 +1,5 @@
 # Installing apt-fast first
-package 'apt-fast'
+# package 'apt-fast'
 
 # apt packages
 apt_packages = %w(
@@ -48,13 +48,12 @@ apt_packages = %w(
   terraform
   vagrant
   element-desktop
-  pulseaudio-modules-bt
   heroku
 )
 
-execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
-  not_if "apt list --installed | grep -q #{apt_packages.first}"
-end
+# execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
+#   not_if "apt list --installed | grep -q #{apt_packages.first}"
+# end
 
 apt_packages.each do |p|
   package p do
@@ -199,11 +198,6 @@ end
     name: 'aws-iam-authenticator',
     url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
     checksum: node[:aws_iam_authenticator_checksum]
-  },
-  {
-    name: 'ra_lsp_server',
-    url: "https://github.com/rust-analyzer/rust-analyzer/releases/download/#{node[:rust_analyzer_version]}/ra_lsp_server-linux",
-    checksum: node[:rust_analyzer_checksum]
   }
 ].each do |cli|
   download cli[:name] do
@@ -234,12 +228,6 @@ end
 go_chromecast_install node[:go_chromecast_version] do
   source_url "https://github.com/vishen/go-chromecast/releases/download/v#{node[:go_chromecast_version]}/go-chromecast_#{node[:go_chromecast_version]}_Linux_x86_64.tar.gz"
   checksum node[:go_chromecast_checksum]
-  destination '/usr/bin'
-end
-
-terraform_lsp_install node[:terraform_lsp_version] do
-  source_url "https://github.com/juliosueiras/terraform-lsp/releases/download/v#{node[:terraform_lsp_version]}/terraform-lsp_#{node[:terraform_lsp_version]}_linux_amd64.tar.gz"
-  checksum node[:terraform_lsp_checksum]
   destination '/usr/bin'
 end
 

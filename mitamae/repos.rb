@@ -24,10 +24,7 @@ apt 'sur5r-keyring' do
 end
 
 # %w(
-#   brightbox/ruby-ng
-#   neovim-ppa/stable
-#   numix/ppa
-#   longsleep/golang-backports
+#   apt-fast/stable
 # ).each do |u|
 #   apt_repository u do
 #     ppa true
@@ -35,11 +32,8 @@ end
 # end
 
 %w(
-  apt-fast/stable
   git-core/ppa
-  yubico/stable
   ubuntu-mozilla-security/ppa
-  berglh/pulseaudio-a2dp
 ).each do |u|
   apt_repository u do
     ppa true
@@ -57,8 +51,8 @@ end
 # end
 
 {
-  "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
-  "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+  "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => 'https://download.docker.com/linux/ubuntu/gpg',
+  "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
   'https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
   'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
@@ -75,7 +69,7 @@ end
   end
 end
 
-# Remove the automatically installed teams.list
+# Remove the automatically installed repositories
 %w[
 /etc/apt/sources.list.d/teams.list
 /etc/apt/sources.list.d/slack.list

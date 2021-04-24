@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -Eeux -o pipefail
+
+_handle_restart() {
+  local value
+  value="${*}"
+
+  if [ "${value}" == "udev" ] ; then
+    echo "Would've restarted udev using systemd"
+    exit 0
+  else
+    echo "I don't mock the service you're trying to restart!"
+    exit 1
+  fi
+}
+
+CMD=${1:-}
+shift || true
+
+case "${CMD}" in
+  restart) _handle_restart "$@" ;;
+  *) exit 0;
+esac
