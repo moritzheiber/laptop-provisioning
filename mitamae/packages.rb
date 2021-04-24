@@ -51,6 +51,8 @@ apt_packages = %w(
   heroku
 )
 
+# Missing package: terraform-ls
+
 # execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
 #   not_if "apt list --installed | grep -q #{apt_packages.first}"
 # end
@@ -142,18 +144,6 @@ rustup 'stable' do
   user node[:login_user]
 end
 
-cargo_prefix = "/home/#{node[:login_user]}/.cargo/bin"
-
-%w(
-  kx
-  tokei
-).each do |p|
-  execute "#{cargo_prefix}/cargo install #{p}" do
-    user node[:login_user]
-    not_if "test -e #{cargo_prefix}/#{p}"
-  end
-end
-
 # AppImages
 directory "#{node[:user][node[:login_user]][:directory]}/AppImages" do
   mode '0755'
@@ -237,8 +227,23 @@ k9s_install node[:k9s_version] do
   destination '/usr/bin'
 end
 
-kx_install node[:kx_version] do
-  checksum node[:kx_checksum]
+{
+  "kx" => {
+    version: node[:kx_version],
+    checkum: node[:kx_checksum],
+    url: "https://github.com/onatm/kx/releases/download/v#{node[:kx_version]}/kx-v#{node[:kx_version]}-linux-amd64.tar.gz"
+  },
+  "tokei" => {
+    version: node[:tokei_version],
+    checksum: node[:tokei_checksum],
+    url: "https://github.com/XAMPPRocky/tokei/releases/download/v#{node[:tokei_version]}/tokei-x86_64-unknown-linux-gnu.tar.gz"
+  }
+}.each do |name, data|
+  rust_tool_install name do
+    checksum data[:checksum]
+    version data[:version]
+    url data[:url]
+  end
 end
 
 gossm_install node[:gossm_version] do

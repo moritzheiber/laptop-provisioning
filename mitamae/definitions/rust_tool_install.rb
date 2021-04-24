@@ -1,16 +1,19 @@
-module KxHelper
-  def self.package_installed?(command = 'kx', version)
+module RustToolHelper
+  def self.package_installed?(command, version)
     !(Regexp.compile(version) =~ IO.popen("#{command} --version 2>&1").read.strip).nil?
   end
 end
 
-define :kx_install, checksum: nil do
-  version = params[:name]
-  dest = "/tmp/kx_#{version}.tar.gz"
+define :rust_tool_install, checksum: nil, version: nil, url: nil do
+  name = params[:name]
+  version = params[:version]
+  url = params[:url]
   cs = params[:checksum]
-  installed = KxHelper.package_installed?(version)
 
-  download "https://github.com/onatm/kx/releases/download/v#{version}/kx-v#{version}-linux-amd64.tar.gz" do
+  dest = "/tmp/rust_tool_#{name}_#{version}.tar.gz"
+  installed = RustToolHelper.package_installed?(name, version)
+
+  download url do
     destination dest
     checksum cs if cs
     not_if { installed }
