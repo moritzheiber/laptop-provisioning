@@ -144,30 +144,6 @@ rustup 'stable' do
   user node[:login_user]
 end
 
-# AppImages
-directory "#{node[:user][node[:login_user]][:directory]}/AppImages" do
-  mode '0755'
-  owner node[:login_user]
-  group node[:login_user]
-  user node[:login_user]
-end
-
-[
-  {
-    name: 'nvim.appimage',
-    url: "https://github.com/neovim/neovim/releases/download/v#{node[:neovim_version]}/nvim.appimage",
-    checksum: node[:neovim_checksum]
-  }
-].each do |app_image|
-  download app_image[:name] do
-    url app_image[:url]
-    destination "#{node[:user][node[:login_user]][:directory]}/AppImages/#{app_image[:name]}"
-    mode '0755'
-    user node[:login_user]
-    checksum app_image[:checksum]
-  end
-end
-
 [
   {
     name: 'powerline-go',
@@ -261,10 +237,6 @@ apt 'i3status-rust' do
 end
 
 {
-  'vim' => {
-    link: '/usr/bin/vim',
-    path: "/home/#{node[:login_user]}/AppImages/nvim.appimage"
-  },
   'pinentry' => {
     link: '/usr/bin/pinentry',
     path: '/usr/bin/pinentry-curses'
