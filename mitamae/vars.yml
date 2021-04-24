@@ -21,6 +21,7 @@ ripgrep_version: "12.0.1"
 aws_iam_authenticator_version: "0.4.0"
 aws_iam_authenticator_checksum: "9744923781cca33dba3f48e1b8443af4d7f158748bd105134aaa68252da3b907"
 nodejs_major_version: "12"
+gopass_version: "1.12.1"
 
 # Other random tooling
 saml2aws_version: "2.24.0"
