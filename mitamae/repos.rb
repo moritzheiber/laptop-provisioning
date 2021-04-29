@@ -23,17 +23,10 @@ apt 'sur5r-keyring' do
   version node[:i3_keyring_version]
 end
 
-# %w(
-#   apt-fast/stable
-# ).each do |u|
-#   apt_repository u do
-#     ppa true
-#   end
-# end
-
 %w(
   git-core/ppa
   ubuntu-mozilla-security/ppa
+  apt-fast/stable
 ).each do |u|
   apt_repository u do
     ppa true

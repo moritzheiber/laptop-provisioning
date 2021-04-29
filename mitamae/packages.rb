@@ -1,5 +1,5 @@
 # Installing apt-fast first
-# package 'apt-fast'
+package 'apt-fast'
 
 # apt packages
 apt_packages = %w(
@@ -53,9 +53,9 @@ apt_packages = %w(
 
 # Missing package: terraform-ls
 
-# execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
-#   not_if "apt list --installed | grep -q #{apt_packages.first}"
-# end
+execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
+  not_if "apt list --installed | grep -q #{apt_packages.first}"
+end
 
 apt_packages.each do |p|
   package p do
