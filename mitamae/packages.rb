@@ -49,9 +49,8 @@ apt_packages = %w(
   vagrant
   element-desktop
   heroku
+  terraform-ls
 )
-
-# Missing package: terraform-ls
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
   not_if "apt list --installed | grep -q #{apt_packages.first}"
