@@ -155,11 +155,6 @@ end
     checksum: node[:minikube_checksum]
   },
   {
-    name: 'terraform-docs',
-    url: "https://github.com/segmentio/terraform-docs/releases/download/v#{node[:terraform_docs_version]}/terraform-docs-v#{node[:terraform_docs_version]}-linux-amd64",
-    checksum: node[:terraform_docs_checksum]
-  },
-  {
     name: 'aws-iam-authenticator',
     url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
     checksum: node[:aws_iam_authenticator_checksum]
@@ -200,6 +195,10 @@ k9s_install node[:k9s_version] do
   source_url "https://github.com/derailed/k9s/releases/download/v#{node[:k9s_version]}/k9s_Linux_x86_64.tar.gz"
   checksum node[:k9s_checksum]
   destination '/usr/bin'
+end
+
+terraform_docs_install node[:terraform_docs_version] do
+  checksum node[:terraform_docs_checksum]
 end
 
 {
