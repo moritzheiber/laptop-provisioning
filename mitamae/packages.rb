@@ -238,6 +238,10 @@ end
   'pinentry' => {
     link: '/usr/bin/pinentry',
     path: '/usr/bin/pinentry-curses'
+  },
+  'python' => {
+    link: '/usr/bin/python',
+    path: '/usr/bin/python3'
   }
 }.each do |n, info|
   alternatives n do
