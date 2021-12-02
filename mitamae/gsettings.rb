@@ -1,6 +1,6 @@
 module GsettingsHelper
   def self.check_setting(setting, expected_value)
-      !(Regexp.compile(expected_value) =~ `gsettings get #{setting}`.lines.first).nil?
+    !(Regexp.compile(expected_value) =~ `gsettings get #{setting}`.lines.first).nil?
   end
 end
 

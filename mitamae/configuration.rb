@@ -18,7 +18,7 @@ file "#{lightdm_path}/lightdm-gtk-greeter.conf.d/display.conf" do
 end
 
 avatar_path = "#{lightdm_path}/avatar.png"
-remote_file avatar_path  do
+remote_file avatar_path do
   source 'files/avatar.png'
   mode '0644'
 end

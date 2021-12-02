@@ -10,6 +10,7 @@ include_recipe 'definitions/k9s_install'
 include_recipe 'definitions/rust_tool_install'
 include_recipe 'definitions/gossm_install'
 include_recipe 'definitions/terraform_docs_install'
+include_recipe 'definitions/aws_cli_install'
 
 include_recipe 'repos'
 include_recipe 'packages'

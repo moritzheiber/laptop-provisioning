@@ -88,7 +88,6 @@ end
 # Python3 pip packages installed locally
 %w(
   keyring
-  awscli
   neovim
   SecretStorage
   dbus-python
@@ -133,10 +132,14 @@ end
   neovim
   ohai
   rubocop
+  rubocop-performance
   rubocop-rspec
   solargraph
 ).each do |g|
-  gem_package g
+  gem_package g do
+    user node[:login_user]
+    options ['--user']
+  end
 end
 
 rustup 'stable' do
@@ -202,12 +205,12 @@ terraform_docs_install node[:terraform_docs_version] do
 end
 
 {
-  "kx" => {
+  'kx' => {
     version: node[:kx_version],
     checkum: node[:kx_checksum],
     url: "https://github.com/onatm/kx/releases/download/v#{node[:kx_version]}/kx-v#{node[:kx_version]}-linux-amd64.tar.gz"
   },
-  "tokei" => {
+  'tokei' => {
     version: node[:tokei_version],
     checksum: node[:tokei_checksum],
     url: "https://github.com/XAMPPRocky/tokei/releases/download/v#{node[:tokei_version]}/tokei-x86_64-unknown-linux-gnu.tar.gz"
@@ -249,4 +252,10 @@ end
     link info[:link]
     priority 50
   end
+end
+
+aws_cli_install node[:aws_cli_version] do
+  user node[:login_user]
+  destination "#{node[:user][node[:login_user]][:directory]}/.local/bin/aws"
+  source_url "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-#{node[:aws_cli_version]}.zip"
 end
