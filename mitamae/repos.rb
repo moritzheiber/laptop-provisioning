@@ -55,7 +55,8 @@ end
   'https://repo.jotta.us/debian unstable main' => 'https://repo.jotta.us/public.gpg',
   "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
   'https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
-  'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+  'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+  'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?
