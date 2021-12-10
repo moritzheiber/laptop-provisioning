@@ -127,7 +127,7 @@ end
   end
 end
 
-# Global rubygems
+# Rubygems
 %w(
   bundler
   neovim
