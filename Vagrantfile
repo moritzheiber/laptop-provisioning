@@ -1,4 +1,4 @@
-initial_user = 'moe'
+initial_user = 'mheiber'
 provisioning_script = <<SCRIPT
 apt update -qq &&
 apt install -y wget gpg-agent &&

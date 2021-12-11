@@ -53,7 +53,7 @@ file "/home/#{node[:login_user]}/.npmrc" do
   group node[:login_user]
   mode '0600'
   content <<-FILE
-prefix=/home/moe/.local/npm
+prefix=/home/#{node[:login_user]}/.local/npm
   FILE
 end
 

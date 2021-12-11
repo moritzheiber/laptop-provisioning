@@ -51,6 +51,7 @@ apt_packages = %w(
   heroku
   terraform-ls
   gh
+  jotta-cli
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
