@@ -17,12 +17,6 @@ end
   package p
 end
 
-# We need to install this without authentication
-apt 'sur5r-keyring' do
-  source_url "http://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_#{node[:i3_keyring_version]}_all.deb"
-  version node[:i3_keyring_version]
-end
-
 %w(
   git-core/ppa
   ubuntu-mozilla-security/ppa
@@ -78,7 +72,11 @@ remote_file '/etc/apt/preferences.d/yubico-stable-400' do
   mode '0644'
 end
 
-remote_file '/etc/apt/preferences.d/proposed-priority-400' do
-  source 'files/proposed-priority-400'
+file "/etc/apt/preferences.d/proposed-priority-400" do
   mode '0644'
+  content <<-FILE
+Package: *
+Pin: release a=#{node[:ubuntu_release]}-proposed
+Pin-Priority: 400  
+FILE
 end

@@ -1,30 +1,21 @@
 service 'apport' do
   action :disable
 end
-lightdm_path = '/usr/share/lightdm'
-display_conf = <<DISPLAY
-[SeatDefaults]
-display-setup-script=xrandr --output eDP-1 --primary --mode 1920x1080
 
-[greeter]
-background=/usr/share/backgrounds/warty-final-ubuntu.png
-DISPLAY
+avatar_path = "/usr/local/share/avatars"
+avatar_file = "#{avatar_path}/avatar.png"
 
-directory "#{lightdm_path}/lightdm-gtk-greeter.conf.d"
-
-file "#{lightdm_path}/lightdm-gtk-greeter.conf.d/display.conf" do
-  content display_conf
-  mode '0644'
+directory avatar_path do
+  mode '0755'
 end
 
-avatar_path = "#{lightdm_path}/avatar.png"
-remote_file avatar_path do
+remote_file avatar_file do
   source 'files/avatar.png'
   mode '0644'
 end
 
 execute 'update-avatar' do
-  command "dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User#{node[:user][node[:login_user].to_s][:uid]} org.freedesktop.Accounts.User.SetIconFile string:\"#{avatar_path}\""
+  command "dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User#{node[:user][node[:login_user].to_s][:uid]} org.freedesktop.Accounts.User.SetIconFile string:\"#{avatar_file}\""
   only_if 'ps aux | grep -q "[d]bus-daemon"'
 end
 
