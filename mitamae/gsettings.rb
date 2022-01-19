@@ -26,13 +26,13 @@ end
   'org.gnome.settings-daemon.plugins.media-keys custom-keybindings': '[\'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\']',
   'org.gnome.settings-daemon.plugins.media-keys logout': '@as []',
   'org.gnome.settings-daemon.plugins.media-keys terminal': '[\'<Super>Return\']',
-  'org.gnome.settings-daemon.plugins.media-keys:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding': '<Primary><Alt>Delete',
-  'org.gnome.settings-daemon.plugins.media-keys:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command': 'systemctl suspend',
-  'org.gnome.settings-daemon.plugins.media-keys:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name': 'Suspend',
+  'org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding': '<Primary><Alt>Delete',
+  'org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command': 'systemctl suspend',
+  'org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name': 'Suspend',
   'org.gnome.shell.extensions.ding show-home': 'false'
 }.each do |setting, value|
   execute "Setting #{setting} to #{value}" do
-    command "DBUS_SESSION_BUS_ADDRESS=\"unix:path=/run/user/$(id -u)/bus\" gsettings set #{setting} #{value}"
+    command "DBUS_SESSION_BUS_ADDRESS=\"unix:path=/run/user/$(id -u)/bus\" gsettings set #{setting} \"#{value}\""
     not_if { GsettingsHelper.check_setting(setting, value) }
     user node[:login_user]
   end

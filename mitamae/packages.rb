@@ -120,6 +120,14 @@ end
   'ripgrep' => {
     url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
     version: node[:ripgrep_version]
+  },
+  'delta' => {
+    url: "https://github.com/dandavison/delta/releases/download/#{node[:delta_version]}/git-delta_#{node[:delta_version]}_amd64.deb",
+    version: node[:delta_version]
+  },
+  'gopass' => {
+    url: "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass_#{node[:gopass_version]}_linux_amd64.deb",
+    version: node[:gopass_version]
   }
 }.each do |name, vars|
   apt name do
@@ -186,10 +194,6 @@ helm_install node[:helm_version] do
   destination '/usr/bin'
 end
 
-saml2aws_install node[:saml2aws_version] do
-  checksum node[:saml2aws_checksum]
-end
-
 go_chromecast_install node[:go_chromecast_version] do
   source_url "https://github.com/vishen/go-chromecast/releases/download/v#{node[:go_chromecast_version]}/go-chromecast_#{node[:go_chromecast_version]}_Linux_x86_64.tar.gz"
   checksum node[:go_chromecast_checksum]
@@ -227,16 +231,6 @@ end
 
 gossm_install node[:gossm_version] do
   checksum node[:gossm_checksum]
-end
-
-apt 'gopass' do
-  source_url "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass_#{node[:gopass_version]}_linux_amd64.deb"
-  version node[:gopass_version]
-end
-
-apt 'i3status-rust' do
-  source_url "https://github.com/greshake/i3status-rust/releases/download/v#{node[:i3_status_rs_version]}/i3status-rust_#{node[:i3_status_rs_version]}_amd64.deb"
-  version node[:i3_status_rs_version]
 end
 
 {
