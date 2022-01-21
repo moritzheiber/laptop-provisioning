@@ -94,7 +94,7 @@ end
   SecretStorage
   dbus-python
   flake8
-  msgpack-python
+  msgpack
   python-language-server
   wheel
   tzupdate
