@@ -16,7 +16,6 @@ apt_packages = %w(
   libdbus-glib-1-dev
   whois
   htop
-  mpv
   i965-va-driver
   libvdpau-va-gl1
   jq
@@ -52,6 +51,8 @@ apt_packages = %w(
   terraform-ls
   gh
   jotta-cli
+  gstreamer1.0-plugins-bad
+  totem
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -171,6 +172,16 @@ end
     name: 'aws-iam-authenticator',
     url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v#{node[:aws_iam_authenticator_version]}/aws-iam-authenticator_#{node[:aws_iam_authenticator_version]}_linux_amd64",
     checksum: node[:aws_iam_authenticator_checksum]
+  },
+  {
+    name: "goss",
+    url: "https://github.com/aelsabbahy/goss/releases/download/v#{node[:goss_version]}/goss-linux-amd64",
+    checksum: node[:goss_checksum]
+  },
+  {
+    name: "dgoss",
+    url: "https://github.com/aelsabbahy/goss/releases/download/v#{node[:goss_version]}/dgoss",
+    checksum: node[:dgoss_checksum]
   }
 ].each do |cli|
   download cli[:name] do

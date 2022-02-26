@@ -37,3 +37,6 @@ tokei_checksum: "c8c5c4ab9e1ff47e745de70f4af3214078657399fa7a0da0b5f209d780e4997
 gossm_version: "1.3.2"
 gossm_checksum: "aee3b629d9e49b7bdeb77decb7996e60634e253d5532d5cf4e68c0948025cf7e"
 aws_cli_version: "2.4.4"
+goss_version: "0.3.16"
+goss_checksum: "827e354b48f93bce933f5efcd1f00dc82569c42a179cf2d384b040d8a80bfbfb"
+dgoss_checksum: "384d5f6eb5a8f11df0da838cb059f0fdfb272469f275c5ce17d00ac2ae34ef05"
