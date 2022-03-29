@@ -46,7 +46,7 @@ end
   'https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   'https://packages.riot.im/debian/ default main' => 'https://packages.riot.im/debian/riot-im-archive-keyring.gpg',
   'https://packages.microsoft.com/repos/ms-teams stable main' => 'https://packages.microsoft.com/keys/microsoft.asc',
-  'https://repo.jotta.us/debian unstable main' => 'https://repo.jotta.us/public.gpg',
+  'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.gpg',
   "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
   'https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
   'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
@@ -77,6 +77,6 @@ file "/etc/apt/preferences.d/proposed-priority-400" do
   content <<-FILE
 Package: *
 Pin: release a=#{node[:ubuntu_release]}-proposed
-Pin-Priority: 400  
+Pin-Priority: 400
 FILE
 end

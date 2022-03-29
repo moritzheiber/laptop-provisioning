@@ -53,6 +53,8 @@ apt_packages = %w(
   jotta-cli
   gstreamer1.0-plugins-bad
   totem
+  heif-gdk-pixbuf
+  heif-thumbnailer
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
