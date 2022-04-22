@@ -223,6 +223,10 @@ terraform_docs_install node[:terraform_docs_version] do
   checksum node[:terraform_docs_checksum]
 end
 
+starship_install node[:starship_version] do
+  checksum node[:starship_checksum]
+end
+
 {
   'kx' => {
     version: node[:kx_version],
