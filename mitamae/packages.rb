@@ -55,6 +55,7 @@ apt_packages = %w(
   totem
   heif-gdk-pixbuf
   heif-thumbnailer
+  xdg-desktop-portal-gnome
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -176,14 +177,19 @@ end
     checksum: node[:aws_iam_authenticator_checksum]
   },
   {
-    name: "goss",
+    name: 'goss',
     url: "https://github.com/aelsabbahy/goss/releases/download/v#{node[:goss_version]}/goss-linux-amd64",
     checksum: node[:goss_checksum]
   },
   {
-    name: "dgoss",
+    name: 'dgoss',
     url: "https://github.com/aelsabbahy/goss/releases/download/v#{node[:goss_version]}/dgoss",
     checksum: node[:dgoss_checksum]
+  },
+  {
+    name: 'tfsec',
+    url: "https://github.com/aquasecurity/tfsec/releases/download/v#{node[:tfsec_version]}/tfsec-linux-amd64",
+    checksum: node[:tfsec_checksum]
   }
 ].each do |cli|
   download cli[:name] do

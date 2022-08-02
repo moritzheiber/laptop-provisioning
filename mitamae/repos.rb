@@ -20,6 +20,7 @@ end
 %w(
   git-core/ppa
   ubuntu-mozilla-security/ppa
+  mozillateam/ppa
   apt-fast/stable
 ).each do |u|
   apt_repository u do
@@ -72,11 +73,25 @@ remote_file '/etc/apt/preferences.d/yubico-stable-400' do
   mode '0644'
 end
 
-file "/etc/apt/preferences.d/proposed-priority-400" do
+file '/etc/apt/preferences.d/proposed-priority-400' do
   mode '0644'
   content <<-FILE
 Package: *
 Pin: release a=#{node[:ubuntu_release]}-proposed
 Pin-Priority: 400
 FILE
+end
+
+%w[
+  ubuntu-mozilla-security
+  mozillateam
+].each do |ppa|
+  file "/etc/apt/preferences.d/#{ppa}-priority-1001" do
+    mode '0644'
+    content <<-FILE
+Package: firefox
+Pin: release o=LP-PPA-#{ppa}
+Pin-Priority: 1001
+FILE
+  end
 end
