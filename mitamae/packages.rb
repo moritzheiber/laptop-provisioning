@@ -233,6 +233,10 @@ starship_install node[:starship_version] do
   checksum node[:starship_checksum]
 end
 
+mcfly_install node[:mcfly_version] do
+  checksum node[:mcfly_checksum]
+end
+
 {
   'kx' => {
     version: node[:kx_version],

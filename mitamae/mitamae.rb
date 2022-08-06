@@ -11,6 +11,7 @@ include_recipe 'definitions/gossm_install'
 include_recipe 'definitions/terraform_docs_install'
 include_recipe 'definitions/aws_cli_install'
 include_recipe 'definitions/starship_install'
+include_recipe 'definitions/mcfly_install'
 
 include_recipe 'repos'
 include_recipe 'packages'
