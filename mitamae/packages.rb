@@ -16,7 +16,7 @@ apt_packages = %w(
   libdbus-glib-1-dev
   whois
   htop
-  i965-va-driver
+  intel-media-va-driver-non-free
   libvdpau-va-gl1
   jq
   wireguard
@@ -56,6 +56,8 @@ apt_packages = %w(
   heif-gdk-pixbuf
   heif-thumbnailer
   xdg-desktop-portal-gnome
+  vainfo
+  intel-gpu-tools
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
