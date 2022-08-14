@@ -114,6 +114,7 @@ end
 
 # Install the libsecret helper
 execute 'make_libsecret_helper' do
+  command 'make'
   cwd '/usr/share/doc/git/contrib/credential/libsecret'
   not_if 'test -f /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
 end
