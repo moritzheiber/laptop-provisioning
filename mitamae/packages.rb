@@ -19,7 +19,6 @@ apt_packages = %w(
   intel-media-va-driver-non-free
   libvdpau-va-gl1
   jq
-  wireguard
   unrar
   w3m
   gimp
@@ -36,7 +35,6 @@ apt_packages = %w(
   ttf-mscorefonts-installer
   fonts-font-awesome
   fonts-powerline
-  libpam-u2f
   neovim
   amazon-ecr-credential-helper
   libssl-dev
@@ -51,13 +49,12 @@ apt_packages = %w(
   terraform-ls
   gh
   jotta-cli
-  gstreamer1.0-plugins-bad
-  totem
   heif-gdk-pixbuf
   heif-thumbnailer
   xdg-desktop-portal-gnome
   vainfo
   intel-gpu-tools
+  mpv
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -116,7 +113,7 @@ end
 end
 
 # Install the libsecret helper
-execute 'make' do
+execute 'make_libsecret_helper' do
   cwd '/usr/share/doc/git/contrib/credential/libsecret'
   not_if 'test -f /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret'
 end
@@ -127,7 +124,7 @@ end
     url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
     version: node[:ripgrep_version]
   },
-  'delta' => {
+  'git-delta' => {
     url: "https://github.com/dandavison/delta/releases/download/#{node[:delta_version]}/git-delta_#{node[:delta_version]}_amd64.deb",
     version: node[:delta_version]
   },
