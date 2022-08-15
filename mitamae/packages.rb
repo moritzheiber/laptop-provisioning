@@ -54,7 +54,11 @@ apt_packages = %w(
   xdg-desktop-portal-gnome
   vainfo
   intel-gpu-tools
+  gnome-shell-extension-gsconnect-browsers
+  python3-nautilus
+  vlc
   mpv
+  libmpv-dev
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do

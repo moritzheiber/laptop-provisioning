@@ -3,17 +3,17 @@ git_dir = '/tmp/mpv_inhibit_gnome'
 dest = "/home/#{node[:login_user]}/.config/mpv/scripts"
 plugin_file = "#{dest}/#{plugin_name}"
 
+directory dest do
+  user node[:login_user]
+  owner node[:login_user]
+  group node[:login_user]
+end
+
 git git_dir do
   repository 'https://github.com/Guldoman/mpv_inhibit_gnome.git'
   not_if "test -f #{plugin_file}"
   user node[:login_user]
   notifies :run, 'execute[make_gnome_plugin]', :immediately
-end
-
-directory dest do
-  user node[:login_user]
-  owner node[:login_user]
-  group node[:login_user]
 end
 
 execute 'make_gnome_plugin' do
