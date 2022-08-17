@@ -22,6 +22,33 @@ Be sure to update your local submodule definitions from time to time, should you
 $ git submodule update --recursive --remote
 ```
 
+### Testing
+
+- Vagrant >= 2.1.2
+- Docker >= 18.03.0-ce
+
+## Provisioning
+
+Just run
+
+```
+$ ./run.sh
+```
+
+You can optionally specify a log level:
+
+```
+$ LOG_LEVEL=debug ./run.sh
+```
+
+## Testing
+
+```sh
+$ vagrant up --provider docker --provision
+```
+
+You should have a box provisioned using the MItamae definitions afterwards.
+
 ### Manual setup steps
 
 These are not automated (yet)
@@ -64,34 +91,12 @@ git pull origin paperclip
 - `vim +PlugInstall`
 - `vim +UpdateRemotePlugins`
 
+#### Chrome
+
+- Enable `#enable-webrtc-pipewire-capturer` in `chrome://flags`
+
 #### Other
 
 - `awscli` (needs its configuration)
 - `crowbar`
-
-### Testing
-
-- Vagrant >= 2.1.2
-- Docker >= 18.03.0-ce
-
-## Provisioning
-
-Just run
-
-```
-$ ./run.sh
-```
-
-You can optionally specify a log level:
-
-```
-$ LOG_LEVEL=debug ./run.sh
-```
-
-## Testing
-
-```sh
-$ vagrant up --provider docker --provision
-```
-
-You should have a box provisioned using the MItamae definitions afterwards.
+- `gopass`
