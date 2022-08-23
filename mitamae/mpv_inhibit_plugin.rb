@@ -25,7 +25,7 @@ execute 'make_gnome_plugin' do
 end
 
 execute 'mpv_plugin_install' do
-  command "install -m0755 -o #{node[:login_user]} -g #{node[:login_user]} #{git_dir}/bin/#{plugin_name} #{plugin_file}"
+  command "install -m0755 -o #{node[:login_user]} -g #{node[:login_user]} #{git_dir}/lib/#{plugin_name} #{plugin_file}"
   action :nothing
   user node[:login_user]
 end
