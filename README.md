@@ -100,3 +100,4 @@ git pull origin paperclip
 - `awscli` (needs its configuration)
 - `crowbar`
 - `gopass`
+- `keyring` (mutt)
