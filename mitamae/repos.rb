@@ -49,9 +49,9 @@ end
   'https://packages.microsoft.com/repos/ms-teams stable main' => 'https://packages.microsoft.com/keys/microsoft.asc',
   'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.gpg',
   "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
-  'https://cli-assets.heroku.com/apt ./' => 'https://cli-assets.heroku.com/apt/release.key',
   'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
-  'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
+  # https://github.com/cli/cli/issues/6175
+  # 'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?
@@ -94,4 +94,14 @@ Pin: release o=LP-PPA-#{ppa}
 Pin-Priority: 1001
 FILE
   end
+end
+
+
+file "/etc/apt/preferences.d/firefox-no-snap" do
+  mode '0644'
+  content <<-FILE
+Package: firefox*
+Pin: release o=Ubuntu*
+Pin-Priority: -1
+FILE
 end
