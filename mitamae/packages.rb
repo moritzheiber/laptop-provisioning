@@ -45,7 +45,6 @@ apt_packages = %w(
   terraform
   vagrant
   element-desktop
-  heroku
   terraform-ls
   gh
   jotta-cli
