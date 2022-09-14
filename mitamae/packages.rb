@@ -240,6 +240,12 @@ mcfly_install node[:mcfly_version] do
   checksum node[:mcfly_checksum]
 end
 
+tflint_install node[:tflint_version] do
+  source_url "https://github.com/terraform-linters/tflint/releases/download/v#{node[:tflint_version]}/tflint_linux_amd64.zip"
+  destination '/usr/bin/tflint'
+  checksum node[:tflint_checksum]
+end
+
 {
   'kx' => {
     version: node[:kx_version],
