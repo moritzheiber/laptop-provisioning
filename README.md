@@ -74,6 +74,8 @@ git pull origin paperclip
   - `media.navigator.mediadatadecoder_vpx_enabled` > `true`
   - `extensions.pocket.enabled` > `false`
   - `extensions.pocket.api` > ""
+  - `privacy.query_stripping.enabled` > `true`
+  - `privacy.query_stripping.enabled.pbmode` > `true`
 - Enable autoclean in Cookie AutoDelete
 - Sign into Bitwarden
 
