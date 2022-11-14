@@ -17,10 +17,12 @@ end
   package p
 end
 
+# Disabled:
+# apt-fast/stable
+
 %w(
   git-core/ppa
   mozillateam/ppa
-  apt-fast/stable
 ).each do |u|
   apt_repository u do
     ppa true
@@ -46,7 +48,9 @@ end
   'https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   'https://packages.riot.im/debian/ default main' => 'https://packages.riot.im/debian/riot-im-archive-keyring.gpg',
   'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.asc',
-  "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
+  # "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
+  # Workaround for https://github.com/hashicorp/terraform/issues/32061
+  'https://apt.releases.hashicorp.com jammy main' => 'https://apt.releases.hashicorp.com/gpg',
   'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
   # https://github.com/cli/cli/issues/6175
   # 'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
