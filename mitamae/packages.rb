@@ -194,6 +194,11 @@ end
     name: 'tfsec',
     url: "https://github.com/aquasecurity/tfsec/releases/download/v#{node[:tfsec_version]}/tfsec-linux-amd64",
     checksum: node[:tfsec_checksum]
+  },
+  {
+    name: 'hadolint',
+    url: "https://github.com/hadolint/hadolint/releases/download/v#{node[:hadolint_version]}/hadolint-Linux-x86_64",
+    checksum: node[:hadolint_checksum]
   }
 ].each do |cli|
   download cli[:name] do
