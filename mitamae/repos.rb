@@ -17,12 +17,10 @@ end
   package p
 end
 
-# Disabled:
-# apt-fast/stable
-
 %w(
   git-core/ppa
   mozillateam/ppa
+  apt-fast/stable
 ).each do |u|
   apt_repository u do
     ppa true
