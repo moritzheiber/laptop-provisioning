@@ -59,6 +59,8 @@ apt_packages = %w(
   mpv
   libmpv-dev
   net-tools
+  bmon
+  ripgrep
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -125,10 +127,6 @@ end
 
 {
   #  'mattermost-desktop' => "https://releases.mattermost.com/desktop/#{node[:mattermost_version]}/mattermost-desktop-#{node[:mattermost_version]}-linux-amd64.deb",
-  'ripgrep' => {
-    url: "https://github.com/BurntSushi/ripgrep/releases/download/#{node[:ripgrep_version]}/ripgrep_#{node[:ripgrep_version]}_amd64.deb",
-    version: node[:ripgrep_version]
-  },
   'git-delta' => {
     url: "https://github.com/dandavison/delta/releases/download/#{node[:delta_version]}/git-delta_#{node[:delta_version]}_amd64.deb",
     version: node[:delta_version]
