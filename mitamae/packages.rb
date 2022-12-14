@@ -40,6 +40,7 @@ apt_packages = %w(
   libssl-dev
   codium
   docker-ce
+  docker-compose-plugin
   vault
   packer
   terraform
