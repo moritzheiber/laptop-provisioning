@@ -14,6 +14,7 @@ include_recipe 'definitions/starship_install'
 include_recipe 'definitions/mcfly_install'
 include_recipe 'definitions/tflint_install'
 
+include_recipe 'apt'
 include_recipe 'repos'
 include_recipe 'packages'
 include_recipe 'docker'

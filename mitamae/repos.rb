@@ -1,12 +1,3 @@
-apt_conf = <<APT_CONF
-APT::Install-Recommends "false";
-APT_CONF
-
-file '/etc/apt/apt.conf.d/99custom' do
-  content apt_conf
-  mode '0644'
-end
-
 %w(
   apt-transport-https
   apt-utils
@@ -46,12 +37,9 @@ end
   'https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   'https://packages.riot.im/debian/ default main' => 'https://packages.riot.im/debian/riot-im-archive-keyring.gpg',
   'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.asc',
-  # "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
-  # Workaround for https://github.com/hashicorp/terraform/issues/32061
-  'https://apt.releases.hashicorp.com jammy main' => 'https://apt.releases.hashicorp.com/gpg',
-  'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
-  # https://github.com/cli/cli/issues/6175
-  # 'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
+  "https://apt.releases.hashicorp.com #{node[:ubuntu_release]} main" => 'https://apt.releases.hashicorp.com/gpg',
+  'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+  'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?

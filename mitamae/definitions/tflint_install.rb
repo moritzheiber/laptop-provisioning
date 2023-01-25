@@ -23,7 +23,7 @@ define :tflint_install,
   end
 
   execute 'Unzip tflint' do
-    command "unzip #{tmp_file} tflint -d #{install_dest}/"
+    command "unzip -fo #{tmp_file} tflint -d #{install_dest}/"
     not_if { installed }
   end
 

@@ -2,7 +2,7 @@ service 'apport' do
   action :disable
 end
 
-avatar_path = "/usr/local/share/avatars"
+avatar_path = '/usr/local/share/avatars'
 avatar_file = "#{avatar_path}/avatar.png"
 
 directory avatar_path do
