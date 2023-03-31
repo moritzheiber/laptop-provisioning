@@ -40,6 +40,7 @@ apt_packages = %w(
   libssl-dev
   codium
   docker-ce
+  docker-buildx-plugin
   docker-compose-plugin
   vault
   packer
