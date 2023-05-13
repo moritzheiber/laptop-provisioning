@@ -1,6 +1,6 @@
 login_user: "mheiber"
-ubuntu_release: "kinetic"
-ubuntu_release_number: "22.10"
+ubuntu_release: "lunar"
+ubuntu_release_number: "23.04"
 powerline_go_version: "1.21.0"
 powerline_go_checksum: "a99cc075cbeca751feac2675355bdf6b9142bb1bb36fa5a50d0ee5768688e286"
 ruby_version: "2.7"

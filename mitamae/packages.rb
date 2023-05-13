@@ -30,6 +30,7 @@ apt_packages = %w(
   xclip
   silversearcher-ag
   shellcheck
+  pipx
   python3-pip
   python3-dev
   ttf-mscorefonts-installer
@@ -63,6 +64,8 @@ apt_packages = %w(
   net-tools
   bmon
   ripgrep
+  python3-secretstorage
+  python3-pynvim
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -98,25 +101,17 @@ package 'golang-go'
   end
 end
 
-# Python3 pip packages installed locally
+# Python3 packages installed locally
 %w(
   keyring
-  neovim
-  SecretStorage
-  dbus-python
   flake8
-  msgpack
   python-language-server
-  wheel
   tzupdate
   streamlink
-  solo-python
 ).each do |python_p|
-  pip python_p do
-    pip_binary '/usr/bin/pip3'
-    action [:upgrade]
-    options '--user'
+  execute "pipx install #{python_p}" do
     user node[:login_user]
+    not_if "pipx list | grep -q #{python_p}"
   end
 end
 

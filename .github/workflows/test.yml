@@ -2,23 +2,22 @@ name: test
 on:
   pull_request:
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE.md'
-      - '.github/**'
+      - "README.md"
+      - "LICENSE.md"
+      - ".github/**"
     branches:
       - "*"
   push:
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE.md'
-      - '.github/**'
+      - "README.md"
+      - "LICENSE.md"
+      - ".github/**"
     branches:
       - main
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
-    if: ${{ !contains(github.event.commits[0].message, '[ci skip]') }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
