@@ -30,7 +30,7 @@ end
 
 {
   "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => 'https://download.docker.com/linux/ubuntu/gpg',
-  "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x #{node[:ubuntu_release]} main" => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+  "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x nodistro main" => 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key',
   'https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
   'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
   'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
