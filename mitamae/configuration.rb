@@ -52,9 +52,9 @@ bluetooth_config_file = '/etc/bluetooth/main.conf'
 file bluetooth_config_file do
   action :edit
   block do |content|
-    content.gsub!(/^#FastConnectable=true/, 'FastConnectable=true')
+    content.gsub!(/^#FastConnectable.?=.?(true|false)/, 'FastConnectable=true')
   end
-  only_if "grep -q '#FastConnectable=true' #{bluetooth_config_file}"
+  only_if "grep -qP '#FastConnectable.?=.?(true|false)' #{bluetooth_config_file}"
   notifies :restart, 'service[bluetooth]', :immediately
 end
 
