@@ -21,25 +21,27 @@ end
 # {
 #   "http://packages.cloud.google.com/apt cloud-sdk-#{node[:ubuntu_release]} main" => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
 #   "https://download.virtualbox.org/virtualbox/debian #{node[:ubuntu_release]} contrib" => 'https://www.virtualbox.org/download/oracle_vbox_2016.asc',
-#   "https://packages.microsoft.com/repos/azure-cli/ #{node[:ubuntu_release]} main" => 'https://packages.microsoft.com/keys/microsoft.asc',
 # }.each do |url, key|
 #   apt_repository "deb [arch=amd64] #{url}" do
 #     gpg_key key unless key.empty?
 #   end
 # end
 
+kubernetes_url = "https://pkgs.k8s.io/core:/stable:/v#{node[:kubernetes_version]}/deb"
+
 {
   "https://download.docker.com/linux/ubuntu #{node[:ubuntu_release]} #{node[:docker_release_channel]}" => 'https://download.docker.com/linux/ubuntu/gpg',
   "https://deb.nodesource.com/node_#{node[:nodejs_major_version]}.x nodistro main" => 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key',
   'https://updates.signal.org/desktop/apt xenial main' => 'https://updates.signal.org/desktop/apt/keys.asc',
-  'https://apt.kubernetes.io/ kubernetes-xenial main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
+  "#{kubernetes_url}/ /" => "#{kubernetes_url}/Release.key",
   'http://dl.google.com/linux/chrome/deb/ stable main' => 'https://dl.google.com/linux/linux_signing_key.pub',
   'https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   'https://packages.element.io/debian/ default main' => 'https://packages.element.io/debian/element-io-archive-keyring.gpg',
   'https://repo.jotta.us/debian debian main' => 'https://repo.jotta.us/public.asc',
-  "https://apt.releases.hashicorp.com jammy main" => 'https://apt.releases.hashicorp.com/gpg',
+  'https://apt.releases.hashicorp.com jammy main' => 'https://apt.releases.hashicorp.com/gpg',
   'http://packages.cloud.google.com/apt cloud-sdk main' => 'https://packages.cloud.google.com/apt/doc/apt-key.gpg',
-  'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg'
+  'https://cli.github.com/packages stable main' => 'https://cli.github.com/packages/githubcli-archive-keyring.gpg',
+  'https://packages.microsoft.com/repos/azure-cli/ jammy main' => 'https://packages.microsoft.com/keys/microsoft.asc'
 }.each do |url, key|
   apt_repository "deb [arch=amd64] #{url}" do
     gpg_key key unless key.empty?
