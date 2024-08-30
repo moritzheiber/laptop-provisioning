@@ -63,6 +63,14 @@ rm .bashrc # Will be replaced by git copy
 git pull origin paperclip
 ```
 
+#### sudo with fingerprint authentication
+
+```console
+sudo pam-auth-update
+```
+
+and select "Fingerprint authentication" in addition to the rest of the already selected methods.
+
 #### Firefox
 
 - Sign into Firefox
@@ -76,6 +84,7 @@ git pull origin paperclip
   - `extensions.pocket.api` > ""
   - `privacy.query_stripping.enabled` > `true`
   - `privacy.query_stripping.enabled.pbmode` > `true`
+  - `dom.private-attribution.submission.enabled` > `false`
 - Enable autoclean in Cookie AutoDelete
 - Sign into Bitwarden
 
