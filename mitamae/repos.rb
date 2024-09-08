@@ -78,18 +78,17 @@ end
   file "/etc/apt/preferences.d/#{ppa}-priority-1001" do
     mode '0644'
     content <<-FILE
-Package: firefox
+Package: firefox thunderbird
 Pin: release o=LP-PPA-#{ppa}
 Pin-Priority: 1001
 FILE
   end
 end
 
-
-file "/etc/apt/preferences.d/firefox-no-snap" do
+file "/etc/apt/preferences.d/mozilla-no-snap" do
   mode '0644'
   content <<-FILE
-Package: firefox*
+Package: firefox* thunderbird*
 Pin: release o=Ubuntu*
 Pin-Priority: -1
 FILE
