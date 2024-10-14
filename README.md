@@ -58,12 +58,14 @@ These are not automated (yet)
 ```console
 cd ~
 git init .
-git remote add <url-to-git-dotfile-repo>
+git remote add origin <url-to-git-dotfile-repo>
 rm .bashrc # Will be replaced by git copy
 git pull origin paperclip
 ```
 
 #### sudo with fingerprint authentication
+
+Add a fingerprint in the GNOME user account management settings. Then:
 
 ```console
 sudo pam-auth-update
@@ -74,19 +76,16 @@ and select "Fingerprint authentication" in addition to the rest of the already s
 #### Firefox
 
 - Sign into Firefox
-- Set DuckDuckGo as default search engine
 - `about:config`
   - `media.ffmpeg.vaapi.enabled` > `true`
-  - `media.ffvpx.enabled` > `false`
   - `media.rdd-vpx.enabled` > `false`
-  - `media.navigator.mediadatadecoder_vpx_enabled` > `true`
   - `extensions.pocket.enabled` > `false`
   - `extensions.pocket.api` > ""
   - `privacy.query_stripping.enabled` > `true`
   - `privacy.query_stripping.enabled.pbmode` > `true`
   - `dom.private-attribution.submission.enabled` > `false`
 - Enable autoclean in Cookie AutoDelete
-- Sign into Bitwarden
+- Sign into Bitwarden (mind the right account)
 
 #### GSConnect
 
@@ -96,19 +95,14 @@ and select "Fingerprint authentication" in addition to the rest of the already s
 #### Google Chrome
 
 - Install uBlock Origin
+- Enable `#enable-webrtc-pipewire-capturer` in `chrome://flags`
 
 #### neovim
 
 - `vim +PlugInstall`
 - `vim +UpdateRemotePlugins`
 
-#### Chrome
-
-- Enable `#enable-webrtc-pipewire-capturer` in `chrome://flags`
-
 #### Other
 
 - `awscli` (needs its configuration)
-- `crowbar`
 - `gopass`
-- `keyring` (mutt)

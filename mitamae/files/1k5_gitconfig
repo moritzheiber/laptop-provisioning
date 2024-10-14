@@ -1,0 +1,6 @@
+[user]
+  email = moritz.heiber@1komma5grad.com
+  name = Moritz Heiber
+  signingkey = E9F5CB10
+[commit]
+  gpgsign = true
