@@ -84,6 +84,8 @@ and select "Fingerprint authentication" in addition to the rest of the already s
   - `privacy.query_stripping.enabled` > `true`
   - `privacy.query_stripping.enabled.pbmode` > `true`
   - `dom.private-attribution.submission.enabled` > `false`
+  - `browser.ml.chat.enabled` > `false`
+  - `browser.ml.chat.sidebar` > `false`
 - Enable autoclean in Cookie AutoDelete
 - Sign into Bitwarden (mind the right account)
 
