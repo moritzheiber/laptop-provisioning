@@ -5,8 +5,20 @@ module GsettingsHelper
 end
 
 {
+  'org.gnome.system.location enabled': 'true',
+  'org.gnome.desktop.datetime automatic-timezone': 'true',
+  'org.gnome.desktop.interface accent-color': 'pink',
+  'org.gnome.desktop.interface clock-format': '24h',
+  'org.gnome.desktop.interface clock-show-date': 'true',
+  'org.gnome.desktop.interface clock-show-weekday': 'true',
+  'org.gnome.desktop.interface color-scheme': 'prefer-dark',
+  'org.gnome.desktop.interface enable-hot-corners': 'false',
+  'org.gnome.desktop.interface show-battery-percentage': 'true',
+  'org.gnome.shell.ubuntu startup-sound': '',
   'org.gnome.nm-applet disable-disconnected-notifications': 'true',
   'org.gnome.nm-applet disable-connected-notifications': 'true',
+  'org.gnome.settings-daemon.plugins.color night-light-enabled': 'true',
+  'org.gnome.settings-daemon.plugins.color night-light-schedule-automatic': 'true',
   'org.gnome.shell.extensions.dash-to-dock autohide': 'false',
   'org.gnome.shell.extensions.dash-to-dock dock-fixed': 'false',
   'org.gnome.shell.extensions.dash-to-dock intellihide': 'false',
