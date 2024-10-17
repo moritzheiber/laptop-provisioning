@@ -1,6 +1,6 @@
 login_user: "mheiber"
-ubuntu_release: "noble"
-ubuntu_release_number: "24.04"
+ubuntu_release: "oracular"
+ubuntu_release_number: "24.10"
 kubernetes_version: "1.29"
 powerline_go_version: "1.21.0"
 powerline_go_checksum: "a99cc075cbeca751feac2675355bdf6b9142bb1bb36fa5a50d0ee5768688e286"
