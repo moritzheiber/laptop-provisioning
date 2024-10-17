@@ -131,6 +131,10 @@ end
   'gopass' => {
     url: "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass_#{node[:gopass_version]}_linux_amd64.deb",
     version: node[:gopass_version]
+  },
+  'rbw' => {
+    url: "https://git.tozt.net/rbw/releases/deb/rbw_#{node[:rbw_version]}_amd64.deb",
+    version: node[:rbw_version]
   }
 }.each do |name, vars|
   apt name do

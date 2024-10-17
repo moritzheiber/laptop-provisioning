@@ -53,6 +53,13 @@ You should have a box provisioned using the MItamae definitions afterwards.
 
 These are not automated (yet)
 
+#### rbw
+
+```console
+rbw config set email <email-address-for-bitwarden>
+rbw config set base_url <base-url-for-bitwarden-server>
+```
+
 #### dotfiles
 
 ```console
