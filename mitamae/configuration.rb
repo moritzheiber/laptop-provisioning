@@ -53,6 +53,22 @@ prefix=/home/#{node[:login_user]}/.local/npm
   FILE
 end
 
+wireplumber_dir = "/home/#{node[:login_user]}/.config/wireplumber/main.lua.d"
+
+directory wireplumber_dir do
+  owner node[:login_user]
+  group node[:login_user]
+  mode '0755'
+end
+
+remote_file "#{wireplumber_dir}/51-focusrite.lua" do
+  source 'files/51-focusrite.lua'
+  mode '0644'
+  owner node[:login_user]
+  group node[:login_user]
+  subscribes :create, "directory[#{wireplumber_dir}]", :immediately
+end
+
 bluetooth_config_file = '/etc/bluetooth/main.conf'
 file bluetooth_config_file do
   action :edit

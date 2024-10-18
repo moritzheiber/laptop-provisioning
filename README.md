@@ -32,13 +32,13 @@ $ git submodule update --recursive --remote
 Just run
 
 ```
-$ ./run.sh
+$ ./run
 ```
 
 You can optionally specify a log level:
 
 ```
-$ LOG_LEVEL=debug ./run.sh
+$ LOG_LEVEL=debug ./run
 ```
 
 ## Testing
@@ -58,6 +58,7 @@ These are not automated (yet)
 ```console
 rbw config set email <email-address-for-bitwarden>
 rbw config set base_url <base-url-for-bitwarden-server>
+rbw login
 ```
 
 #### dotfiles
