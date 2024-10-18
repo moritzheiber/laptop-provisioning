@@ -34,6 +34,7 @@ end
     mode '0755'
     owner node[:login_user]
     group node[:login_user]
+    user node[:login_user]
   end
 
   remote_file "/home/#{node[:login_user]}/Code/#{dir}/gitconfig" do
@@ -59,6 +60,7 @@ directory wireplumber_dir do
   owner node[:login_user]
   group node[:login_user]
   mode '0755'
+  user node[:login_user]
 end
 
 remote_file "#{wireplumber_dir}/51-focusrite.lua" do
