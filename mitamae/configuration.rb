@@ -84,3 +84,8 @@ end
 service 'bluetooth' do
   action :nothing
 end
+
+execute 'enable fingerprint auth' do
+  command 'pam-auth-update --enable fprintd'
+  not_if 'grep -q fprintd /etc/pam.d/common-auth'
+end

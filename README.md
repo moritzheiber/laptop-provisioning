@@ -73,13 +73,7 @@ git pull origin paperclip
 
 #### sudo with fingerprint authentication
 
-Add a fingerprint in the GNOME user account management settings. Then:
-
-```console
-sudo pam-auth-update
-```
-
-and select "Fingerprint authentication" in addition to the rest of the already selected methods.
+Add a fingerprint in the GNOME user account management settings.
 
 #### Firefox
 
