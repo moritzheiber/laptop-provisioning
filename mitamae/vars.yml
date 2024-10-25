@@ -19,7 +19,6 @@ aws_iam_authenticator_version: "0.4.0"
 aws_iam_authenticator_checksum: "9744923781cca33dba3f48e1b8443af4d7f158748bd105134aaa68252da3b907"
 nodejs_major_version: "21"
 gopass_version: "1.14.4"
-delta_version: "0.11.3"
 
 # Other random tooling
 go_chromecast_version: "0.0.14"

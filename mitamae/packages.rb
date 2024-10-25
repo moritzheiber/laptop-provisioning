@@ -66,6 +66,7 @@ apt_packages = %w(
   ripgrep
   python3-secretstorage
   python3-pynvim
+  git-delta
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do
@@ -123,11 +124,6 @@ execute 'make_libsecret_helper' do
 end
 
 {
-  #  'mattermost-desktop' => "https://releases.mattermost.com/desktop/#{node[:mattermost_version]}/mattermost-desktop-#{node[:mattermost_version]}-linux-amd64.deb",
-  'git-delta' => {
-    url: "https://github.com/dandavison/delta/releases/download/#{node[:delta_version]}/git-delta_#{node[:delta_version]}_amd64.deb",
-    version: node[:delta_version]
-  },
   'gopass' => {
     url: "https://github.com/gopasspw/gopass/releases/download/v#{node[:gopass_version]}/gopass_#{node[:gopass_version]}_linux_amd64.deb",
     version: node[:gopass_version]
