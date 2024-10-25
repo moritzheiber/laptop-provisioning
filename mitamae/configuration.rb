@@ -54,7 +54,7 @@ prefix=/home/#{node[:login_user]}/.local/npm
   FILE
 end
 
-wireplumber_dir = "/home/#{node[:login_user]}/.config/wireplumber/main.lua.d"
+wireplumber_dir = "/home/#{node[:login_user]}/.config/wireplumber/wireplumber.conf.d"
 
 directory wireplumber_dir do
   owner node[:login_user]
@@ -63,8 +63,8 @@ directory wireplumber_dir do
   user node[:login_user]
 end
 
-remote_file "#{wireplumber_dir}/51-focusrite.lua" do
-  source 'files/51-focusrite.lua'
+remote_file "#{wireplumber_dir}/51-focusrite.conf" do
+  source 'files/51-focusrite.conf'
   mode '0644'
   owner node[:login_user]
   group node[:login_user]
