@@ -14,6 +14,14 @@ CONTENT
   notifies :restart, 'service[udev]', :immediately
 end
 
+template '/etc/udev/rules.d/99-enable-write-access-logi-dock.rules' do
+  mode '0644'
+  content <<CONTENT
+KERNEL=="hidraw*",SUBSYSTEM=="hidraw",ATTRS{idVendor}=="046d",ATTRS{idProduct}=="0af4",MODE="0666"
+CONTENT
+  notifies :restart, 'service[udev]', :immediately
+end
+
 service 'udev' do
   action :nothing
 end
