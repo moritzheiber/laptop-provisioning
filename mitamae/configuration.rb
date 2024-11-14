@@ -89,3 +89,25 @@ execute 'enable fingerprint auth' do
   command 'pam-auth-update --enable fprintd'
   not_if 'grep -q fprintd /etc/pam.d/common-auth'
 end
+
+geoclue_confd_dir = '/etc/geoclue/conf.d'
+
+directory geoclue_confd_dir do
+  mode '0755'
+  owner 'root'
+  group 'root'
+end
+
+template "#{geoclue_confd_dir}/99-beacondb.conf" do
+  mode '0644'
+  content <<CONTENT
+[wifi]
+enabled = true
+url = https://api.beacondb.net/v1/geolocate
+CONTENT
+  notifies :restart, 'service[geoclue]', :immediately
+end
+
+service 'geoclue' do
+  action :nothing
+end
