@@ -2,17 +2,21 @@
 
 set -Eeux -o pipefail
 
+declare -a services=("udev" "geoclue")
+
 _handle_restart() {
   local value
   value="${*}"
 
-  if [ "${value}" == "udev" ] ; then
-    echo "Would've restarted udev using systemd"
-    exit 0
-  else
-    echo "I don't mock the service you're trying to restart!"
-    exit 1
-  fi
+  for service in "${services[@]}" ; do
+    if [ "${value}" == "${service}" ] ; then
+      echo "Would've restarted ${service} using systemd"
+      exit 0
+    fi
+  done
+
+  echo "I don't mock the service you're trying to restart!"
+  exit 1
 }
 
 CMD=${1:-}
