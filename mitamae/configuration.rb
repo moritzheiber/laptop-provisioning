@@ -111,3 +111,16 @@ end
 service 'geoclue' do
   action :nothing
 end
+
+# This is only relevant for systems with ZFS
+# You would probably want to set this dynamically using node[]
+# but I cannot be bothered right now
+size_in_gb = 4
+size_of_arc_cache = size_in_gb * 1024 * 1024 * 1024
+
+template '/etc/modprobe.d/zfs.conf' do
+  mode '0644'
+  content <<CONTENT
+options zfs zfs_arc_max=#{size_of_arc_cache}
+CONTENT
+end
