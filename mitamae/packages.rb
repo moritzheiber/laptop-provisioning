@@ -67,6 +67,7 @@ apt_packages = %w(
   python3-secretstorage
   python3-pynvim
   git-delta
+  firefox
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do

@@ -8,7 +8,7 @@ SCRIPT
 
 Vagrant.configure('2') do |config|
   config.vm.provider 'docker' do |d|
-    d.image = 'ghcr.io/moritzheiber/vagrant:noble'
+    d.image = 'ghcr.io/moritzheiber/vagrant:oracular'
     d.has_ssh = true
   end
 
