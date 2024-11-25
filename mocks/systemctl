@@ -2,7 +2,7 @@
 
 set -Eeux -o pipefail
 
-declare -a services=("udev" "geoclue" "apparmor")
+declare -a services=("udev" "geoclue" "apparmor" "wpa_supplicant")
 
 _handle_restart() {
   local value
