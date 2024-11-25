@@ -63,8 +63,8 @@ directory wireplumber_dir do
   user node[:login_user]
 end
 
-remote_file "#{wireplumber_dir}/51-focusrite.conf" do
-  source 'files/51-focusrite.conf'
+remote_file "#{wireplumber_dir}/99-usb-audio.conf" do
+  source 'files/99-usb-audio.conf'
   mode '0644'
   owner node[:login_user]
   group node[:login_user]
@@ -123,4 +123,24 @@ template '/etc/modprobe.d/zfs.conf' do
   content <<CONTENT
 options zfs zfs_arc_max=#{size_of_arc_cache}
 CONTENT
+end
+
+# Shut up, wpa_supplicant
+wpa_supplicant_override_dir = '/etc/systemd/system/wpa_supplicant.service.d'
+directory wpa_supplicant_override_dir do
+  owner 'root'
+  group 'root'
+  mode '0755'
+end
+
+remote_file "#{wpa_supplicant_override_dir}/override.conf" do
+  source 'files/wpa_supplicant_override.conf'
+  mode '0644'
+  owner 'root'
+  group 'root'
+  notifies :restart, 'service[wpa_supplicant]', :immediately
+end
+
+service 'wpa_supplicant' do
+  action :nothing
 end
