@@ -98,12 +98,12 @@ directory geoclue_confd_dir do
   group 'root'
 end
 
-template "#{geoclue_confd_dir}/99-beacondb.conf" do
+template "#{geoclue_confd_dir}/99-positon.conf" do
   mode '0644'
   content <<CONTENT
 [wifi]
 enabled = true
-url = https://api.beacondb.net/v1/geolocate
+url = https://api.positon.xyz/v1/geolocate?key=56aba903-ae67-4f26-919b-15288b44bda9
 CONTENT
   notifies :restart, 'service[geoclue]', :immediately
 end
