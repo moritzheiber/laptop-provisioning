@@ -68,6 +68,8 @@ apt_packages = %w(
   python3-pynvim
   git-delta
   firefox
+  libcamera-v4l2
+  libcamera-ipa
 )
 
 execute "VERBOSE_OUTPUT=y DEBIAN_FRONTEND=noninteractive apt-fast install -y --no-install-recommends #{apt_packages.join(' ')}" do

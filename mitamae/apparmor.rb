@@ -6,6 +6,12 @@ apparmor_content = <<~APPARMOR
 /sys/devices/**/hidraw/hidraw*/uevent r,
 /dev/hidraw* rw,
 
+# Launching URLs from browser
+/usr/lib/**/gio-launch-desktop ixr,
+/usr/bin/env ixr,
+/usr/bin/snap ixr,
+/run/snapd.socket wr,
+
 @{PROC}/[0-9]*/oom_score_adj rw,
 @{PROC}/[0-9]*/cgroup r,
 APPARMOR

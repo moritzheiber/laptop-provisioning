@@ -48,15 +48,6 @@ kubernetes_url = "https://pkgs.k8s.io/core:/stable:/v#{node[:kubernetes_version]
   end
 end
 
-# Remove the automatically installed repositories
-%w[
-  /etc/apt/sources.list.d/slack.list
-].each do |f|
-  file f do
-    action :delete
-  end
-end
-
 remote_file '/etc/apt/preferences.d/yubico-stable-400' do
   source 'files/yubico-stable-400'
   mode '0644'
