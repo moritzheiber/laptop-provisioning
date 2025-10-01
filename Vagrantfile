@@ -1,4 +1,4 @@
-initial_user = 'mheiber'
+initial_user = 'moritzheiber'
 provisioning_script = <<SCRIPT
 apt update -qq &&
 apt install -y wget gpg-agent &&
@@ -8,7 +8,7 @@ SCRIPT
 
 Vagrant.configure('2') do |config|
   config.vm.provider 'docker' do |d|
-    d.image = 'ghcr.io/moritzheiber/vagrant:oracular'
+    d.image = 'ghcr.io/moritzheiber/vagrant:noble'
     d.has_ssh = true
   end
 
@@ -28,10 +28,9 @@ Vagrant.configure('2') do |config|
                       inline: 'install -m0755 -o root -g root /tmp/gsettings /usr/local/bin/gsettings',
                       privileged: true
   config.vm.provision 'shell',
-                      inline: 'cd /vagrant && ./run',
+                      inline: 'cd /vagrant && ./nucleus apply -c ./nucleus.toml -l debug',
                       privileged: true,
                       env: {
-                        'LOG_LEVEL' => 'debug',
                         'DEBIAN_FRONTEND' => 'noninteractive'
                       }
 end

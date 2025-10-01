@@ -1,0 +1,214 @@
+ubuntu_version = "24.04"
+ubuntu_suite = "noble"
+
+ppas = [
+  "git-core/ppa",
+  "mozillateam/ppa"
+]
+
+[[files]]
+name = "proposed-priority"
+content = """
+Package: *
+Pin: release a=noble-proposed
+Pin-Priority: 400
+"""
+target = "/etc/apt/preferences.d/proposed-priority-400"
+mode = "0644"
+
+[[files]]
+name = "mozilla-ppa"
+content = """
+Package: firefox thunderbird
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+"""
+target = "/etc/apt/preferences.d/mozillateam-priority-1001"
+mode = "0644"
+
+[[files]]
+name = "mozilla-security"
+content = """
+Package: firefox thunderbird
+Pin: release o=LP-PPA-ubuntu-mozilla-security
+Pin-Priority: 1001
+"""
+target = "/etc/apt/preferences.d/ubuntu-mozilla-security-priority-1001"
+mode = "0644"
+
+[[files]]
+name = "mozilla-no-snap"
+content = """
+Package: firefox* thunderbird*
+Pin: release o=Ubuntu*
+Pin-Priority: -1
+"""
+target = "/etc/apt/preferences.d/mozilla-no-snap"
+mode = "0644"
+
+[[files]]
+name = "no-install-recommends"
+content = """
+APT::Install-Recommends "false";
+APT::Get::Always-Include-Phased-Updates "true";
+"""
+target = "/etc/apt/apt.conf.d/99custom"
+mode = "0644"
+
+[[files]]
+name = "user-avatar"
+source = "files/avatar.png"
+target = "/usr/local/share/avatars/avatar.png"
+mode = "0644"
+
+[[files]]
+name = "npmrc"
+content = """
+prefix=/home/moritzheiber/.local/npm
+"""
+target = "/home/moritzheiber/.npmrc"
+owner = "moritzheiber"
+group = "moritzheiber"
+mode = "0644"
+
+[[packages]]
+name = "ruby"
+[[packages]]
+name = "ruby-dev"
+[[packages]]
+name = "build-essential"
+[[packages]]
+name = "git"
+[[packages]]
+name = "urlscan"
+[[packages]]
+name = "mutt"
+[[packages]]
+name = "gnupg"
+[[packages]]
+name = "unzip"
+[[packages]]
+name = "dkms"
+[[packages]]
+name = "libdbus-glib-1-dev"
+[[packages]]
+name = "whois"
+[[packages]]
+name = "htop"
+[[packages]]
+name = "i965-va-driver"
+[[packages]]
+name = "libvdpau-va-gl1"
+[[packages]]
+name = "jq"
+[[packages]]
+name = "wireguard"
+[[packages]]
+name = "unrar"
+[[packages]]
+name = "w3m"
+[[packages]]
+name = "gimp"
+[[packages]]
+name = "pinentry-curses"
+[[packages]]
+name = "libsecret-1-dev"
+[[packages]]
+name = "nodejs"
+[[packages]]
+name = "mosh"
+[[packages]]
+name = "signal-desktop"
+[[packages]]
+name = "xclip"
+[[packages]]
+name = "silversearcher-ag"
+[[packages]]
+name = "shellcheck"
+[[packages]]
+name = "python3-pip"
+[[packages]]
+name = "python3-dev"
+[[packages]]
+name = "ttf-mscorefonts-installer"
+[[packages]]
+name = "fonts-font-awesome"
+[[packages]]
+name = "fonts-powerline"
+[[packages]]
+name = "libpam-u2f"
+[[packages]]
+name = "neovim"
+[[packages]]
+name = "libssl-dev"
+[[packages]]
+name = "code"
+[[packages]]
+name = "docker-ce"
+[[packages]]
+name = "gh"
+[[packages]]
+name = "gstreamer1.0-plugins-bad"
+[[packages]]
+name = "totem"
+[[packages]]
+name = "heif-gdk-pixbuf"
+[[packages]]
+name = "heif-thumbnailer"
+[[packages]]
+name = "xdg-desktop-portal-gnome"
+[[packages]]
+name = "ripgrep"
+[[packages]]
+name = "git-delta"
+[[packages]]
+name = "firefox"
+[[package]]
+name = "golang-go"
+
+[[package]]
+name = "thunderbird"
+state = "uninstalled"
+
+[[package]]
+name = "pidgin"
+state = "uninstalled"
+
+[[package]]
+name = "apport-gtk"
+state = "uninstalled"
+
+[repositories.docker]
+uris = ["https://download.docker.com/linux/ubuntu"]
+signed_by = ["https://download.docker.com/linux/ubuntu/gpg"]
+suites = ["noble"]
+components = ["stable"]
+architectures = ["amd64"]
+
+[repositories.signal]
+uris = ["https://updates.signal.org/desktop/apt"]
+suites = ["xenial"]
+signed_by = ["https://updates.signal.org/desktop/apt/keys.asc"]
+components = ["main"]
+architectures = ["amd64"]
+
+[repositories.hashicorp]
+uris = ["https://apt.releases.hashicorp.com"]
+suites = ["jammy"]
+signed_by = ["https://apt.releases.hashicorp.com/gpg"]
+components = ["main"]
+architectures = ["amd64"]
+
+[repositories.gh]
+uris = ["https://cli.github.com/packages"]
+suites = ["stable"]
+signed_by = ["https://cli.github.com/packages/githubcli-archive-keyring.gpg"]
+components = ["main"]
+architectures = ["amd64"]
+
+[repositories.vscode]
+uris = ["https://packages.microsoft.com/repos/code"]
+suites = ["stable"]
+signed_by = ["https://packages.microsoft.com/keys/microsoft.asc"]
+components = ["main"]
+architectures = ["amd64"]

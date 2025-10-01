@@ -1,53 +1,36 @@
 # Laptop Provisioning ![test](https://github.com/moritzheiber/laptop-provisioning/workflows/test/badge.svg)
 
-This is a set of [mitamae](https://github.com/itamae-kitchen/mitamae) recipes to configure my Ubuntu-based laptop (currently Ubuntu "Noble Numbat" 24.04).
+This the repository for my [Nucleus](https://github.com/moritzheiber/nucleus) configuration that's provisioning my workplace laptop, running Ubuntu LTS (currently Ubuntu "Noble Numbat" 24.04.3 LTS).
 
 Should you have questions/concerns/ideas for improvements just send me a message, hit me up on [Mastodon](https://social.heiber.im/@moritz) or submit a PR. Thanks!
 
-_Note: Prior to using mitamae recipes this repository contained a set of Ansible playbooks. They are archived in the `ansible` branch._
-
 ## Prerequisites
 
-A Debian/Ubuntu-based machine. It's not tested on any other operating system.
-
-You will also want to fetch all the required git submodules:
-
-```
-$ git submodule update --init --recursive
-```
-
-Be sure to update your local submodule definitions from time to time, should you want to stay "current":
-
-```
-$ git submodule update --recursive --remote
-```
+- A Debian/Ubuntu-based machine. They will not work anywhere else.
+- The latest release of [`nucleus`](https://github.com/moritzheiber/nucleus).
 
 ### Testing
 
-- Vagrant >= 2.1.2
-- Docker >= 18.03.0-ce
+- Vagrant >= 2.4.9
+- Docker >= 28.4.0-ce
 
 ## Provisioning
 
-Just run
-
 ```
-$ ./run
+$ nucleus -c ./nucleus.toml
 ```
 
 You can optionally specify a log level:
 
 ```
-$ LOG_LEVEL=debug ./run
+$ nucleus -c ./nucleus.toml -l debug
 ```
 
 ## Testing
 
 ```sh
-$ vagrant up --provider docker --provision
+$ vagrant up
 ```
-
-You should have a box provisioned using the MItamae definitions afterwards.
 
 ### Manual setup steps
 
@@ -91,11 +74,6 @@ Add a fingerprint in the GNOME user account management settings.
 - Enable autoclean in Cookie AutoDelete
 - Sign into Bitwarden (mind the right account)
 
-#### GSConnect
-
-- Pair device(s)
-- Setting are under `gapplication action org.gnome.Shell.Extensions.GSConnect preferences`
-
 #### Google Chrome
 
 - Install uBlock Origin
@@ -105,8 +83,3 @@ Add a fingerprint in the GNOME user account management settings.
 
 - `vim +PlugInstall`
 - `vim +UpdateRemotePlugins`
-
-#### Other
-
-- `awscli` (needs its configuration)
-- `gopass`
