@@ -56,21 +56,10 @@ git pull origin paperclip
 
 #### sudo with fingerprint authentication
 
-Add a fingerprint in the GNOME user account management settings.
+- Add a fingerprint in the GNOME user account management settings.
 
 #### Firefox
 
-- Sign into Firefox
-- `about:config`
-  - `media.ffmpeg.vaapi.enabled` > `true`
-  - `media.rdd-vpx.enabled` > `false`
-  - `extensions.pocket.enabled` > `false`
-  - `extensions.pocket.api` > ""
-  - `privacy.query_stripping.enabled` > `true`
-  - `privacy.query_stripping.enabled.pbmode` > `true`
-  - `dom.private-attribution.submission.enabled` > `false`
-  - `browser.ml.chat.enabled` > `false`
-  - `browser.ml.chat.sidebar` > `false`
 - Enable autoclean in Cookie AutoDelete
 - Sign into Bitwarden (mind the right account)
 

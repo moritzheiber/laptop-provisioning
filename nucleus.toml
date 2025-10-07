@@ -1,10 +1,37 @@
 ubuntu_version = "24.04"
 ubuntu_suite = "noble"
+username = "moritzheiber"
+gsettings_user = "{username}"
 
 ppas = [
   "git-core/ppa",
   "mozillateam/ppa"
 ]
+
+[remote_files.mcfly]
+version = "0.9.3"
+url = "https://github.com/cantino/mcfly/releases/download/v{.version}/mcfly-v{.version}-x86_64-unknown-linux-musl.tar.gz"
+checksum = "be0d3c1e0253189a5d834767231c2a4d206f077f4184699ac7069482ed9c6453"
+target = "/usr/bin/mcfly"
+artifact = "mcfly"
+
+[[files]]
+name = "firefox-global-policies"
+source = "files/firefox_policies.js" 
+target = "/etc/firefox/policies/policies.json"
+mode = "0644"
+
+[[files]]
+name = "microsoft-repo-preferences"
+regexp = "repo_reenable_on_distupgrade=\"true\""
+content = "repo_reenable_on_distupgrade=\"false\""
+target = "/etc/default/microsoft-edge"
+
+[[files]]
+name = "streamdeck-access"
+source = "files/streamdeck_rules_udev"
+target = "/etc/udev/rules.d/60-streamdeck.rules"
+mode = "0644"
 
 [[files]]
 name = "proposed-priority"
@@ -62,121 +89,71 @@ target = "/usr/local/share/avatars/avatar.png"
 mode = "0644"
 
 [[files]]
-name = "npmrc"
-content = """
-prefix=/home/moritzheiber/.local/npm
-"""
-target = "/home/moritzheiber/.npmrc"
-owner = "moritzheiber"
-group = "moritzheiber"
+name = "1password-enable-native-messaging-host"
+source = "files/firefox_local_apparmor"
+target = "/etc/apparmor.d/local/usr.bin.firefox"
 mode = "0644"
 
-[[packages]]
-name = "ruby"
-[[packages]]
-name = "ruby-dev"
-[[packages]]
-name = "build-essential"
-[[packages]]
-name = "git"
-[[packages]]
-name = "urlscan"
-[[packages]]
-name = "mutt"
-[[packages]]
-name = "gnupg"
-[[packages]]
-name = "unzip"
-[[packages]]
-name = "dkms"
-[[packages]]
-name = "libdbus-glib-1-dev"
-[[packages]]
-name = "whois"
-[[packages]]
-name = "htop"
-[[packages]]
-name = "i965-va-driver"
-[[packages]]
-name = "libvdpau-va-gl1"
-[[packages]]
-name = "jq"
-[[packages]]
-name = "wireguard"
-[[packages]]
-name = "unrar"
-[[packages]]
-name = "w3m"
-[[packages]]
-name = "gimp"
-[[packages]]
-name = "pinentry-curses"
-[[packages]]
-name = "libsecret-1-dev"
-[[packages]]
-name = "nodejs"
-[[packages]]
-name = "mosh"
-[[packages]]
-name = "signal-desktop"
-[[packages]]
-name = "xclip"
-[[packages]]
-name = "silversearcher-ag"
-[[packages]]
-name = "shellcheck"
-[[packages]]
-name = "python3-pip"
-[[packages]]
-name = "python3-dev"
-[[packages]]
-name = "ttf-mscorefonts-installer"
-[[packages]]
-name = "fonts-font-awesome"
-[[packages]]
-name = "fonts-powerline"
-[[packages]]
-name = "libpam-u2f"
-[[packages]]
-name = "neovim"
-[[packages]]
-name = "libssl-dev"
-[[packages]]
-name = "code"
-[[packages]]
-name = "docker-ce"
-[[packages]]
-name = "gh"
-[[packages]]
-name = "gstreamer1.0-plugins-bad"
-[[packages]]
-name = "totem"
-[[packages]]
-name = "heif-gdk-pixbuf"
-[[packages]]
-name = "heif-thumbnailer"
-[[packages]]
-name = "xdg-desktop-portal-gnome"
-[[packages]]
-name = "ripgrep"
-[[packages]]
-name = "git-delta"
-[[packages]]
-name = "firefox"
-[[package]]
-name = "golang-go"
+[[files]]
+name = "npmrc"
+content = """
+prefix=/home/{username}/.local/npm
+"""
+target = "/home/{username}/.npmrc"
+owner = "{username}"
+group = "{username}"
+mode = "0644"
 
-[[package]]
-name = "thunderbird"
-state = "uninstalled"
-
-[[package]]
-name = "pidgin"
-state = "uninstalled"
-
-[[package]]
-name = "apport-gtk"
-state = "uninstalled"
+[packages]
+ruby = "latest"
+ruby-dev = "latest"
+build-essential = "latest"
+git = "latest"
+urlscan = "latest"
+mutt = "latest"
+gnupg = "latest"
+unzip = "latest"
+dkms = "latest"
+"libdbus-glib-1-dev" = "latest"
+whois = "latest"
+htop = "latest"
+"i965-va-driver" = "latest"
+"libvdpau-va-gl1" = "latest"
+jq = "latest"
+wireguard = "latest"
+unrar = "latest"
+w3m = "latest"
+gimp = "latest"
+pinentry-curses = "latest"
+"libsecret-1-dev" = "latest"
+mosh = "latest"
+signal-desktop = "latest"
+wl-clipboard = "latest"
+silversearcher-ag = "latest"
+shellcheck = "latest"
+python3-pip = "latest"
+python3-dev = "latest"
+ttf-mscorefonts-installer = "latest"
+fonts-font-awesome = "latest"
+fonts-powerline = "latest"
+libpam-u2f = "latest"
+neovim = "latest"
+libssl-dev = "latest"
+code = "latest"
+docker-ce = "latest"
+gh = "latest"
+"gstreamer1.0-plugins-bad" = "latest"
+totem = "latest"
+heif-gdk-pixbuf = "latest"
+heif-thumbnailer = "latest"
+xdg-desktop-portal-gnome = "latest"
+ripgrep = "latest"
+git-delta = "latest"
+firefox = "latest"
+golang-go = { state = "uninstalled" }
+thunderbird =  { state = "uninstalled" }
+pidgin =  { state = "uninstalled" }
+apport-gtk =  { state = "uninstalled" }
 
 [repositories.docker]
 uris = ["https://download.docker.com/linux/ubuntu"]
@@ -206,9 +183,49 @@ signed_by = ["https://cli.github.com/packages/githubcli-archive-keyring.gpg"]
 components = ["main"]
 architectures = ["amd64"]
 
-[repositories.vscode]
-uris = ["https://packages.microsoft.com/repos/code"]
+[repositories.microsoft-edge-vscode]
+uris = [
+  "https://packages.microsoft.com/repos/code",
+  "https://packages.microsoft.com/repos/edge"
+]
 suites = ["stable"]
 signed_by = ["https://packages.microsoft.com/keys/microsoft.asc"]
 components = ["main"]
 architectures = ["amd64"]
+
+[gsettings]
+enabled = { schema = "org.gnome.system.location", value = "true" }
+automatic-timezone = { schema = "org.gnome.desktop.datetime", value = "true" }
+clock-format = { schema = "org.gnome.desktop.interface", value = "24h" }
+clock-show-date = { schema = "org.gnome.desktop.interface", value = "true" }
+clock-show-weekday = { schema = "org.gnome.desktop.interface", value = "true" }
+color-scheme = { schema = "org.gnome.desktop.interface", value = "prefer-dark" }
+enable-hot-corners = { schema = "org.gnome.desktop.interface", value = "false" }
+show-battery-percentage = { schema = "org.gnome.desktop.interface", value = "true" }
+disable-disconnected-notifications = { schema = "org.gnome.nm-applet", value = "true" }
+disable-connected-notifications = { schema = "org.gnome.nm-applet", value = "true" }
+night-light-enabled = { schema = "org.gnome.settings-daemon.plugins.color", value = "true" }
+night-light-schedule-automatic = { schema = "org.gnome.settings-daemon.plugins.color", value = "true" }
+autohide = { schema = "org.gnome.shell.extensions.dash-to-dock", value = "false" }
+dock-fixed = { schema = "org.gnome.shell.extensions.dash-to-dock", value = "false" }
+intellihide = { schema = "org.gnome.shell.extensions.dash-to-dock", value = "false" }
+dash-max-icon-size = { schema = "org.gnome.shell.extensions.dash-to-dock", value = "32" }
+preferred-monitor = { schema = "org.gnome.shell.extensions.dash-to-dock", value = "0" }
+per-window = { schema = "org.gnome.desktop.input-sources", value = "false" }
+sources = { schema = "org.gnome.desktop.input-sources", value = "[('xkb', 'us')]" }
+xkb-options = { schema = "org.gnome.desktop.input-sources", value = "['compose:ralt']" }
+natural-scroll = { schema = "org.gnome.desktop.peripherals.mouse", value = "true" }
+two-finger-scrolling-enabled = { schema = "org.gnome.desktop.peripherals.touchpad", value = "true" }
+disable-microphone = { schema = "org.gnome.desktop.privacy", value = "false" }
+report-technical-problems = { schema = "org.gnome.desktop.privacy", value = "false" }
+click-policy = { schema = "org.gnome.nautilus.preferences", value = "single" }
+default-folder-viewer = { schema = "org.gnome.nautilus.preferences", value = "icon-view" }
+search-filter-time-type = { schema = "org.gnome.nautilus.preferences", value = "last_modified" }
+show-delete-permanently = { schema = "org.gnome.nautilus.preferences", value = "true" }
+custom-keybindings = { schema = "org.gnome.settings-daemon.plugins.media-keys", value = "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']" }
+logout = { schema = "org.gnome.settings-daemon.plugins.media-keys", value = "@as []" }
+terminal = { schema = "org.gnome.settings-daemon.plugins.media-keys", value = "['<Super>Return']" }
+binding = { schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding", path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", value = "<Primary><Alt>Delete" }
+command = { schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding", path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", value = "systemctl suspend" }
+name = { schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding", path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", value = "Suspend" }
+show-home = { schema = "org.gnome.shell.extensions.ding", value = "false" }

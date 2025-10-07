@@ -1,0 +1,26 @@
+# USB device access is necessary for FIDO2 hardware keys to work
+/sys/class/ r,
+/sys/bus/ r,
+/sys/class/hidraw/ r,
+/run/udev/data/c24{1,7,9}:* r,
+/sys/devices/**/hidraw/hidraw*/uevent r,
+/dev/hidraw* rw,
+
+# Launching URLs from browser
+/usr/lib/**/gio-launch-desktop ixr,
+/usr/bin/env ixr,
+/usr/bin/snap ixr,
+/run/snapd.socket wr,
+
+# Firefox wants to update the mime database for files it manages
+/usr/bin/update-mime-database ixr,
+
+# Necessary to have 1Password's extension "talk" to the native app running vian NativeMessagingHosts.
+# Reference: ~/.mozilla/native-messaging-hosts/com.1password.1password.json
+owner @{HOME}/.mozilla/native-messaging-hosts/com.1password.1password.json r,
+owner @{run}/user/@{uid}/1Password-BrowserSupport.sock rw,
+/opt/1Password/1Password-BrowserSupport ixr,
+
+# Noise but required
+@{PROC}/[0-9]*/oom_score_adj rw,
+@{PROC}/[0-9]*/cgroup r,
