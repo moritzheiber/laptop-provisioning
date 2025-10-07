@@ -14,6 +14,7 @@ url = "https://github.com/cantino/mcfly/releases/download/v{.version}/mcfly-v{.v
 checksum = "be0d3c1e0253189a5d834767231c2a4d206f077f4184699ac7069482ed9c6453"
 target = "/usr/bin/mcfly"
 artifact = "mcfly"
+check = ["bash", "-c", "mcfly --version | grep -q 0.9.3"]
 
 [[files]]
 name = "firefox-global-policies"
