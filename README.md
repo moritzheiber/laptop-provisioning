@@ -72,3 +72,9 @@ git pull origin paperclip
 
 - `vim +PlugInstall`
 - `vim +UpdateRemotePlugins`
+
+### Virtualization with KVM (until this is automated)
+
+```console
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst spice-client-gtk gir1.2-spiceclientgtk-3.0 virt-manager ovmf swtpm-tools swtpm qemu-system-modules-* libvirglrenderer1 qemu-utils virtiofsd
+```
