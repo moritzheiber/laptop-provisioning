@@ -56,5 +56,8 @@
         "Wikipedia (de)"
       ]
    }
+   "GenerativeAI": {
+     "Enabled": false
+   }
  }
 }

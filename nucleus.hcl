@@ -1,7 +1,7 @@
 variables {
-  ubuntu_version = "24.04"
-  ubuntu_suite   = "noble"
-  username       = "moritzheiber"
+  ubuntu_version = "26.04"
+  ubuntu_suite   = "resolute"
+  username       = "mheiber"
 }
 
 ubuntu_version = ubuntu_version
@@ -13,12 +13,13 @@ ppa = [
   "mozillateam/ppa",
   "solaar-unifying/stable",
   "kobuk-team/intel-graphics",
-  "maveonair/helix-editor"
+  #  "maveonair/helix-editor"
 ]
 
 remote_file "mcfly" {
   url      = "https://github.com/cantino/mcfly/releases/download/v0.9.3/mcfly-v0.9.3-x86_64-unknown-linux-musl.tar.gz"
   checksum = "be0d3c1e0253189a5d834767231c2a4d206f077f4184699ac7069482ed9c6453"
+  artifact = "mcfly"
   target   = "/usr/bin/mcfly"
   mode     = "0755"
   check    = ["bash", "-c", "mcfly --version | grep -q 0.9.3"]
@@ -27,6 +28,7 @@ remote_file "mcfly" {
 remote_file "starship" {
   url      = "https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz"
   checksum = "cef41df04378c6f692913c5d9c1032d3b9a4369a1d2f3296c8300ed8838c2197"
+  artifact = "starship"
   target   = "/usr/bin/starship"
   mode     = "0755"
   check    = ["bash", "-c", "starship --version | grep -q 1.23.0"]
@@ -62,15 +64,16 @@ file "streamdeck-access" {
   mode   = "0644"
 }
 
-file "docker-daemon-config" {
-  source = "files/docker-daemon.json"
-  target = "/etc/docker/daemon.json"
-  mode   = "0644"
-}
+# file "docker-daemon-config" {
+#   source = "files/docker-daemon.json"
+#   target = "/etc/docker/daemon.json"
+#   mode   = "0644"
+# }
+
 file "proposed-priority" {
   content = <<-EOT
 Package: *
-Pin: release a=noble-proposed
+Pin: release a=${ubuntu_suite}-proposed
 Pin-Priority: 400
 EOT
   target  = "/etc/apt/preferences.d/proposed-priority-400"
@@ -122,12 +125,6 @@ file "user-avatar" {
   mode   = "0644"
 }
 
-file "1password-enable-native-messaging-host" {
-  source = "files/firefox_local_apparmor"
-  target = "/etc/apparmor.d/local/usr.bin.firefox"
-  mode   = "0644"
-}
-
 file "npmrc" {
   content = <<-EOT
 prefix=/home/${username}/.local/npm
@@ -135,17 +132,7 @@ EOT
   target  = "/home/${username}/.npmrc"
   owner   = username
   group   = username
-  mode    = "0644"
-}
-
-file "slack-syslog" {
-  content = <<-EOT
-# Drop info log messages from Slack
-:rawmsg,contains,"slack.desktop" /dev/null
-& stop
-EOT
-  target  = "/etc/rsyslog.d/22-slack.conf"
-  mode    = "0644"
+  mode    = "0600"
 }
 
 file "wireplumber-usb-audio" {
@@ -224,7 +211,7 @@ package "apport-gtk" {
 repository "docker" {
   uris          = ["https://download.docker.com/linux/ubuntu"]
   signed_by     = ["https://download.docker.com/linux/ubuntu/gpg"]
-  suites        = ["noble"]
+  suites        = ["${ubuntu_suite}"]
   components    = ["stable"]
   architectures = ["amd64"]
 }
@@ -264,18 +251,18 @@ repository "microsoft-edge-vscode" {
   architectures = ["amd64"]
 }
 
-repository "microsoft-noble" {
-  uris          = ["https://packages.microsoft.com/ubuntu/24.04/prod"]
-  suites        = ["noble"]
-  signed_by     = ["https://packages.microsoft.com/keys/microsoft.asc"]
-  components    = ["main"]
-  architectures = ["amd64"]
-}
-
 repository "node" {
   uris          = ["https://deb.nodesource.com/node_24.x"]
   suites        = ["nodistro"]
   signed_by     = ["https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
+
+repository "chrome" {
+  uris          = ["https://dl.google.com/linux/chrome/deb/"]
+  suites        = ["stable"]
+  signed_by     = ["https://dl.google.com/linux/linux_signing_key.pub"]
   components    = ["main"]
   architectures = ["amd64"]
 }
@@ -317,16 +304,6 @@ gsetting "enable-hot-corners" {
 
 gsetting "show-battery-percentage" {
   schema = "org.gnome.desktop.interface"
-  value  = "true"
-}
-
-gsetting "disable-disconnected-notifications" {
-  schema = "org.gnome.nm-applet"
-  value  = "true"
-}
-
-gsetting "disable-connected-notifications" {
-  schema = "org.gnome.nm-applet"
   value  = "true"
 }
 
