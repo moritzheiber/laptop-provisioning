@@ -13,7 +13,9 @@ ppa = [
   "mozillateam/ppa",
   "solaar-unifying/stable",
   "kobuk-team/intel-graphics",
-  #  "maveonair/helix-editor"
+  "maveonair/helix-editor",
+  "yubico/stable",
+  "longsleep/golang-backports"
 ]
 
 remote_file "mcfly" {
@@ -40,7 +42,7 @@ file "firefox-global-policies" {
   mode   = "0644"
 }
 
-file "microsoft-repo-preferences" {
+file "slack-preferences" {
   regexp  = "repo_reenable_on_distupgrade=\"true\""
   content = "repo_reenable_on_distupgrade=\"false\""
   target  = "/etc/default/slack"
@@ -110,6 +112,20 @@ EOT
   mode    = "0644"
 }
 
+file "only-install-zed" {
+  content = <<-EOT
+Package: *
+Pin: origin debian.griffo.io
+Pin-Priority: -1
+
+Package: zed
+Pin: origin debian.griffo.io
+Pin-Priority: 990
+EOT
+  target  = "/etc/apt/preferences.d/only-install-zed"
+  mode    = "0644"
+}
+
 file "no-install-recommends" {
   content = <<-EOT
 APT::Install-Recommends "false";
@@ -133,6 +149,16 @@ EOT
   owner   = username
   group   = username
   mode    = "0600"
+}
+
+file "slack-syslog" {
+  content = <<-EOT
+# Drop info log messages from Slack
+:rawmsg,contains,"slack.desktop" /dev/null
+& stop
+EOT
+  target  = "/etc/rsyslog.d/22-slack.conf"
+  mode    = "0644"
 }
 
 file "wireplumber-usb-audio" {
@@ -179,6 +205,7 @@ package "neovim" {}
 package "libssl-dev" {}
 package "code" {}
 package "docker-ce" {}
+package "docker-compose-plugin" {}
 package "gh" {}
 package "gstreamer1.0-plugins-bad" {}
 package "totem" {}
@@ -191,10 +218,7 @@ package "firefox" {}
 package "solaar" {}
 package "intel-media-va-driver-non-free" {}
 package "net-tools" {}
-
-package "golang-go" {
-  state = "uninstalled"
-}
+package "golang-go" {}
 
 package "thunderbird" {
   state = "uninstalled"
@@ -259,13 +283,21 @@ repository "node" {
   architectures = ["amd64"]
 }
 
-repository "chrome" {
-  uris          = ["https://dl.google.com/linux/chrome/deb/"]
-  suites        = ["stable"]
-  signed_by     = ["https://dl.google.com/linux/linux_signing_key.pub"]
+repository "zed" {
+  uris          = ["https://debian.griffo.io/apt"]
+  suites        = ["noble"]
+  signed_by     = ["https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc"]
   components    = ["main"]
   architectures = ["amd64"]
 }
+
+# repository "himmelblau-nightly" {
+#  uris          = ["https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu24.04"]
+#  suites        = ["./"]
+#  signed_by     = ["https://packages.himmelblau-idm.org/himmelblau.asc"]
+#  components    = [""]
+#  architectures = ["amd64"]
+# }
 
 gsetting "enabled" {
   schema = "org.gnome.system.location"
@@ -399,7 +431,7 @@ gsetting "show-delete-permanently" {
 
 gsetting "custom-keybindings" {
   schema = "org.gnome.settings-daemon.plugins.media-keys"
-  value  = "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+  value  = "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 }
 
 gsetting "logout" {
@@ -412,22 +444,46 @@ gsetting "terminal" {
   value  = "['<Super>Return']"
 }
 
-gsetting "binding" {
+gsetting "suspend_binding" {
   schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
   path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  key    = "binding"
   value  = "'<Primary><Alt>Delete'"
 }
 
-gsetting "command" {
+gsetting "suspend_command" {
   schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
   path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  key    = "command"
   value  = "'systemctl suspend'"
 }
 
-gsetting "name" {
+gsetting "suspend_name" {
   schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
   path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  key    = "name"
   value  = "'Suspend'"
+}
+
+gsetting "gradia_screenshot_binding" {
+  schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+  path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+  key    = "binding"
+  value  = "'<Shift><Super>s'"
+}
+
+gsetting "gradio_screenshot_command" {
+  schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+  path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+  key    = "command"
+  value  = "'gradia --screenshot'"
+}
+
+gsetting "gradia_screenshot_name" {
+  schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+  path   = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+  key    = "name"
+  value  = "'Take screenshot with Gradia'"
 }
 
 gsetting "show-home" {
