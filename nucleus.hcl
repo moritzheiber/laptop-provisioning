@@ -1,7 +1,7 @@
 variables {
   ubuntu_version = "26.04"
   ubuntu_suite   = "resolute"
-  username       = "mheiber"
+  username       = "moritzheiber"
 }
 
 ubuntu_version = ubuntu_version
@@ -13,8 +13,8 @@ ppa = [
   "mozillateam/ppa",
   "solaar-unifying/stable",
   "kobuk-team/intel-graphics",
-  "maveonair/helix-editor",
-  "yubico/stable",
+  # "maveonair/helix-editor",
+  # "yubico/stable",
   "longsleep/golang-backports"
 ]
 
@@ -37,7 +37,7 @@ remote_file "starship" {
 }
 
 file "firefox-global-policies" {
-  source = "files/firefox_policies.js"
+  source = "files/firefox_policies.json"
   target = "/etc/firefox/policies/policies.json"
   mode   = "0644"
 }
@@ -201,7 +201,6 @@ package "ttf-mscorefonts-installer" {}
 package "fonts-font-awesome" {}
 package "fonts-powerline" {}
 package "libpam-u2f" {}
-package "neovim" {}
 package "libssl-dev" {}
 package "code" {}
 package "docker-ce" {}
@@ -275,6 +274,22 @@ repository "microsoft-edge-vscode" {
   architectures = ["amd64"]
 }
 
+repository "microsoft-packages" {
+  uris          = ["https://packages.microsoft.com/ubuntu/26.04/prod"]
+  suites        = ["resolute"]
+  signed_by     = ["https://packages.microsoft.com/keys/microsoft-2025.asc"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
+
+repository "microsoft-azure-cli" {
+  uris          = ["https://packages.microsoft.com/repos/azure-cli/"]
+  suites        = ["noble"]
+  signed_by     = ["https://packages.microsoft.com/keys/microsoft.asc"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
+
 repository "node" {
   uris          = ["https://deb.nodesource.com/node_24.x"]
   suites        = ["nodistro"]
@@ -291,13 +306,29 @@ repository "zed" {
   architectures = ["amd64"]
 }
 
-# repository "himmelblau-nightly" {
-#  uris          = ["https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu24.04"]
-#  suites        = ["./"]
-#  signed_by     = ["https://packages.himmelblau-idm.org/himmelblau.asc"]
-#  components    = [""]
-#  architectures = ["amd64"]
-# }
+repository "himmelblau" {
+  uris          = ["https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu${ubuntu_version}"]
+  suites        = ["./"]
+  signed_by     = ["https://packages.himmelblau-idm.org/himmelblau.asc"]
+  components    = [""]
+  architectures = ["amd64"]
+}
+
+repository "slack" {
+  uris          = ["https://packagecloud.io/slacktechnologies/slack/debian/"]
+  suites        = ["jessie"]
+  signed_by     = ["https://packagecloud.io/slacktechnologies/slack/gpgkey"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
+
+repository "teams-for-linux" {
+  uris          = ["https://repo.teamsforlinux.de/debian/"]
+  suites        = ["stable"]
+  signed_by     = ["https://repo.teamsforlinux.de/teams-for-linux.asc"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
 
 gsetting "enabled" {
   schema = "org.gnome.system.location"
