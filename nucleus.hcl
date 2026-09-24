@@ -112,20 +112,6 @@ EOT
   mode    = "0644"
 }
 
-file "only-install-zed" {
-  content = <<-EOT
-Package: *
-Pin: origin debian.griffo.io
-Pin-Priority: -1
-
-Package: zed
-Pin: origin debian.griffo.io
-Pin-Priority: 990
-EOT
-  target  = "/etc/apt/preferences.d/only-install-zed"
-  mode    = "0644"
-}
-
 file "no-install-recommends" {
   content = <<-EOT
 APT::Install-Recommends "false";
@@ -294,14 +280,6 @@ repository "node" {
   uris          = ["https://deb.nodesource.com/node_24.x"]
   suites        = ["nodistro"]
   signed_by     = ["https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key"]
-  components    = ["main"]
-  architectures = ["amd64"]
-}
-
-repository "zed" {
-  uris          = ["https://debian.griffo.io/apt"]
-  suites        = ["noble"]
-  signed_by     = ["https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc"]
   components    = ["main"]
   architectures = ["amd64"]
 }
