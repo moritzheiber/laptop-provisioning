@@ -4,19 +4,21 @@ variables {
   username       = "moritzheiber"
 }
 
-ubuntu_version = ubuntu_version
-ubuntu_suite   = ubuntu_suite
-gsettings_user = username
+provider "repository" {
+  suite = var.ubuntu_suite
+  ppa = [
+    "git-core/ppa",
+    "mozillateam/ppa",
+    "solaar-unifying/stable",
+    "kobuk-team/intel-graphics",
+    # "yubico/stable",
+    "longsleep/golang-backports"
+  ]
+}
 
-ppa = [
-  "git-core/ppa",
-  "mozillateam/ppa",
-  "solaar-unifying/stable",
-  "kobuk-team/intel-graphics",
-  # "maveonair/helix-editor",
-  # "yubico/stable",
-  "longsleep/golang-backports"
-]
+provider "gsetting" {
+  user = var.username
+}
 
 remote_file "mcfly" {
   url      = "https://github.com/cantino/mcfly/releases/download/v0.9.3/mcfly-v0.9.3-x86_64-unknown-linux-musl.tar.gz"
@@ -60,6 +62,21 @@ file "microsoft-edge-repo-preferences" {
   target  = "/etc/default/microsoft-edge"
 }
 
+file "1password-package-sources" {
+  state  = "deleted"
+  target = "/etc/apt/sources.list.d/1password.sources"
+}
+
+file "1password-package-list" {
+  state  = "deleted"
+  target = "/etc/apt/sources.list.d/1password.list"
+}
+
+file "1password-package-list-disabled" {
+  state  = "deleted"
+  target = "/etc/apt/sources.list.d/1password.list.disabled"
+}
+
 file "streamdeck-access" {
   source = "files/streamdeck_rules_udev"
   target = "/etc/udev/rules.d/60-streamdeck.rules"
@@ -75,7 +92,7 @@ file "streamdeck-access" {
 file "proposed-priority" {
   content = <<-EOT
 Package: *
-Pin: release a=${ubuntu_suite}-proposed
+Pin: release a=${var.ubuntu_suite}-proposed
 Pin-Priority: 400
 EOT
   target  = "/etc/apt/preferences.d/proposed-priority-400"
@@ -129,11 +146,11 @@ file "user-avatar" {
 
 file "npmrc" {
   content = <<-EOT
-prefix=/home/${username}/.local/npm
+prefix=/home/${var.username}/.local/npm
 EOT
-  target  = "/home/${username}/.npmrc"
-  owner   = username
-  group   = username
+  target  = "/home/${var.username}/.npmrc"
+  owner   = var.username
+  group   = var.username
   mode    = "0600"
 }
 
@@ -149,9 +166,9 @@ EOT
 
 file "wireplumber-usb-audio" {
   source = "files/99-usb-audio.conf"
-  target = "/home/${username}/.config/wireplumber/wireplumber.conf.d/99-usb-audio.conf"
-  owner  = username
-  group  = username
+  target = "/home/${var.username}/.config/wireplumber/wireplumber.conf.d/99-usb-audio.conf"
+  owner  = var.username
+  group  = var.username
   mode   = "0644"
 }
 
@@ -204,23 +221,29 @@ package "solaar" {}
 package "intel-media-va-driver-non-free" {}
 package "net-tools" {}
 package "golang-go" {}
+package "libheif-plugin-libde265" {}
+
+package "helix" {
+  type    = "snap"
+  classic = true
+}
 
 package "thunderbird" {
-  state = "uninstalled"
+  state = "deleted"
 }
 
 package "pidgin" {
-  state = "uninstalled"
+  state = "deleted"
 }
 
 package "apport-gtk" {
-  state = "uninstalled"
+  state = "deleted"
 }
 
 repository "docker" {
   uris          = ["https://download.docker.com/linux/ubuntu"]
   signed_by     = ["https://download.docker.com/linux/ubuntu/gpg"]
-  suites        = ["${ubuntu_suite}"]
+  suites        = ["${var.ubuntu_suite}"]
   components    = ["stable"]
   architectures = ["amd64"]
 }
@@ -285,7 +308,7 @@ repository "node" {
 }
 
 repository "himmelblau" {
-  uris          = ["https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu${ubuntu_version}"]
+  uris          = ["https://packages.himmelblau-idm.org/stable/latest/deb/ubuntu${var.ubuntu_version}"]
   suites        = ["./"]
   signed_by     = ["https://packages.himmelblau-idm.org/himmelblau.asc"]
   components    = [""]
@@ -304,6 +327,14 @@ repository "teams-for-linux" {
   uris          = ["https://repo.teamsforlinux.de/debian/"]
   suites        = ["stable"]
   signed_by     = ["https://repo.teamsforlinux.de/teams-for-linux.asc"]
+  components    = ["main"]
+  architectures = ["amd64"]
+}
+
+repository "1password" {
+  uris          = ["https://downloads.1password.com/linux/debian/amd64"]
+  suites        = ["stable"]
+  signed_by     = ["https://downloads.1password.com/linux/keys/1password.asc"]
   components    = ["main"]
   architectures = ["amd64"]
 }
